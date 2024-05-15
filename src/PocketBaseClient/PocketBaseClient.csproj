@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+	<TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput)</TargetsForTfmSpecificBuildOutput>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>PocketBaseClient-csharp</Title>
+    <FileVersion>0.6.1</FileVersion>
+    <AssemblyVersion>0.6.1</AssemblyVersion>
+    <Version>0.6.1</Version>
+    <PackageProjectUrl>https://github.com/iluvadev/PocketBaseClient-csharp</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Authors>iluvadev</Authors>
+    <RepositoryUrl>https://github.com/iluvadev/PocketBaseClient-csharp</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>pocketbase,orm,c#</PackageTags>
+    <AnalysisLevel>6.0</AnalysisLevel>
+	<Description>Client in C# for interacting with a particular PocketBase application, with an ORM to manage Collections and Registries.</Description>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>embedded</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>embedded</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\sdk\pocketbase-csharp-sdk\pocketbase-csharp-sdk.csproj" />
+  </ItemGroup>
+
+</Project>
