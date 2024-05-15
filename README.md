@@ -17,25 +17,36 @@ BlazorPocket is a lightweight web application template that leverages the latest
 
 ### Installation
 
+
 1. **Clone the repository:**
     ```sh
     git clone https://github.com/neozhu/BlazorPocket.git
     cd BlazorPocket
     ```
+    
+2. **Add PocketBaseClient subtree:**
+    ```sh
+    git subtree add --prefix pbcodegen https://github.com/iluvadev/PocketBaseClient.git main --squash
+    ```
 
-2. **Setup PocketBase:**
+3. **Add PocketBase C# SDK subtree:**
+    ```sh
+    git subtree add --prefix sdk https://github.com/iluvadev/pocketbase-csharp-sdk.git master --squash
+    ```
+
+3. **Setup PocketBase:**
     - Download and run PocketBase following the [official documentation](https://pocketbase.io/docs/).
     - Configure the PocketBase instance and make note of the endpoint URL.
 
-3. **Configure the Blazor App:**
+4. **Configure the Blazor App:**
     - Update the configuration file in the Blazor project to point to your PocketBase instance.
 
-4. **Restore .NET dependencies:**
+5. **Restore .NET dependencies:**
     ```sh
     dotnet restore
     ```
 
-5. **Build and run the Blazor App:**
+6. **Build and run the Blazor App:**
     ```sh
     dotnet run
     ```

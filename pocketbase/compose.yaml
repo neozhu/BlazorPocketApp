@@ -1,0 +1,13 @@
+version: '3.7'
+
+services:
+  pocketbase:
+    build: .
+    restart: unless-stopped
+    ports:
+      - 443:443
+      - 80:80
+    volumes:
+      - pocketbase-data:/pb/pb_data     
+volumes:
+  pocketbase-data:
