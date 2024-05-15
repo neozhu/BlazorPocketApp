@@ -19,7 +19,7 @@ BlazorPocket is a lightweight web application template that leverages the latest
 
 1. **Clone the repository:**
     ```sh
-    git clone https://github.com/yourusername/BlazorPocket.git
+    git clone https://github.com/neozhu/BlazorPocket.git
     cd BlazorPocket
     ```
 
