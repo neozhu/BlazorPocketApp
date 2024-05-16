@@ -41,6 +41,9 @@ builder.Services.AddMudExtensions();
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddScoped<IUserPreferencesService, UserPreferencesService>();
 builder.Services.AddScoped<LayoutService>();
+
+
+
 #endregion
 
 
@@ -69,7 +72,6 @@ else
 }
 
 app.UseHttpsRedirection();
-
 app.UseStaticFiles();
 app.UseAntiforgery();
 

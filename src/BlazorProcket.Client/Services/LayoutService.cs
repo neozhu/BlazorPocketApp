@@ -10,7 +10,7 @@ public class LayoutService
     private bool _systemPreferences;
 
     public bool IsRTL { get; private set; }
-    public DarkLightMode CurrentDarkLightMode { get; private set; } = DarkLightMode.System;
+    public DarkLightMode CurrentDarkLightMode { get; private set; } = DarkLightMode.Light;
 
     public bool IsDarkMode { get; private set; }
 
@@ -18,8 +18,9 @@ public class LayoutService
 
     public LayoutService(IUserPreferencesService userPreferencesService)
     {
-        _userPreferencesService = userPreferencesService;
         CurrentTheme = Theme.ApplicationTheme();
+        _userPreferencesService = userPreferencesService;
+        
     }
 
     public void SetDarkMode(bool value)

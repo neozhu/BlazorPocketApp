@@ -9,40 +9,60 @@ public class Theme
         {
             PaletteLight = new()
             {
-                Black = "#110e2d",
-                AppbarText = "#424242",
-                AppbarBackground = "rgba(255,255,255,0.8)",
-                DrawerBackground = "#ffffff",
-                GrayLight = "#e8e8e8",
-                GrayLighter = "#f9f9f9",
+                Primary = "#1E3A8A", // Deep blue, primary color for highlights and key elements
+                Surface = "#F3F4F6", // Light gray, for card surfaces or secondary backgrounds
+                Background = "#FFFFFF", // White, main background color
+                BackgroundGray = "#F9FAFB", // Very light gray, for subtle background areas
+                AppbarText = "#1F2937", // Dark gray, text color for app bar
+                AppbarBackground = "rgba(255,255,255,0.8)", // Semi-transparent white, background for app bar
+                DrawerBackground = "#FFFFFF", // White, background for drawer
+                ActionDefault = "#6B7280", // Gray, default action color
+                //ActionDisabled = "#D1D5DB4D", // Semi-transparent gray, color for disabled actions
+                ActionDisabledBackground = "#9CA3AF4D", // Semi-transparent gray, background for disabled actions
+                TextPrimary = "#1F2937", // Dark gray, primary text color
+                TextSecondary = "#4B5563", // Medium gray, secondary text color
+                //TextDisabled = "#9CA3AF33", // Semi-transparent gray, disabled text color
+                DrawerIcon = "#4B5563", // Medium gray, icon color for drawer
+                DrawerText = "#4B5563", // Medium gray, text color for drawer
+                GrayLight = "#E5E7EB", // Light gray, for light gray elements
+                GrayLighter = "#F3F4F6", // Very light gray, for lighter gray elements
+                Info = "#2563EB", // Blue, for informational messages
+                Success = "#10B981", // Green, for success messages
+                Warning = "#F59E0B", // Orange, for warning messages
+                Error = "#EF4444", // Red, for error messages
+                LinesDefault = "#D1D5DB", // Light gray, for default lines
+                TableLines = "#D1D5DB", // Light gray, for table lines
+                Divider = "#E5E7EB", // Light gray, for dividers
+                OverlayLight = "#F3F4F680", // Semi-transparent light gray, for overlays
+               
             },
             PaletteDark = new()
             {
-                Primary = "#7e6fff",
-                Surface = "#1e1e2d",
-                Background = "#1a1a27",
-                BackgroundGray = "#151521",
-                AppbarText = "#92929f",
-                AppbarBackground = "rgba(26,26,39,0.8)",
-                DrawerBackground = "#1a1a27",
-                ActionDefault = "#74718e",
-                ActionDisabled = "#9999994d",
-                ActionDisabledBackground = "#605f6d4d",
-                TextPrimary = "#b2b0bf",
-                TextSecondary = "#92929f",
-                TextDisabled = "#ffffff33",
-                DrawerIcon = "#92929f",
-                DrawerText = "#92929f",
-                GrayLight = "#2a2833",
-                GrayLighter = "#1e1e2d",
-                Info = "#4a86ff",
-                Success = "#3dcb6c",
-                Warning = "#ffb545",
-                Error = "#ff3f5f",
-                LinesDefault = "#33323e",
-                TableLines = "#33323e",
-                Divider = "#292838",
-                OverlayLight = "#1e1e2d80",
+                Primary = "#1E3A8A", // Deep blue, primary color for highlights and key elements
+                Surface = "#1C1C2E", // Dark gray, for card surfaces or secondary backgrounds
+                Background = "#161625", // Dark gray, main background color
+                BackgroundGray = "#11111A", // Very dark gray, for subtle background areas
+                AppbarText = "#D1D5DB", // Light gray, text color for app bar
+                AppbarBackground = "rgba(22,22,37,0.8)", // Semi-transparent dark gray, background for app bar
+                DrawerBackground = "#161625", // Dark gray, background for drawer
+                ActionDefault = "#4B5563", // Gray, default action color
+                ActionDisabled = "#6B72804D", // Semi-transparent gray, color for disabled actions
+                ActionDisabledBackground = "#4B55634D", // Semi-transparent gray, background for disabled actions
+                TextPrimary = "#E5E7EB", // Light gray, primary text color
+                TextSecondary = "#9CA3AF", // Medium gray, secondary text color
+                TextDisabled = "#9CA3AF33", // Semi-transparent gray, disabled text color
+                DrawerIcon = "#9CA3AF", // Medium gray, icon color for drawer
+                DrawerText = "#9CA3AF", // Medium gray, text color for drawer
+                GrayLight = "#1F2937", // Dark gray, for light gray elements
+                GrayLighter = "#1C1C2E", // Dark gray, for lighter gray elements
+                Info = "#2563EB", // Blue, for informational messages
+                Success = "#10B981", // Green, for success messages
+                Warning = "#F59E0B", // Orange, for warning messages
+                Error = "#EF4444", // Red, for error messages
+                LinesDefault = "#374151", // Dark gray, for default lines
+                TableLines = "#374151", // Dark gray, for table lines
+                Divider = "#4B5563", // Gray, for dividers
+                OverlayLight = "#1C1C2E80", // Semi-transparent dark gray, for overlays
             },
             Shadows = new()
             {
@@ -78,7 +98,7 @@ public class Theme
             },
             LayoutProperties = new()
             {
-                DefaultBorderRadius = "6px",
+                DefaultBorderRadius = "4px",
                 AppbarHeight = "68px",
             },
             ZIndex = new ZIndex(),
