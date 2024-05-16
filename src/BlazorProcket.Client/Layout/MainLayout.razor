@@ -1,6 +1,6 @@
 ﻿@using BlazorProcket.Client.Services
 @inherits LayoutComponentBase
-@inject LayoutService LayoutService
+
 <PageTitle>BlazorPocket App</PageTitle>
 
 <MudRTLProvider RightToLeft="@LayoutService.IsRTL">
@@ -13,7 +13,8 @@
 
 @code{
   
-
+    [Inject]
+    public LayoutService LayoutService { get; set; }
     private MudThemeProvider _mudThemeProvider;
 
     protected override void OnInitialized()

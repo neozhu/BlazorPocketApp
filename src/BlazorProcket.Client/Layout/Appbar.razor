@@ -1,5 +1,5 @@
 ﻿@using BlazorProcket.Client.Services
-@inject LayoutService LayoutService
+
 <MudAppBar Color="Color.Transparent" Elevation="0" Fixed="false">
 
     <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" />
@@ -20,5 +20,6 @@
 </MudAppBar>
 
 @code {
-
+    [Inject]
+    public LayoutService LayoutService { get; set; } 
 }
