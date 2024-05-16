@@ -19,11 +19,13 @@ public class LayoutService
     public LayoutService(IUserPreferencesService userPreferencesService)
     {
         _userPreferencesService = userPreferencesService;
+        CurrentTheme = Theme.ApplicationTheme();
     }
 
     public void SetDarkMode(bool value)
     {
         IsDarkMode = value;
+        OnMajorUpdateOccurred();
     }
 
     public async Task ApplyUserPreferences(bool isDarkModeDefaultTheme)

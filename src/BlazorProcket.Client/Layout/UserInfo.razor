@@ -1,0 +1,39 @@
+﻿<MudMenu Class="ml-1" PositionAtCursor="false" AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.BottomLeft">
+    <ActivatorContent>
+        <MudStack Row="true" AlignItems="AlignItems.Center">
+            <MudAvatar Size="Size.Medium" Square="true">A</MudAvatar>
+            <MudStack Justify="Justify.Center" Spacing="0">
+                <MudText Typo="Typo.body2">Mony Larsson</MudText>
+                <MudText Typo="Typo.body2" Class="mud-text-secondary">admin</MudText>
+            </MudStack>
+        </MudStack>
+    </ActivatorContent>
+    <ChildContent>
+        <MudMenuItem>
+            <div class="d-flex align-center">
+                <MudIcon Class="mr-1" Size="Size.Small"
+                         Icon="@Icons.Material.Filled.Person" />
+                <MudText Align="Align.Center">Profile</MudText>
+            </div>
+        </MudMenuItem>
+        <MudMenuItem>
+            <div class="d-flex align-center">
+                <MudIcon Class="mr-1" Size="Size.Small"
+                         Icon="@Icons.Material.Filled.Settings" />
+                <MudText Align="Align.Center">Settings</MudText>
+            </div>
+        </MudMenuItem>
+        <MudMenuItem>
+            <div class="d-flex align-center">
+                <MudIcon Class="mr-1" Size="Size.Small"
+                         Icon="@Icons.Material.Filled.Logout" />
+                <MudText Align="Align.Center">Logout</MudText>
+            </div>
+        </MudMenuItem>
+
+    </ChildContent>
+</MudMenu>
+
+@code {
+
+}
