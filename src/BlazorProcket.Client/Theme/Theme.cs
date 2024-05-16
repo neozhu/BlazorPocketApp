@@ -107,7 +107,8 @@ public class Theme
                 Default = new Default()
                 {
                     FontFamily = new[] { "Public Sans", "Roboto", "Arial", "sans-serif" },
-                    LetterSpacing = "normal"
+                    LetterSpacing = "normal",
+                    FontSize=".75rem"
                 },
                 H1 = new H1()
                 {
