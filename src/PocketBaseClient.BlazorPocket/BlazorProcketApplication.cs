@@ -14,7 +14,7 @@ using PocketBaseClient.BlazorPocket.Services;
 
 namespace PocketBaseClient.BlazorPocket
 {
-    public partial class BlazorProcketApplication : PocketBaseClientApplication
+    public partial class BlazorPocketApplication : PocketBaseClientApplication
     {
         private AppDataService? _Data = null;
         /// <summary> Access to Data for Application Acme </summary>
@@ -25,8 +25,8 @@ namespace PocketBaseClient.BlazorPocket
         public new AppAuthService Auth => _Auth ??= new AppAuthService(this);
 
         #region Constructors
-        public BlazorProcketApplication() : this("http://localhost:8090") { }
-        public BlazorProcketApplication(string url, string appName = "BlazorProcketApp") : base(url, appName) { }
+        public BlazorPocketApplication() : this("http://localhost:8090") { }
+        public BlazorPocketApplication(string url, string appName = "BlazorPocketApp") : base(url, appName) { }
         #endregion Constructors
     }
 }

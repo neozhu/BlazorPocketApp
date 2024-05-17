@@ -26,21 +26,21 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["src/BlazorProcket/BlazorProcket.csproj", "src/BlazorProcket/"]
-COPY ["src/BlazorProcket.Client/BlazorProcket.Client.csproj", "src/BlazorProcket.Client/"]
+COPY ["src/BlazorPocket/BlazorPocket.csproj", "src/BlazorPocket/"]
+COPY ["src/BlazorPocket.Client/BlazorPocket.Client.csproj", "src/BlazorPocket.Client/"]
 COPY ["src/PocketBaseClient.BlazorPocket/PocketBaseClient.BlazorPocket.csproj", "src/PocketBaseClient.BlazorPocket/"]
 COPY ["pbcodegen/src/PocketBaseClient/PocketBaseClient.csproj", "pbcodegen/src/PocketBaseClient/"]
 COPY ["sdk/pocketbase-csharp-sdk/pocketbase-csharp-sdk.csproj", "sdk/pocketbase-csharp-sdk/"]
-RUN dotnet restore "./src/BlazorProcket/BlazorProcket.csproj"
+RUN dotnet restore "./src/BlazorPocket/BlazorPocket.csproj"
 COPY . .
-WORKDIR "/src/src/BlazorProcket"
-RUN dotnet build "./BlazorProcket.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/src/BlazorPocket"
+RUN dotnet build "./BlazorPocket.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./BlazorProcket.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./BlazorPocket.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "BlazorProcket.dll"]
+ENTRYPOINT ["dotnet", "BlazorPocket.dll"]

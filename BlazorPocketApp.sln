@@ -2,9 +2,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34902.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorProcket", "src\BlazorProcket\BlazorProcket.csproj", "{4DDE502E-526C-4F96-B9EE-6C017E890CAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorPocket", "src\BlazorPocket\BlazorPocket.csproj", "{4DDE502E-526C-4F96-B9EE-6C017E890CAD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorProcket.Client", "src\BlazorProcket.Client\BlazorProcket.Client.csproj", "{66303FAB-CC2B-4E52-812B-3B0BEF0A1525}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorPocket.Client", "src\BlazorPocket.Client\BlazorPocket.Client.csproj", "{66303FAB-CC2B-4E52-812B-3B0BEF0A1525}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sdk", "sdk", "{113EE8F0-D60C-44FE-AFEE-FB4CF48F0280}"
 EndProject
@@ -66,3 +66,4 @@ Global
 		SolutionGuid = {FBEE3E89-2F6F-4A1C-89CF-3CECF498D79B}
 	EndGlobalSection
 EndGlobal
+al

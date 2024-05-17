@@ -1,0 +1,30 @@
+﻿@page "/account/signup"
+@using BlazorPocket.Client.Layout
+<PageTitle>Sign Up</PageTitle>
+<MudPaper Elevation="3" Class="pa-8" Width="100%" MaxWidth="500px">
+    <div class="d-flex flex-row  align-center gap-3 my-3">
+        <MudBlazorLogo Style="with:60px;height:60px"></MudBlazorLogo>
+        <MudText Typo="Typo.h5">Create an Account</MudText>
+    </div>
+    <div class="d-flex flex-column gap-2">
+
+        <div class="d-flex flex-row gap-1">
+            <MudText>Have an account?</MudText> <MudLink Href="/account/signin">Sign In</MudLink>
+        </div>
+        
+        <MudForm>
+            <MudTextField Class="mb-2" T="string" Label="Email" Placeholder="Email" Required="true" RequiredError="Email is required"></MudTextField>
+            <MudTextField Class="mb-2" T="string" Label="Name" Placeholder="Name" Required="false"></MudTextField>
+            <MudTextField Class="mb-2" InputType="InputType.Password" T="string" Label="Password" Placeholder="Password" Required="true" RequiredError="Password is required"></MudTextField>
+            <MudTextField InputType="InputType.Password" T="string" Label="Confirm password" Placeholder="Cofirm password" Required="true" RequiredError="Cofirm password is required"></MudTextField>
+            <div class="d-flex flex-row align-center justify-space-between mb-2">
+                <MudCheckBox T="bool">I agree to the terms and privacy</MudCheckBox>
+            </div>
+            <MudButton FullWidth="true" Color="Color.Primary" Variant="Variant.Filled">Sign Up</MudButton>
+        </MudForm>
+    </div>
+
+</MudPaper>
+@code {
+
+}
