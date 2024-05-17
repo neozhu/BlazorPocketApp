@@ -117,18 +117,18 @@ public class Theme
                 },
                 H3 = new H3()
                 {
-                    FontSize = "3rem",
+                    FontSize = "2rem",
                     FontWeight = 600,
                     LineHeight = 1.8,
                 },
                 H4 = new H4()
                 {
-                    FontSize = "1.8rem",
+                    FontSize = "1.6rem",
                     FontWeight = 700,
                 },
                 H5 = new H5()
                 {
-                    FontSize = "1.8rem",
+                    FontSize = "1.35rem",
                     FontWeight = 700,
                     LineHeight = 2,
                 },
