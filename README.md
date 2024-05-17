@@ -13,6 +13,30 @@ BlazorPocket is a lightweight web application template that leverages the latest
 
 ## Getting Started
 
+### Demo
+- https://blazorpocket.blazorserver.com/
+- https://blazorpocket.blazors.app
+
+### docker compose file
+```sh
+version: '3.8'
+services:
+  blazorpocketapp:
+    image: blazordevlab/blazorpocketapp:0.0.2
+    environment:
+      - UseInMemoryDatabase=false
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80;https://+:443
+      - ASPNETCORE_HTTP_PORTS=80
+      - ASPNETCORE_HTTPS_PORTS=443
+      - AppSetting__AppName='${AppName}'
+      - AppSetting__Version='${Version}'
+      - AppSetting__ProcketbaseUrl='${ProcketbaseUrl}'   
+    ports:
+      - "8023:80"
+      - "8024:443"
+```
+
 ### Prerequisites
 - [.NET 8.0 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
 - [PocketBase](https://pocketbase.io/)
