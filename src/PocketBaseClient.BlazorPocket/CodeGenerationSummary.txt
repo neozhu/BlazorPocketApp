@@ -1,0 +1,56 @@
+
+// This file was generated automatically for the PocketBase Application Acme (http://localhost:8090)
+//    See CodeGenerationSummary.txt for more details
+//
+// PocketBaseClient-csharp project: https://github.com/iluvadev/PocketBaseClient-csharp
+// Issues: https://github.com/iluvadev/PocketBaseClient-csharp/issues
+// License (MIT): https://github.com/iluvadev/PocketBaseClient-csharp/blob/main/LICENSE
+//
+// pocketbase-csharp-sdk project: https://github.com/PRCV1/pocketbase-csharp-sdk 
+// pocketbase project: https://github.com/pocketbase/pocketbase
+
+
+  _____           _        _   ____                  _____ _ _            _   
+ |  __ \         | |      | | |  _ \                / ____| (_)          | |  
+ | |__) |__   ___| | _____| |_| |_) | __ _ ___  ___| |    | |_  ___ _ __ | |_ 
+ |  ___/ _ \ / __| |/ / _ \ __|  _ < / _` / __|/ _ \ |    | | |/ _ \ '_ \| __|
+ | |  | (_) | (__|   <  __/ |_| |_) | (_| \__ \  __/ |____| | |  __/ | | | |_ 
+ |_|   \___/ \___|_|\_\___|\__|____/ \__,_|___/\___|\_____|_|_|\___|_| |_|\__|
+   _____          _       _____                           _                   
+  / ____|        | |     / ____|                         | |                  
+ | |     ___   __| | ___| |  __  ___ _ __   ___ _ __ __ _| |_ ___  _ __       
+ | |    / _ \ / _` |/ _ \ | |_ |/ _ \ '_ \ / _ \ '__/ _` | __/ _ \| '__|      
+ | |___| (_) | (_| |  __/ |__| |  __/ | | |  __/ | | (_| | || (_) | |         
+  \_____\___/ \__,_|\___|\_____|\___|_| |_|\___|_|  \__,_|\__\___/|_|         
+
+
+Code generated with:
+    PocketBaseClient CodeGenerator: pbcodegen v.0.6.1.0
+    At: 2024-05-17T05:06:46.8668025Z
+
+PocketBase Application: 
+    Name: Acme
+    Url: http://localhost:8090
+    Schema Date: 2024-05-17T05:05:04.3082572Z
+
+Files Generated:
+    C:\Users\zhuhua\Documents\GitHub\BlazorPocketApp\src\AcmeApplication.cs
+    C:\Users\zhuhua\Documents\GitHub\BlazorPocketApp\src\Models\CollectionDocuments.cs
+    C:\Users\zhuhua\Documents\GitHub\BlazorPocketApp\src\Models\CollectionProducts.cs
+    C:\Users\zhuhua\Documents\GitHub\BlazorPocketApp\src\Models\CollectionUsers.cs
+    C:\Users\zhuhua\Documents\GitHub\BlazorPocketApp\src\Models\Document.cs
+    C:\Users\zhuhua\Documents\GitHub\BlazorPocketApp\src\Models\Document.FileFile.cs
+    C:\Users\zhuhua\Documents\GitHub\BlazorPocketApp\src\Models\Document.Filters.cs
+    C:\Users\zhuhua\Documents\GitHub\BlazorPocketApp\src\Models\Document.Sorts.cs
+    C:\Users\zhuhua\Documents\GitHub\BlazorPocketApp\src\Models\Product.cs
+    C:\Users\zhuhua\Documents\GitHub\BlazorPocketApp\src\Models\Product.CurrencyEnum.cs
+    C:\Users\zhuhua\Documents\GitHub\BlazorPocketApp\src\Models\Product.Filters.cs
+    C:\Users\zhuhua\Documents\GitHub\BlazorPocketApp\src\Models\Product.Sorts.cs
+    C:\Users\zhuhua\Documents\GitHub\BlazorPocketApp\src\Models\Product.UnitEnum.cs
+    C:\Users\zhuhua\Documents\GitHub\BlazorPocketApp\src\Models\User.AvatarFile.cs
+    C:\Users\zhuhua\Documents\GitHub\BlazorPocketApp\src\Models\User.cs
+    C:\Users\zhuhua\Documents\GitHub\BlazorPocketApp\src\Models\User.Filters.cs
+    C:\Users\zhuhua\Documents\GitHub\BlazorPocketApp\src\Models\User.Sorts.cs
+    C:\Users\zhuhua\Documents\GitHub\BlazorPocketApp\src\PocketBaseClient.BlazorPocket.csproj
+    C:\Users\zhuhua\Documents\GitHub\BlazorPocketApp\src\Services\AcmeAuthService.cs
+    C:\Users\zhuhua\Documents\GitHub\BlazorPocketApp\src\Services\AcmeDataService.cs

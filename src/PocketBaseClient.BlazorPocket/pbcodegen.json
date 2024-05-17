@@ -1,0 +1,250 @@
+{
+  "ProjectName": "PocketBaseClient.BlazorPocket",
+  "Namespace": "PocketBaseClient.BlazorPocket",
+  "PocketBaseApplication": {
+    "appName": "Acme",
+    "appUrl": "http://localhost:8090"
+  },
+  "SchemaDate": "2024-05-17T05:05:04.3082572Z",
+  "SingularizeAndPluralize": true,
+  "Collections": [
+    {
+      "Id": "_pb_users_auth_",
+      "Created": "5/17/2024 11:15:01 AM",
+      "Updated": "5/17/2024 11:15:01 AM",
+      "Name": "users",
+      "System": false,
+      "Type": "auth",
+      "ListRule": "id = @request.auth.id",
+      "ViewRule": "id = @request.auth.id",
+      "CreateRule": "",
+      "UpdateRule": "id = @request.auth.id",
+      "DeleteRule": "id = @request.auth.id",
+      "Options": {
+        "AllowEmailAuth": true,
+        "AllowOAuth2Auth": true,
+        "AllowUsernameAuth": true,
+        "RequireEmail": false,
+        "MinPasswordLength": 8,
+        "ExceptEmailDomains": null,
+        "OnlyEmailDomains": null,
+        "ManageRule": null
+      },
+      "Schema": [
+        {
+          "Id": "users_name",
+          "Name": "name",
+          "Type": "text",
+          "System": false,
+          "Required": false,
+          "Unique": false,
+          "Options": {
+            "min": null,
+            "max": null,
+            "pattern": ""
+          }
+        },
+        {
+          "Id": "users_avatar",
+          "Name": "avatar",
+          "Type": "file",
+          "System": false,
+          "Required": false,
+          "Unique": false,
+          "Options": {
+            "mimeTypes": [
+              "image/jpeg",
+              "image/png",
+              "image/svg\u002Bxml",
+              "image/gif",
+              "image/webp"
+            ],
+            "thumbs": null,
+            "maxSelect": 1,
+            "maxSize": 5242880,
+            "protected": false
+          }
+        }
+      ]
+    },
+    {
+      "Id": "n0jrg4z0jcpicaj",
+      "Created": "5/17/2024 11:27:10 AM",
+      "Updated": "5/17/2024 12:54:03 PM",
+      "Name": "products",
+      "System": false,
+      "Type": "base",
+      "ListRule": null,
+      "ViewRule": null,
+      "CreateRule": null,
+      "UpdateRule": null,
+      "DeleteRule": null,
+      "Options": {
+        "AllowEmailAuth": null,
+        "AllowOAuth2Auth": null,
+        "AllowUsernameAuth": null,
+        "RequireEmail": null,
+        "MinPasswordLength": null,
+        "ExceptEmailDomains": null,
+        "OnlyEmailDomains": null,
+        "ManageRule": null
+      },
+      "Schema": [
+        {
+          "Id": "xw8xxibu",
+          "Name": "name",
+          "Type": "text",
+          "System": false,
+          "Required": true,
+          "Unique": false,
+          "Options": {
+            "min": null,
+            "max": null,
+            "pattern": ""
+          }
+        },
+        {
+          "Id": "s9wzpvba",
+          "Name": "spec",
+          "Type": "text",
+          "System": false,
+          "Required": false,
+          "Unique": false,
+          "Options": {
+            "min": null,
+            "max": null,
+            "pattern": ""
+          }
+        },
+        {
+          "Id": "reu8cecz",
+          "Name": "description",
+          "Type": "text",
+          "System": false,
+          "Required": false,
+          "Unique": false,
+          "Options": {
+            "min": null,
+            "max": null,
+            "pattern": ""
+          }
+        },
+        {
+          "Id": "tv34msy1",
+          "Name": "unit",
+          "Type": "select",
+          "System": false,
+          "Required": true,
+          "Unique": false,
+          "Options": {
+            "maxSelect": 1,
+            "values": [
+              "Packages",
+              "Box",
+              "Pallet",
+              "Carton",
+              "Drum"
+            ]
+          }
+        },
+        {
+          "Id": "gieggpzi",
+          "Name": "price",
+          "Type": "number",
+          "System": false,
+          "Required": false,
+          "Unique": false,
+          "Options": {
+            "min": null,
+            "max": null,
+            "noDecimal": false
+          }
+        },
+        {
+          "Id": "pddjipx1",
+          "Name": "currency",
+          "Type": "select",
+          "System": false,
+          "Required": false,
+          "Unique": false,
+          "Options": {
+            "maxSelect": 1,
+            "values": [
+              "USD",
+              "EUR",
+              "CNY"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "Id": "6prava2a3trini6",
+      "Created": "5/17/2024 12:55:52 PM",
+      "Updated": "5/17/2024 12:55:52 PM",
+      "Name": "documents",
+      "System": false,
+      "Type": "base",
+      "ListRule": null,
+      "ViewRule": null,
+      "CreateRule": null,
+      "UpdateRule": null,
+      "DeleteRule": null,
+      "Options": {
+        "AllowEmailAuth": null,
+        "AllowOAuth2Auth": null,
+        "AllowUsernameAuth": null,
+        "RequireEmail": null,
+        "MinPasswordLength": null,
+        "ExceptEmailDomains": null,
+        "OnlyEmailDomains": null,
+        "ManageRule": null
+      },
+      "Schema": [
+        {
+          "Id": "jj7clypc",
+          "Name": "name",
+          "Type": "text",
+          "System": false,
+          "Required": false,
+          "Unique": false,
+          "Options": {
+            "min": null,
+            "max": null,
+            "pattern": ""
+          }
+        },
+        {
+          "Id": "3npbikro",
+          "Name": "file",
+          "Type": "file",
+          "System": false,
+          "Required": false,
+          "Unique": false,
+          "Options": {
+            "mimeTypes": [],
+            "thumbs": [],
+            "maxSelect": 1,
+            "maxSize": 5242880,
+            "protected": false
+          }
+        },
+        {
+          "Id": "xwejmhh8",
+          "Name": "owner",
+          "Type": "relation",
+          "System": false,
+          "Required": false,
+          "Unique": false,
+          "Options": {
+            "collectionId": "_pb_users_auth_",
+            "cascadeDelete": false,
+            "minSelect": null,
+            "maxSelect": 1,
+            "displayFields": null
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -19,7 +19,7 @@ builder.Services.AddRazorComponents()
 
 
 builder.Services.TryAddMudBlazorUI(builder.Configuration);
-
+builder.Services.TryAddProcketbase(builder.Configuration);
 
 
 

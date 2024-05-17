@@ -5,6 +5,8 @@ using MudExtensions.Services;
 using MudBlazor;
 
 using Blazored.LocalStorage;
+using BlazorProcket.Client.Configurations;
+using PocketBaseClient.BlazorPocket;
 namespace BlazorProcket.Client;
 
 public static class DependencyInjection
@@ -39,6 +41,15 @@ public static class DependencyInjection
         services.AddScoped<LayoutService>();
 
         #endregion
+    }
+
+    public static void TryAddProcketbase(this IServiceCollection services,IConfiguration config)
+    {
+        var appSettings = new AppSettings();
+        config.GetSection(AppSettings.KEY).Bind(appSettings);
+        services.AddSingleton(appSettings);
+        services.AddScoped(s => new BlazorProcketApplication(appSettings.PocketbaseUrl, appSettings.AppName));
+        
     }
 }
 

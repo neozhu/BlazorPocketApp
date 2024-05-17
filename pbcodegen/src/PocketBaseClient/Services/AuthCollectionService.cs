@@ -125,5 +125,8 @@ namespace PocketBaseClient.Services
 
         public void UnlinkExternalAuthentication(string userId, string provider)
             => AuthService.UnlinkExternalAuthentication(userId, provider);
+
+        public Task RefreshAsync()
+           => AuthService.RefreshAsync();
     }
 }
