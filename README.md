@@ -40,6 +40,16 @@ BlazorPocket is a lightweight web application template that leverages the latest
 3. **Setup PocketBase:**
     - Download and run PocketBase following the [official documentation](https://pocketbase.io/docs/).
     - Configure the PocketBase instance and make note of the endpoint URL.
+    - pocketbase default admin and password
+    ```sh
+    admin@blazors.app
+    admin12345!
+    ```
+    - login with demo and password
+    ```sh
+    demo@blazors.app
+    demo12345!
+    ```
 
 4. **Configure the Blazor App:**
     - Update the configuration file in the Blazor project to point to your PocketBase instance.
