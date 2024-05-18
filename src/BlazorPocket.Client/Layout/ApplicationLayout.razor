@@ -1,15 +1,23 @@
-﻿﻿
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@using BlazorPocket.Client.Layout.Redirections
 @inherits LayoutComponentBase
 @layout MainLayout
 <MudLayout>
-    <Appbar></Appbar>
-    <Navbar></Navbar>
-    <MudMainContent>
-       <Breadcrumbs></Breadcrumbs>
-        <MudContainer Gutters="false">
-            @Body
-        </MudContainer>
-    </MudMainContent>
+    <AuthorizeView>
+        <Authorized>
+            <Appbar></Appbar>
+            <Navbar></Navbar>
+            <MudMainContent>
+                <Breadcrumbs></Breadcrumbs>
+                <MudContainer Gutters="false">
+                    @Body
+                </MudContainer>
+            </MudMainContent>
+        </Authorized>
+        <NotAuthorized>
+            <RedirectToSignIn />
+        </NotAuthorized>
+    </AuthorizeView>
 </MudLayout>
 @code {
 
