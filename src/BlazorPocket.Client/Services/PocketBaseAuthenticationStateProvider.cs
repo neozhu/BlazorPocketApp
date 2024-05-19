@@ -1,6 +1,7 @@
 ﻿using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using pocketbase_csharp_sdk;
+using pocketbase_csharp_sdk.Models;
 using PocketBaseClient.BlazorPocket;
 using System.Security.Claims;
 using System.Text.Json;
@@ -15,9 +16,8 @@ public class PocketBaseAuthenticationStateProvider : AuthenticationStateProvider
 
     public PocketBaseAuthenticationStateProvider(BlazorPocketApplication pocketBase, ILocalStorageService localStorage)
     {
-        this._pocketBase = pocketBase;
-        this._localStorage = localStorage;
-
+        _pocketBase = pocketBase;
+        _localStorage = localStorage;
         pocketBase.Auth.AuthStore.OnChange += AuthStore_OnChange;
     }
 
@@ -30,40 +30,44 @@ public class PocketBaseAuthenticationStateProvider : AuthenticationStateProvider
         }
         else
         {
-
-            await _localStorage.SetItemAsync<string>("token", e.Token);
-            //await _localStorage.SetItemAsync<string>("Id", e.Model.Id); 
-
-            var claims = ParseClaimsFromJwt(e.Token);
-            MarkUserAsAuthenticated(claims);
-
+            try
+            {
+                await _localStorage.SetItemAsync("token", e.Token);
+                var claims = ParseClaimsFromJwt(e.Token);
+                MarkUserAsAuthenticated(claims);
+            }
+            catch { }
         }
-
-        //Debug.WriteLine(e.Token);
     }
 
     public async override Task<AuthenticationState> GetAuthenticationStateAsync()
     {
+        try
+        {
+            var savedToken = await _localStorage.GetItemAsync<string>("token");
+            if (string.IsNullOrWhiteSpace(savedToken))
+            {
+                return new AuthenticationState(new ClaimsPrincipal());
+            }
 
-        var savedToken = await _localStorage.GetItemAsync<string>("token");
+            var parsedClaims = ParseClaimsFromJwt(savedToken);
+            var expires = parsedClaims.FirstOrDefault(c => c.Type == "exp");
 
-        if (string.IsNullOrWhiteSpace(savedToken))
+            if (expires is null || IsTokenExpired())
+            {
+                return new AuthenticationState(new ClaimsPrincipal());
+            }
+            var userid = parsedClaims.First(x => x.Type == "id").Value;
+            _pocketBase.Auth.AuthStore.Token = savedToken;
+            var usermodel =await _pocketBase.Data.UsersCollection.GetByIdAsync(userid);
+            _pocketBase.Auth.AuthStore.Save(savedToken, usermodel);
+            await _pocketBase.Auth.User.RefreshAsync();
+            return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(ParseClaimsFromJwt(savedToken), "jwt")));
+        }
+        catch
         {
             return new AuthenticationState(new ClaimsPrincipal());
         }
-
-        var parsedClaims = ParseClaimsFromJwt(savedToken);
-        var expires = parsedClaims.FirstOrDefault(c => c.Type == "exp");
-
-        if (expires is null || IsTokenExpired())
-        {
-            return new AuthenticationState(new ClaimsPrincipal());
-        }
-
-        _pocketBase.Auth.AuthStore.Save(savedToken, null);
-        await _pocketBase.Auth.User.RefreshAsync();
-
-        return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(ParseClaimsFromJwt(savedToken), "jwt")));
     }
 
     public void MarkUserAsAuthenticated(IEnumerable<Claim> claims)
@@ -78,12 +82,7 @@ public class PocketBaseAuthenticationStateProvider : AuthenticationStateProvider
     {
         var anonymousUser = new ClaimsPrincipal(new ClaimsIdentity());
         var authState = Task.FromResult(new AuthenticationState(anonymousUser));
-
-        //await _localStorage.ClearAsync();
-
-        await _localStorage.RemoveItemAsync("Id");
         await _localStorage.RemoveItemAsync("token");
-
         NotifyAuthenticationStateChanged(authState);
     }
 
