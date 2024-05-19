@@ -1,6 +1,7 @@
 ﻿using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using pocketbase_csharp_sdk;
+using pocketbase_csharp_sdk.Models;
 using PocketBaseClient.BlazorPocket;
 using System.Security.Claims;
 using System.Text.Json;
@@ -29,10 +30,13 @@ public class PocketBaseAuthenticationStateProvider : AuthenticationStateProvider
         }
         else
         {
-            await _localStorage.SetItemAsync("token", e.Token);
-            var claims = ParseClaimsFromJwt(e.Token);
-            MarkUserAsAuthenticated(claims);
-
+            try
+            {
+                await _localStorage.SetItemAsync("token", e.Token);
+                var claims = ParseClaimsFromJwt(e.Token);
+                MarkUserAsAuthenticated(claims);
+            }
+            catch { }
         }
     }
 
@@ -53,8 +57,10 @@ public class PocketBaseAuthenticationStateProvider : AuthenticationStateProvider
             {
                 return new AuthenticationState(new ClaimsPrincipal());
             }
-
-            _pocketBase.Auth.AuthStore.Save(savedToken, null);
+            var userid = parsedClaims.First(x => x.Type == "id").Value;
+            _pocketBase.Auth.AuthStore.Token = savedToken;
+            var usermodel =await _pocketBase.Data.UsersCollection.GetByIdAsync(userid);
+            _pocketBase.Auth.AuthStore.Save(savedToken, usermodel);
             await _pocketBase.Auth.User.RefreshAsync();
             return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(ParseClaimsFromJwt(savedToken), "jwt")));
         }

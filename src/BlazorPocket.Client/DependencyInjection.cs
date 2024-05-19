@@ -68,7 +68,7 @@ public static class DependencyInjection
         services.AddMudBlazorSnackbar();
         services.AddMudBlazorDialog();
         services.AddMudExtensions();
-        services.AddBlazoredLocalStorage();
+        services.AddBlazoredLocalStorageAsSingleton();
         services.AddSingleton<IUserPreferencesService, UserPreferencesService>();
         services.AddSingleton<LayoutService>();
 
@@ -80,7 +80,7 @@ public static class DependencyInjection
         var appSettings = new AppSettings();
         config.GetSection(AppSettings.KEY).Bind(appSettings);
         services.AddSingleton(appSettings);
-        services.AddSingleton(s => new BlazorPocketApplication());
+        services.AddScoped(s => new BlazorPocketApplication(appSettings.PocketbaseUrl, appSettings.AppName));
     }
     public static void TryAddProcketbaseWebAssembly(this IServiceCollection services, IConfiguration config)
     {

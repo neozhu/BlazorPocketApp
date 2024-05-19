@@ -42,6 +42,11 @@
     private async Task OnValidSubmit(EditContext context)
     {
         var result = await PocketbaseClient.Data.UsersCollection.Auth.AuthenticateWithPasswordAsync(model.Email, model.Paswsword);
+        if (result is not null && result.Model is not null)
+        {
+            var user = await PocketbaseClient.Data.UsersCollection.GetByIdAsync(result.Model.Id);
+            PocketbaseClient.Auth.AuthStore.Save(result.Token,user);
+        }
         StateHasChanged();
     }
 
