@@ -1,10 +1,10 @@
 ﻿@using BlazorPocket.Client.Services
 @using Microsoft.AspNetCore.Components.Authorization
 @using PocketBaseClient.BlazorPocket.Models
+@using pocketbase_csharp_sdk
+@using pocketbase_csharp_sdk.Models
 @using pocketbase_csharp_sdk.Models.Auth
-@{
-    var userModel = (User)PocketbaseClient.Auth.AuthStore.Model;
-}
+@implements IDisposable
 <MudMenu Class="ml-1" PositionAtCursor="false" AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.BottomLeft">
     <ActivatorContent>
         <MudStack Row="true" AlignItems="AlignItems.Center">
@@ -32,7 +32,7 @@
                 <MudText Align="Align.Center">Profile</MudText>
             </div>
         </MudMenuItem>
-        <MudMenuItem>
+        <MudMenuItem Href="/profile/setting">
             <div class="d-flex align-center">
                 <MudIcon Class="mr-1" Size="Size.Small"
                          Icon="@Icons.Material.Filled.Settings" />
@@ -54,13 +54,43 @@
 @code {
     [Inject]
     public AuthenticationStateProvider AuthenticationStateProvider { get; set; } = null!;
+
+    private User? userModel { get; set; }
     private string GetAvatarUrl(User usermodel)
     {
         return PocketbaseClient.AppUrl + "/api/files/" + usermodel.CollectionId + "/" + usermodel.Id + "/" + usermodel.Avatar.FileName;
     }
+    protected override void OnInitialized()
+    {
+        PocketbaseClient.Auth.AuthStore.OnChange += AuthStore_OnChange;
+        if (PocketbaseClient.Auth.AuthStore.Model is User)
+        {
+            userModel = PocketbaseClient.Auth.AuthStore.Model as User;
+        }
+        else if (PocketbaseClient.Auth.AuthStore.Model is UserModel)
+        {
+            userModel = PocketbaseClient.GetCurrentUser();
+        }
 
+    }
+    private  void AuthStore_OnChange(object? sender, AuthStoreEvent e)
+    {
+        if (e.Model is User)
+        {
+            userModel = PocketbaseClient.Auth.AuthStore.Model as User;
+        }
+        else if (e.Model is UserModel)
+        {
+            userModel = PocketbaseClient.GetCurrentUser();
+        }
+        InvokeAsync(StateHasChanged);
+    }
     private void OnSignOut()
     {
         ((PocketBaseAuthenticationStateProvider)AuthenticationStateProvider).MarkUserAsLoggedOut();
+    }
+    public void Dispose()
+    {
+        PocketbaseClient.Auth.AuthStore.OnChange -= AuthStore_OnChange;
     }
 }
