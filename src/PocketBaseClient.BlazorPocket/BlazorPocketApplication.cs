@@ -9,7 +9,6 @@
 // pocketbase-csharp-sdk project: https://github.com/PRCV1/pocketbase-csharp-sdk 
 // pocketbase project: https://github.com/pocketbase/pocketbase
 
-using PocketBaseClient;
 using PocketBaseClient.BlazorPocket.Services;
 
 namespace PocketBaseClient.BlazorPocket

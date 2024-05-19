@@ -1,5 +1,6 @@
 ﻿@page "/account/signin"
 @using BlazorPocket.Client.Layout
+@using System.ComponentModel.DataAnnotations
 <PageTitle>Login</PageTitle>
 <MudPaper Elevation="3" Class="pa-8" Width="100%" MaxWidth="500px">
     <div class="d-flex flex-row  align-center gap-3 my-3">
@@ -11,19 +12,64 @@
         <div class="d-flex flex-row gap-1">
             <MudText>Don't have an account?</MudText> <MudLink Href="/account/signup">Sign Up</MudLink>
         </div>
-        
-        <MudForm>
-            <MudTextField Class="mb-2" T="string" Label="Email" Placeholder="Email" Required="true" RequiredError="Email is required"></MudTextField>
-            <MudTextField InputType="InputType.Password" T="string" Label="Password" Placeholder="Password" Required="true" RequiredError="Password is required"></MudTextField>
+
+        <EditForm Model="@model"  OnValidSubmit="OnValidSubmit">
+            <MudTextField Class="mb-2"
+                          @bind-Value="model.Email" For="@(() => model.Email)"
+                          Label="Email" Placeholder="Email"
+                          Required="true" RequiredError="Email is required">
+            </MudTextField>
+            <MudTextField InputType="@PasswordInput" @bind-Value="model.Paswsword" For="@(() => model.Paswsword)" Label="Password" Placeholder="Password" Required="true" RequiredError="Password is required" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ButtonPasswordClick" AdornmentAriaLabel="Show Password"></MudTextField>
             <div class="d-flex flex-row align-center justify-space-between mb-2">
                 <MudCheckBox T="bool">remember me</MudCheckBox>
                 <MudLink Href="/account/forgetpassword">forget password?</MudLink>
             </div>
-            <MudButton FullWidth="true" Color="Color.Primary" Variant="Variant.Filled">Sign In</MudButton>
-        </MudForm>
+            <MudButton ButtonType="ButtonType.Submit" FullWidth="true" Color="Color.Primary" Variant="Variant.Filled">Sign In</MudButton>
+        </EditForm>
     </div>
 
 </MudPaper>
 @code {
+    private SignInModel model = new SignInModel()
+        {
+            Email = "demo@blazors.app",
+            Paswsword = "demo12345!"
+        };
 
+    bool isShow;
+    InputType PasswordInput = InputType.Password;
+    string PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
+    private async Task OnValidSubmit(EditContext context)
+    {
+        var result = await PocketbaseClient.Data.UsersCollection.Auth.AuthenticateWithPasswordAsync(model.Email, model.Paswsword);
+        StateHasChanged();
+    }
+
+    void ButtonPasswordClick()
+    {
+        if (isShow)
+        {
+            isShow = false;
+            PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
+            PasswordInput = InputType.Password;
+        }
+        else
+        {
+            isShow = true;
+            PasswordInputIcon = Icons.Material.Filled.Visibility;
+            PasswordInput = InputType.Text;
+        }
+    }
+
+
+    public class SignInModel
+    {
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+        [Required]
+        [StringLength(30, ErrorMessage = "Password must be at least 6 characters long.", MinimumLength = 6)]
+        public string Paswsword { get; set; }
+
+    }
 }
