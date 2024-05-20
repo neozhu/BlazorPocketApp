@@ -1,5 +1,6 @@
 ﻿@using System.Net.Http
 @using System.Net.Http.Json
+@using BlazorPocket.Client.Configurations
 @using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.AspNetCore.Components.Routing
 @using Microsoft.AspNetCore.Components.Web
@@ -9,3 +10,9 @@
 @using BlazorPocket.Client
 @using MudBlazor
 @using MudExtensions
+@using PocketBaseClient.BlazorPocket
+@inject NavigationManager Navigation
+@inject ApplicationSettings AppSettings
+@inject ISnackbar Snackbar
+@inject IDialogService DialogService
+@inject BlazorPocketApplication PocketbaseClient
