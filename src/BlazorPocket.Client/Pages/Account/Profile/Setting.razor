@@ -2,15 +2,13 @@
 <PageTitle>Setting</PageTitle>
 <MudText Typo="Typo.h2">Settings</MudText>
 <MudTabs Outlined="true" Position="Position.Left" Class="mt-3"  Border="true"
-    ApplyEffectsToContainer="true" PanelClass="pa-5">
+    ApplyEffectsToContainer="true" PanelClass="pa-6">
     <MudTabPanel Text="Profile">
-        <MudText>Profile</MudText>
+       <Profile/>
     </MudTabPanel>
-    <MudTabPanel Text="Account">
-        <MudText>Account</MudText>
-    </MudTabPanel>
+    
     <MudTabPanel Text="Security">
-        <MudText>Security</MudText>
+        <RestPassword/>
     </MudTabPanel>
 </MudTabs>
 @code {

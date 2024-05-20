@@ -69,6 +69,7 @@
         public string Email { get; set; }
         [Required]
         [StringLength(30, ErrorMessage = "Password must be at least 6 characters long.", MinimumLength = 6)]
+        [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)(?=.*[\W_]).{6,}$", ErrorMessage = "Password must be at least 6 characters long and contain at least one letter, one number, and one special character.")]
         public string Paswsword { get; set; }
 
     }
