@@ -34,17 +34,34 @@ jobs:
           
    
 
-    - name: Build and push
+    - name: Build and push BlazorPocketApp
       uses: docker/build-push-action@v5
       with:
         context: .
         push: true
         tags: blazordevlab/blazorpocketapp:${{ steps.version.outputs.version }}
 
-    - name: Build and push with latest tag
+    - name: Build and push BlazorPocketApp with latest tag
       uses: docker/build-push-action@v5
       with:
         context: .
         push: true
         tags: blazordevlab/blazorpocketapp:latest
+
+
+    - name: Build and push BlazorPocketBase
+      uses: docker/build-push-action@v5
+      with:
+        context: ./pocketbase
+        file: ./pocketbase/Dockerfile
+        push: true
+        tags: blazordevlab/blazorpocketbase:${{ steps.version.outputs.version }}
+        
+    - name: Build and push BlazorPocketBase with latest tag
+      uses: docker/build-push-action@v5
+      with:
+        context: ./pocketbase
+        file: ./pocketbase/Dockerfile
+        push: true
+        tags: blazordevlab/blazorpocketbase:latest
      
