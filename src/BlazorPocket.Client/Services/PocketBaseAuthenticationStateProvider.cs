@@ -61,7 +61,7 @@ public class PocketBaseAuthenticationStateProvider : AuthenticationStateProvider
             _pocketBase.Auth.AuthStore.Token = savedToken;
             var usermodel =await _pocketBase.Data.UsersCollection.GetByIdAsync(userid);
             _pocketBase.Auth.AuthStore.Save(savedToken, usermodel);
-            await _pocketBase.Auth.User.RefreshAsync();
+            await _pocketBase.Sdk.User.RefreshAsync();
             return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(ParseClaimsFromJwt(savedToken), "jwt")));
         }
         catch

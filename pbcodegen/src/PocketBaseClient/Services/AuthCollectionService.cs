@@ -15,11 +15,6 @@ namespace PocketBaseClient.Services
         private CollectionAuthService<RecordAuthModel<T>, T>? _AuthService;
         private CollectionAuthService<RecordAuthModel<T>, T> AuthService => _AuthService ??= new CollectionAuthService<RecordAuthModel<T>, T>(Collection.App.Sdk, Collection.Name!);
 
-
-
-        private UserService? _UserService;
-        private UserService UserService =>_UserService??new UserService(Collection.App.Sdk);
-
         public AuthCollectionService(CollectionBase<T> collection)
         {
             Collection = collection;
@@ -40,7 +35,7 @@ namespace PocketBaseClient.Services
                 { "password", password },
                 { "passwordConfirm", passwordConfirm },
             };
-            return await Collection.App.Sdk.HttpPostAsync<T>(Collection.UrlCollection, body);
+            return await Collection.App.Sdk.HttpPostAsync<T>(Collection.UrlRecords, body);
         }
         /// <summary>
         /// Create an Auth item with email and password
@@ -131,14 +126,6 @@ namespace PocketBaseClient.Services
 
         public void UnlinkExternalAuthentication(string userId, string provider)
             => AuthService.UnlinkExternalAuthentication(userId, provider);
-
-        public Task RefreshAsync()
-           => AuthService.RefreshAsync();
-        public void Refresh()
-          => AuthService.Refresh();
-
-        public Task<UserAuthModel?> AuthenticateWithPasswordAsync(string username, string password) => UserService.AuthenticateWithPasswordAsync(username, password);
-        public UserAuthModel? AuthenticateWithPassword(string username, string password) => UserService.AuthenticateWithPassword(username, password);
 
     }
 }
