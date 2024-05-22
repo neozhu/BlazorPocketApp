@@ -63,6 +63,8 @@ public class Theme
                 TableLines = "#374151", // Dark gray, for table lines
                 Divider = "#4B5563", // Gray, for dividers
                 OverlayLight = "#1C1C2E80", // Semi-transparent dark gray, for overlays
+             
+
             },
             Shadows = new()
             {
