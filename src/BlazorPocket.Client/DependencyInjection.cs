@@ -17,6 +17,7 @@ public static class DependencyInjection
         #region register MudBlazor.Services
         services.AddMudServices(config =>
         {
+            
             config.SnackbarConfiguration.PositionClass = Defaults.Classes.Position.BottomLeft;
             config.SnackbarConfiguration.NewestOnTop = false;
             config.SnackbarConfiguration.ShowCloseIcon = true;
