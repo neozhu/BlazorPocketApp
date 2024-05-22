@@ -35,6 +35,7 @@
             var result = await PocketbaseClient.Auth.User.CreateAsync(model.Email, model.Password, model.ConfirmPassword);
             if (result is not null && result.Verified == false)
             {
+                await PocketbaseClient.Auth.User.RequestVerificationAsync(model.Email);
                 Navigation.NavigateTo("/account/signupsuccessful");
             }
         }
