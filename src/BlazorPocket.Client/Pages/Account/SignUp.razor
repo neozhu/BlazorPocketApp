@@ -1,30 +1,62 @@
 ﻿@page "/account/signup"
 @using BlazorPocket.Client.Layout
-<PageTitle>Sign Up</PageTitle>
+@using System.ComponentModel.DataAnnotations
+<PageTitle>Signup</PageTitle>
 <MudPaper Elevation="3" Class="pa-8" Width="100%" MaxWidth="500px">
     <div class="d-flex flex-row  align-center gap-3 my-3">
         <MudBlazorLogo Style="with:60px;height:60px"></MudBlazorLogo>
         <MudText Typo="Typo.h5">Create an Account</MudText>
     </div>
     <div class="d-flex flex-column gap-2">
-
         <div class="d-flex flex-row gap-1">
             <MudText>Have an account?</MudText> <MudLink Href="/account/signin">Sign In</MudLink>
         </div>
-        
-        <MudForm>
-            <MudTextField Class="mb-2" T="string" Label="Email" Placeholder="Email" Required="true" RequiredError="Email is required"></MudTextField>
-            <MudTextField Class="mb-2" T="string" Label="Name" Placeholder="Name" Required="false"></MudTextField>
-            <MudTextField Class="mb-2" InputType="InputType.Password" T="string" Label="Password" Placeholder="Password" Required="true" RequiredError="Password is required"></MudTextField>
-            <MudTextField InputType="InputType.Password" T="string" Label="Confirm password" Placeholder="Cofirm password" Required="true" RequiredError="Cofirm password is required"></MudTextField>
-            <div class="d-flex flex-row align-center justify-space-between mb-2">
-                <MudCheckBox T="bool">I agree to the terms and privacy</MudCheckBox>
+        <EditForm Model="@model" OnValidSubmit="OnValidSubmit">
+            <div class="d-flex flex-column gap-2">
+                <MudTextField @bind-Value="model.Email" For="@(() => model.Email)" Label="Email" Placeholder="Email" Required="true" RequiredError="Email is required"></MudTextField>
+                <MudTextField @bind-Value="model.Password" For="@(() => model.Password)" InputType="InputType.Password" T="string" Label="Password" Placeholder="Password" Required="true" RequiredError="Password is required"></MudTextField>
+                <MudTextField @bind-Value="model.ConfirmPassword" For="@(() => model.ConfirmPassword)" InputType="InputType.Password" T="string" Label="Confirm password" Placeholder="Cofirm password" Required="true" RequiredError="Cofirm password is required"></MudTextField>
+                <div class="d-flex flex-row align-center justify-space-between">
+                    <MudCheckBox @bind-Value="model.CheckPrivacy" For="@(() => model.CheckPrivacy)">I agree to the terms and privacy</MudCheckBox>
+                </div>
+                <MudButton ButtonType="ButtonType.Submit" FullWidth="true" Color="Color.Primary" Variant="Variant.Filled">Signup</MudButton>
             </div>
-            <MudButton FullWidth="true" Color="Color.Primary" Variant="Variant.Filled">Sign Up</MudButton>
-        </MudForm>
+        </EditForm>
     </div>
 
 </MudPaper>
 @code {
+    private SignupModel model = new();
 
+    private async Task OnValidSubmit(EditContext context)
+    {
+        try
+        {
+            var result = await PocketbaseClient.Auth.User.CreateAsync(model.Email, model.Password, model.ConfirmPassword);
+            if (result is not null && result.Verified == false)
+            {
+                await PocketbaseClient.Auth.User.RequestVerificationAsync(model.Email);
+                Navigation.NavigateTo("/account/signupsuccessful");
+            }
+        }
+        catch (Exception e)
+        {
+            Snackbar.Add("An error occurred while creating your account. Please try again later.", Severity.Error);
+        }
+    }
+    public class SignupModel
+    {
+        [Required]
+        [EmailAddress]
+        public string? Email { get; set; }
+        [Required]
+        [StringLength(30, ErrorMessage = "Password must be at least 6 characters long.", MinimumLength = 6)]
+        [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)(?=.*[\W_]).{6,}$", ErrorMessage = "Password must be at least 6 characters long and contain at least one letter, one number, and one special character.")]
+        public string? Password { get; set; }
+        [Required]
+        [Compare(nameof(Password))]
+        public string? ConfirmPassword { get; set; }
+        [Range(typeof(bool), "true", "true", ErrorMessage = "You must accept the privacy policy.")]
+        public bool CheckPrivacy { get; set; }
+    }
 }

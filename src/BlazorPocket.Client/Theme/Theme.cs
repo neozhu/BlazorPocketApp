@@ -112,7 +112,12 @@ public class Theme
                 },
                 H1 = new H1()
                 {
-                    FontSize = "4rem",
+                    FontSize = "3rem",
+                    FontWeight = 700,
+                },
+                H2 = new H2()
+                {
+                    FontSize = "2.4rem",
                     FontWeight = 700,
                 },
                 H3 = new H3()
