@@ -97,11 +97,9 @@ namespace PocketBaseClient.Services
         public void RequestVerification(string email)
             => AuthService.RequestVerification(email);
 
-        public async Task<T?> ConfirmVerificationAsync(string token)
-            => (await AuthService.ConfirmVerificationAsync(token))?.Record;
+        public  Task ConfirmVerificationAsync(string token)  => AuthService.ConfirmVerificationAsync(token);
 
-        public T? ConfirmVerification(string token)
-            => AuthService.ConfirmVerification(token)?.Record;
+        public void ConfirmVerification(string token) => AuthService.ConfirmVerification(token);
 
         public async Task RequestEmailChangeAsync(string newEmail)
             => await AuthService.RequestEmailChangeAsync(newEmail);

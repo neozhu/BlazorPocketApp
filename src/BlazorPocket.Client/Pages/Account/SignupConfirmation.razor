@@ -1,4 +1,4 @@
-﻿ @page "/_/auth/confirm-verification/{token}" 
+﻿@page "/_/auth/confirm-verification/{token}"
 @using BlazorPocket.Client.Layout
 <PageTitle>Confirm Verification</PageTitle>
 <MudPaper Elevation="3" Class="pa-8" Width="100%" MaxWidth="500px">
@@ -31,13 +31,13 @@
         }
         else
         {
-            var result=await PocketbaseClient.Auth.User.ConfirmVerificationAsync(Token);
-            if (result is not null && (result.Verified??false))
+            try
             {
+                await PocketbaseClient.Auth.User.ConfirmVerificationAsync(Token);
                 success = true;
                 message = "Your email has been successfully verified. You can now sign in.";
             }
-            else
+            catch (Exception e)
             {
                 message = "Verification failed. The token may be invalid or expired.";
             }

@@ -19,7 +19,7 @@
                               Label="Email" Placeholder="Email"
                               Required="true" RequiredError="Email is required">
                 </MudTextField>
-                <MudTextField InputType="@PasswordInput" @bind-Value="model.Paswsword" For="@(() => model.Paswsword)" Label="Password" Placeholder="Password" Required="true" RequiredError="Password is required" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ButtonPasswordClick" AdornmentAriaLabel="Show Password"></MudTextField>
+                <MudTextField InputType="@PasswordInput" @bind-Value="model.Password" For="@(() => model.Password)" Label="Password" Placeholder="Password" Required="true" RequiredError="Password is required" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ButtonPasswordClick" AdornmentAriaLabel="Show Password"></MudTextField>
                 <div class="d-flex flex-row align-center justify-space-between">
                     <MudCheckBox T="bool">remember me</MudCheckBox>
                     <MudLink Href="/account/forgetpassword">forget password?</MudLink>
@@ -34,7 +34,7 @@
     private SignInModel model = new SignInModel()
         {
             Email = "demo@blazors.app",
-            Paswsword = "demo12345!"
+            Password = "demo12345!"
         };
 
     bool isShow;
@@ -42,8 +42,22 @@
     string PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
     private async Task OnValidSubmit(EditContext context)
     {
-        var result = await PocketbaseClient.Sdk.User.AuthenticateWithPasswordAsync(model.Email, model.Paswsword);
-        StateHasChanged();
+        try
+        {
+            var result = await PocketbaseClient.Sdk.User.AuthenticateWithPasswordAsync(model.Email, model.Password);
+            if (result?.Record?.Verified ?? false)
+            {
+                StateHasChanged();
+            }
+            else
+            {
+                Snackbar.Add("Your account is not verified. Please check your email for the verification link.", Severity.Error);
+            }
+        }
+        catch (Exception e)
+        {
+            Snackbar.Add("Authentication failed. Please check your email and password and try again.", Severity.Error);
+        }
     }
 
     void ButtonPasswordClick()
@@ -67,11 +81,11 @@
     {
         [Required]
         [EmailAddress]
-        public string Email { get; set; }
+        public string Email { get; set; } = string.Empty;
         [Required]
         [StringLength(30, ErrorMessage = "Password must be at least 6 characters long.", MinimumLength = 6)]
         [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)(?=.*[\W_]).{6,}$", ErrorMessage = "Password must be at least 6 characters long and contain at least one letter, one number, and one special character.")]
-        public string Paswsword { get; set; }
+        public string Password { get; set; } = string.Empty;
 
     }
 }
