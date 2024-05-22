@@ -63,6 +63,8 @@ public class Theme
                 TableLines = "#374151", // Dark gray, for table lines
                 Divider = "#4B5563", // Gray, for dividers
                 OverlayLight = "#1C1C2E80", // Semi-transparent dark gray, for overlays
+             
+
             },
             Shadows = new()
             {
@@ -112,7 +114,12 @@ public class Theme
                 },
                 H1 = new H1()
                 {
-                    FontSize = "4rem",
+                    FontSize = "3rem",
+                    FontWeight = 700,
+                },
+                H2 = new H2()
+                {
+                    FontSize = "2.4rem",
                     FontWeight = 700,
                 },
                 H3 = new H3()
