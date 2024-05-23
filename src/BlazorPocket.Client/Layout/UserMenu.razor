@@ -25,7 +25,7 @@
         </MudStack>
     </ActivatorContent>
     <ChildContent>
-        <MudMenuItem>
+        <MudMenuItem Href="/account/profile">
             <div class="d-flex align-center">
                 <MudIcon Class="mr-1" Size="Size.Small"
                          Icon="@Icons.Material.Filled.Person" />
@@ -60,7 +60,7 @@
     {
         return PocketbaseClient.AppUrl + "/api/files/" + usermodel.CollectionId + "/" + usermodel.Id + "/" + usermodel.Avatar.FileName;
     }
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
         PocketbaseClient.Auth.AuthStore.OnChange += AuthStore_OnChange;
         if (PocketbaseClient.Auth.AuthStore.Model is User)
@@ -69,11 +69,11 @@
         }
         else if (PocketbaseClient.Auth.AuthStore.Model is UserModel)
         {
-            userModel = PocketbaseClient.GetCurrentUser();
+            userModel = await PocketbaseClient.GetCurrentUserAsync();
         }
 
     }
-    private  void AuthStore_OnChange(object? sender, AuthStoreEvent e)
+    private void AuthStore_OnChange(object? sender, AuthStoreEvent e)
     {
         if (e.Model is User)
         {
