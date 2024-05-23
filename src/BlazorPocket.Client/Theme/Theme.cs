@@ -45,7 +45,7 @@ public class Theme
                 AppbarText = "#D1D5DB", // Light gray, text color for app bar
                 AppbarBackground = "rgba(22,22,37,0.8)", // Semi-transparent dark gray, background for app bar
                 DrawerBackground = "#161625", // Dark gray, background for drawer
-                ActionDefault = "#4B5563", // Gray, default action color
+                ActionDefault = "#A4B0C2", // Gray, default action color
                 ActionDisabled = "#6B72804D", // Semi-transparent gray, color for disabled actions
                 ActionDisabledBackground = "#4B55634D", // Semi-transparent gray, background for disabled actions
                 TextPrimary = "#E5E7EB", // Light gray, primary text color
@@ -63,7 +63,6 @@ public class Theme
                 TableLines = "#374151", // Dark gray, for table lines
                 Divider = "#4B5563", // Gray, for dividers
                 OverlayLight = "#1C1C2E80", // Semi-transparent dark gray, for overlays
-                                            // New properties
                 Black = "#27272F", // Dark grayish black color
                 Dark = "#0D0D0D", // Very dark gray, almost black
                 DarkContrastText = "#FFFFFF", // White, contrast text for dark background

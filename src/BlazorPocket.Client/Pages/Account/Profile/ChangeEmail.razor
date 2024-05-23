@@ -1,14 +1,21 @@
-﻿<MudText Typo="Typo.h4">Change email</MudText>
-<MudDrawer></MudDrawer>
+﻿<div class="d-flex flex-column gap-2">
+    <MudText Typo="Typo.h4">Change email</MudText>
+    <MudDivider />
 
-<MudText>Changing your username can have unintended side effects.</MudText>
-<MudButton Variant="Variant.Filled" Color="Color.Primary">Change email</MudButton>
-<MudText Typo="Typo.body1">Looking to manage account security settings? You can find them in the Password and authentication page.</MudText>
+    <MudText>Changing your username can have unintended side effects.</MudText>
+    <div class="flex-grow-0">
+        <MudButton Variant="Variant.Filled" Color="Color.Primary">Change email</MudButton>
+    </div>
 
-<MudText Typo="Typo.h4" Color="Color.Secondary">Delete account</MudText>
-<MudDrawer></MudDrawer>
-<MudText>You must remove yourself, transfer ownership, or delete these organizations before you can delete your user.</MudText>
-<MudButton Variant="Variant.Filled" Color="Color.Error">Delete your account</MudButton>
+    <MudText Typo="Typo.body1">Looking to manage account security settings? You can find them in the Password and authentication page.</MudText>
+
+    <MudText Typo="Typo.h4" Color="Color.Secondary" Class="mt-4">Delete account</MudText>
+    <MudDivider />
+    <MudText>You must remove yourself, transfer ownership, or delete these organizations before you can delete your user.</MudText>
+    <div class="flex-grow-0">
+        <MudButton Variant="Variant.Filled" Color="Color.Error">Delete your account</MudButton>
+    </div>
+</div>
 @code {
 
 }
