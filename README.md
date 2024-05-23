@@ -23,7 +23,7 @@ BlazorPocket is a lightweight web application template that leverages the latest
 version: '3.8'
 services:
   blazorpocketapp:
-    image: blazordevlab/blazorpocketapp:0.0.2
+    image: blazordevlab/blazorpocketapp:0.0.6-pre.73720a4
     environment:
       - UseInMemoryDatabase=false
       - ASPNETCORE_ENVIRONMENT=Development
@@ -36,6 +36,16 @@ services:
     ports:
       - "8023:80"
       - "8024:443"
+  pocketbase:
+    image: blazordevlab/blazorpocketbase:0.0.5
+    ports:
+      - "8025:8080"
+    volumes:
+      - pocketbase_data:/pb/pb_data 
+volumes:
+  pocketbase_data:
+
+
 ```
 
 ### Prerequisites
