@@ -1,0 +1,35 @@
+﻿<EditForm Model="@model" OnValidSubmit="OnValidSubmit">
+    <div class="d-flex flex-row gap-3">
+        <div class="d-flex flex-column gap-2">
+            <MudText Typo="Typo.h4">Public profile</MudText>
+            <MudTextField Label="Name" @bind-Value="model.Name" For="@(() => model.Name)" ShrinkLabel="true" HelperText="Your name may appear around application where you contribute or are mentioned. You can remove it at any time."></MudTextField>
+            <MudTextField Label="User name" @bind-Value="model.Username" For="@(() => model.Username)" ShrinkLabel="true" ReadOnly Adornment="Adornment.End" IconSize="Size.Small" AdornmentIcon="@Icons.Material.Filled.Edit"></MudTextField>
+            <MudTextField Label="Email" @bind-Value="model.Email" For="@(() => model.Email)" ShrinkLabel="true" ReadOnly Adornment="Adornment.End" IconSize="Size.Small" AdornmentIcon="@Icons.Material.Filled.Edit"></MudTextField>
+        </div>
+        <div class="d-flex flex-column  gap-1 px-4">
+            <MudImage Src="https://blazorpocketbase.blazorserver.com/api/files/_pb_users_auth_/y8rcwum9bqy0i3d/1JIByOOTTb9_LqfOgMOeGW.png" Width="150" Height="150" ObjectFit="ObjectFit.Cover" Alt="user name" Elevation="5" Class="rounded-lg"></MudImage>
+            <MudButton Variant="Variant.Text" FullWidth="false">Edit Avatar</MudButton>
+        </div>
+
+        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Save Profile</MudButton>
+    </div>
+ 
+</EditForm>
+
+@code {
+    private ProfileModel model = new();
+
+    private void OnValidSubmit(EditContext context)
+    {
+
+        StateHasChanged();
+    }
+
+    public class ProfileModel
+    {
+        public string? Id { get; set; }
+        public string? Username { get; set; }
+        public string? Name { get; set; }
+        public string? Email { get; set; }
+    }
+}
