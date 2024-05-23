@@ -34,11 +34,11 @@ public class Theme
                 TableLines = "#D1D5DB", // Light gray, for table lines
                 Divider = "#E5E7EB", // Light gray, for dividers
                 OverlayLight = "#F3F4F680", // Semi-transparent light gray, for overlays
-               
+
             },
             PaletteDark = new()
             {
-                Primary = "#1E3A8A", // Deep blue, primary color for highlights and key elements
+                Primary = "#3B82F6", // Brighter deep blue, primary color for highlights and key elements
                 Surface = "#1C1C2E", // Dark gray, for card surfaces or secondary backgrounds
                 Background = "#161625", // Dark gray, main background color
                 BackgroundGray = "#11111A", // Very dark gray, for subtle background areas
@@ -55,7 +55,7 @@ public class Theme
                 DrawerText = "#9CA3AF", // Medium gray, text color for drawer
                 GrayLight = "#1F2937", // Dark gray, for light gray elements
                 GrayLighter = "#1C1C2E", // Dark gray, for lighter gray elements
-                Info = "#2563EB", // Blue, for informational messages
+                Info = "#3B82F6", // Bright blue, for informational messages
                 Success = "#10B981", // Green, for success messages
                 Warning = "#F59E0B", // Orange, for warning messages
                 Error = "#EF4444", // Red, for error messages
@@ -63,7 +63,48 @@ public class Theme
                 TableLines = "#374151", // Dark gray, for table lines
                 Divider = "#4B5563", // Gray, for dividers
                 OverlayLight = "#1C1C2E80", // Semi-transparent dark gray, for overlays
-             
+                                            // New properties
+                Black = "#27272F", // Dark grayish black color
+                Dark = "#0D0D0D", // Very dark gray, almost black
+                DarkContrastText = "#FFFFFF", // White, contrast text for dark background
+                DarkDarken = "#0B0B0B", // Slightly darker dark
+                DarkLighten = "#262626", // Slightly lighter dark
+                DividerLight = "#2D2D2D", // Light gray for dividers
+                ErrorContrastText = "#FFFFFF", // White, contrast text for errors
+                ErrorDarken = "#CC3737", // Darker red for errors
+                ErrorLighten = "#FF6B6B", // Lighter red for errors
+                GrayDark = "#1A1A1A", // Very dark gray
+                GrayDarker = "#141414", // Even darker gray
+                GrayDefault = "#1C1C1C", // Default gray
+                HoverOpacity = 0.06, // Opacity for hover effects
+                InfoContrastText = "#FFFFFF", // White, contrast text for info
+                InfoDarken = "#1E4DB7", // Darker blue for info
+                InfoLighten = "#4D8FF7", // Lighter blue for info
+                LinesInputs = "#2B2B2B", // Gray for input lines
+                OverlayDark = "#0F0F1F80", // Semi-transparent very dark gray
+                PrimaryContrastText = "#FFFFFF", // White, contrast text for primary color
+                PrimaryDarken = "#2A6FCC", // Darker blue for primary
+                PrimaryLighten = "#669EFF", // Lighter blue for primary
+                RippleOpacity = 0.1, // Opacity for ripple effect
+                RippleOpacitySecondary = 0.2, // Higher opacity for secondary ripple effect
+                Secondary = "#EC4899", // Pink, secondary color (using Colors.Pink.Accent2)
+                SecondaryContrastText = "#FFFFFF", // White, contrast text for secondary color
+                SecondaryDarken = "#B91C70", // Darker pink for secondary
+                SecondaryLighten = "#FF70B3", // Lighter pink for secondary
+                SuccessContrastText = "#FFFFFF", // White, contrast text for success
+                SuccessDarken = "#0A865F", // Darker green for success
+                SuccessLighten = "#33E0A3", // Lighter green for success
+                TableHover = "#2C2C3A", // Dark gray for table hover
+                TableStriped = "#24242E", // Slightly lighter dark gray for table stripes
+                Tertiary = "#9333EA", // Purple, tertiary color
+                TertiaryContrastText = "#FFFFFF", // White, contrast text for tertiary color
+                TertiaryDarken = "#6B21A8", // Darker purple for tertiary
+                TertiaryLighten = "#C084FC", // Lighter purple for tertiary
+                WarningContrastText = "#000000", // Black, contrast text for warnings
+                WarningDarken = "#C47D08", // Darker orange for warnings
+                WarningLighten = "#FFB340", // Lighter orange for warnings
+                White = "#FFFFFF" // White color
+
 
             },
             Shadows = new()
@@ -110,7 +151,7 @@ public class Theme
                 {
                     FontFamily = new[] { "Public Sans", "Roboto", "Arial", "sans-serif" },
                     LetterSpacing = "normal",
-                    FontSize=".75rem"
+                    FontSize = ".75rem"
                 },
                 H1 = new H1()
                 {
