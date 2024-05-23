@@ -10,9 +10,11 @@ BlazorPocket is a lightweight web application template that leverages the latest
 <img width="1279" src="img/1.png">
 <img width="1279" src="img/2.png">
 <img width="1280" src="img/4.png">
+<p>
 <img width="280" src="img/5.png">
 <img width="248" src="img/7.png">
 <img width="248" src="img/8.png">
+</p>
 
 ## Features
 - **Blazor Web App with .NET 8.0**: Utilizes the latest features and improvements in .NET 8.0 Blazor.
