@@ -6,6 +6,14 @@
 
 BlazorPocket is a lightweight web application template that leverages the latest .NET 8.0 Blazor Web App with InteractiveAuto render mode and PocketBase for backend data storage. This project aims to streamline the development process, minimize repetitive coding, and provide a quick start for building efficient web applications.
 
+
+<img width="1279" src="img/1.png">
+<img width="1279" src="img/2.png">
+<img width="1280" src="img/4.png">
+<img width="280" src="img/5.png">
+<img width="248" src="img/7.png">
+<img width="248" src="img/8.png">
+
 ## Features
 - **Blazor Web App with .NET 8.0**: Utilizes the latest features and improvements in .NET 8.0 Blazor.
 - **InteractiveAuto Render Mode**: Offers enhanced interactivity and responsiveness.
