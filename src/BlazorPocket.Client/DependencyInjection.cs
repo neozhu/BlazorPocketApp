@@ -17,7 +17,7 @@ public static class DependencyInjection
         #region register MudBlazor.Services
         services.AddMudServices(config =>
         {
-            
+            MudGlobal.InputDefaults.ShrinkLabel = true;
             config.SnackbarConfiguration.PositionClass = Defaults.Classes.Position.BottomCenter;
             config.SnackbarConfiguration.NewestOnTop = false;
             config.SnackbarConfiguration.ShowCloseIcon = true;
@@ -48,7 +48,8 @@ public static class DependencyInjection
     {
         #region register MudBlazor.Services
         services.AddMudServices(config =>
-        {
+        { 
+            MudGlobal.InputDefaults.ShrinkLabel = true;
             config.SnackbarConfiguration.PositionClass = Defaults.Classes.Position.BottomCenter;
             config.SnackbarConfiguration.NewestOnTop = false;
             config.SnackbarConfiguration.ShowCloseIcon = true;

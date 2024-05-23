@@ -4,11 +4,14 @@
 <MudTabs Outlined="true" Position="Position.Left" Class="mt-3"  Border="true"
     ApplyEffectsToContainer="true" PanelClass="pa-6">
     <MudTabPanel Text="Profile">
-       <EditProfile/>
+        <EditProfile />
+    </MudTabPanel>
+    <MudTabPanel Text="Account">
+       <ChangeEmail></ChangeEmail>
     </MudTabPanel>
     
     <MudTabPanel Text="Security">
-        <RestPassword/>
+      <TwofactorSetting></TwofactorSetting>
     </MudTabPanel>
 </MudTabs>
 @code {
