@@ -14,6 +14,7 @@
         </div>
 
         <EditForm Model="@model" OnValidSubmit="OnValidSubmit">
+            <DataAnnotationsValidator />
             <div class="d-flex flex-column gap-2">
                 <MudTextField @bind-Value="model.Email" For="@(() => model.Email)"
                               Label="Email" Placeholder="Email"
