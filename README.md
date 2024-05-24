@@ -25,7 +25,6 @@ BlazorPocket is a lightweight web application template that leverages the latest
 ## Getting Started
 
 ### Demo
-- https://blazorpocket.blazorserver.com/
 - https://blazorpocket.blazors.app
 
 ### docker compose file
