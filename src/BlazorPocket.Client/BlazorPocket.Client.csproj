@@ -20,4 +20,10 @@
     <ProjectReference Include="..\PocketBaseClient.BlazorPocket\PocketBaseClient.BlazorPocket.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Pages\Account\EmailChangeConfirm.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+  </ItemGroup>
+
 </Project>

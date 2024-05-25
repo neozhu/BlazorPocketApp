@@ -50,12 +50,15 @@
         var userModel = await PocketbaseClient.GetCurrentUserAsync();
         model = new ProfileModel { Id = userModel.Id, Email = userModel.Email?.Address, Name = userModel.Name, Username = userModel.Username, Avatar = userModel.Avatar, AvatarUrl = userModel.Avatar.GetFileUrl() };
     }
-    IList<IBrowserFile> files = new List<IBrowserFile>();
-    private void UploadFiles(IBrowserFile file)
+
+    private async Task UploadFiles(IBrowserFile file)
     {
-        files.Add(file);
-        var filename = file.Name;
-        var file1 = new AvatarFile();
+        var fileName = file.Name;
+        var stream = new MemoryStream();
+        var user = await PocketbaseClient.Data.UsersCollection.GetByIdAsync(model.Id);
+        
+        await PocketbaseClient.Data.SaveChangesAsync();
+    
     }
     private async Task OnValidSubmit(EditContext context)
     {
