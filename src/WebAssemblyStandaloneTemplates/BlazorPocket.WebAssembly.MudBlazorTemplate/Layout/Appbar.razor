@@ -1,0 +1,24 @@
+﻿@using BlazorPocket.WebAssembly.MudBlazorTemplate.Services
+<MudAppBar Color="Color.Transparent" Elevation="0" Fixed="false">
+
+    <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" />
+    BlazorPocket Application
+    <MudSpacer />
+    <MudTooltip Delay="1000" Text="https://github.com/neozhu/BlazorPocketApp.git">
+        <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Href="https://github.com/neozhu/BlazorPocketApp.git" Target="_blank" />
+    </MudTooltip>
+    <MudTooltip Delay="1000" Text="@(LayoutService.IsDarkMode ? "Light mode" : "Dark mode")">
+    <MudToggleIconButton Toggled="@LayoutService.IsDarkMode" Icon="@Icons.Material.TwoTone.WbSunny"
+                         Color="@Color.Warning" Title="Off" Class="d-flex ml-auto" ToggledIcon="@Icons.Material.TwoTone.DarkMode"
+                         ToggledColor="@Color.Surface" ToggledTitle="On" @onclick="@(()=> LayoutService.SetDarkMode(!LayoutService.IsDarkMode))" />
+   </MudTooltip>
+    <MudTooltip Delay="1000" Text="@(LayoutService.IsRTL ? "Left-to-right" : "Right-to-left")">
+        <MudIconButton Icon="@(LayoutService.IsRTL ? @Icons.Material.Filled.FormatTextdirectionLToR : @Icons.Material.Filled.FormatTextdirectionRToL)" OnClick="@LayoutService.ToggleRightToLeft" Color="Color.Inherit" />
+    </MudTooltip>
+    <UserMenu></UserMenu>
+</MudAppBar>
+
+@code {
+    [Inject]
+    public LayoutService LayoutService { get; set; } 
+}

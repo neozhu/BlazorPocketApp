@@ -1,0 +1,30 @@
+@using BlazorPocket.Shared.Services
+@using Microsoft.AspNetCore.Components.Authorization
+@inject AuthenticationStateProvider authStateProvider
+@inject NavigationManager NavManager
+@inherits ComponentBase
+<AuthorizeView>
+    <Authorized>
+        <div class="hstack gap-1">
+            <span class="fw-bold text-primary">@context.User.Identity!.Name </span>
+            <button class="btn btn-link fw-bold text-danger" @onclick="Logout">Logout</button>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <a class="btn btn-link text-decoration-none text-primary fw-bold" href="/login">Login</a>
+        <a class="btn btn-link text-decoration-none text-danger fw-bold" href="/register">Register</a>
+    </NotAuthorized>
+</AuthorizeView>
+
+
+@code {
+    private async Task Logout()
+    {
+        if (authStateProvider is PocketBaseAuthenticationStateProvider customAuthStateProvider)
+        {
+            customAuthStateProvider.MarkUserAsLoggedOut();
+        }
+
+        NavManager.NavigateTo("/", replace: true);
+    }
+}

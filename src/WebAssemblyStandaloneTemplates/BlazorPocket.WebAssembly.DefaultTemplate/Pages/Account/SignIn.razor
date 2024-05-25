@@ -1,0 +1,112 @@
+﻿@page "/account/signin"
+@layout AuthenticationLayout
+@attribute [AllowAnonymous]
+
+@using System.ComponentModel.DataAnnotations
+@using Microsoft.AspNetCore.Components.Forms
+
+<PageTitle>Login</PageTitle>
+
+<div class="paper pa-8" style="width: 100%; max-width: 500px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 16px; margin: auto;">
+    <div class="d-flex flex-row align-center gap-3 my-3">
+        <img src="mudblazor_logo.png" style="width: 60px; height: 60px;" alt="MudBlazor Logo" />
+        <h5>BlazorPocket App</h5>
+    </div>
+    <div class="d-flex flex-column gap-2">
+        <div class="d-flex flex-row gap-1">
+            <span>Don't have an account?</span>
+            <a href="/account/signup">Signup</a>
+        </div>
+
+        <EditForm Model="@model" OnValidSubmit="OnValidSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="d-flex flex-column gap-2">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <InputText id="email" @bind-Value="model.Email" class="form-control" placeholder="Email" />
+                    <ValidationMessage For="@(() => model.Email)" />
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <InputText id="password" type="@PasswordInput" @bind-Value="model.Password" class="form-control" placeholder="Password" />
+                    <ValidationMessage For="@(() => model.Password)" />
+                    <button type="button" class="btn btn-link" @onclick="ButtonPasswordClick">
+                        <i class="material-icons">@PasswordInputIcon</i>
+                    </button>
+                </div>
+
+                <div class="d-flex flex-row align-center justify-space-between">
+                    <InputCheckbox @bind-Value="rememberMe" /> <label>remember me</label>
+                    <a href="/account/forgetpassword">forget password?</a>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    private SignInModel model = new SignInModel()
+        {
+            Email = "demo@blazors.app",
+            Password = "demo12345!"
+        };
+
+    bool isShow;
+    string PasswordInput = "password";
+    string PasswordInputIcon = "visibility_off";
+    bool rememberMe;
+
+    private async Task OnValidSubmit()
+    {
+        try
+        {
+            var result = await PocketbaseClient.Sdk.User.AuthenticateWithPasswordAsync(model.Email, model.Password);
+            if (result?.Record?.Verified ?? false)
+            {
+                StateHasChanged();
+            }
+            else
+            {
+                // Use your preferred method to show a message to the user
+                Console.WriteLine("Your account is not verified. Please check your email for the verification link.");
+            }
+        }
+        catch (Exception e)
+        {
+            // Use your preferred method to show a message to the user
+            Console.WriteLine("Authentication failed. Please check your email and password and try again.");
+        }
+    }
+
+    void ButtonPasswordClick()
+    {
+        if (isShow)
+        {
+            isShow = false;
+            PasswordInputIcon = "visibility_off";
+            PasswordInput = "password";
+        }
+        else
+        {
+            isShow = true;
+            PasswordInputIcon = "visibility";
+            PasswordInput = "text";
+        }
+    }
+
+    public class SignInModel
+    {
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; } = string.Empty;
+
+        [Required]
+        [StringLength(30, ErrorMessage = "Password must be at least 6 characters long.", MinimumLength = 6)]
+        [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)(?=.*[\W_]).{6,}$", ErrorMessage = "Password must be at least 6 characters long and contain at least one letter, one number, and one special character.")]
+        public string Password { get; set; } = string.Empty;
+    }
+}
