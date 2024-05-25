@@ -25,7 +25,15 @@
                 <MudAvatar Style="width:150px;height:150px">@model.Username?.FirstOrDefault()</MudAvatar>
             }
             <div class="flex-grow-0" style="margin-left:auto;margin-top:-35px;margin-right:20px">
-                <MudIconButton Color="Color.Info" Icon="@Icons.Material.Filled.Camera" aria-label="Edit Avatar"></MudIconButton>
+                <MudFileUpload T="IBrowserFile" FilesChanged="UploadFiles">
+                    <ActivatorContent>
+                        <MudIconButton HtmlTag="label"
+                                       Color="Color.Info"
+                                       Icon="@Icons.Material.Filled.PhotoCamera"
+                                       >
+                        </MudIconButton>
+                    </ActivatorContent>
+                </MudFileUpload>
             </div>
         </div>
 
@@ -42,7 +50,13 @@
         var userModel = await PocketbaseClient.GetCurrentUserAsync();
         model = new ProfileModel { Id = userModel.Id, Email = userModel.Email?.Address, Name = userModel.Name, Username = userModel.Username, Avatar = userModel.Avatar, AvatarUrl = userModel.Avatar.GetFileUrl() };
     }
-
+    IList<IBrowserFile> files = new List<IBrowserFile>();
+    private void UploadFiles(IBrowserFile file)
+    {
+        files.Add(file);
+        var filename = file.Name;
+        var file1 = new AvatarFile();
+    }
     private async Task OnValidSubmit(EditContext context)
     {
         try
