@@ -20,6 +20,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PocketBaseClient", "pbcodeg
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PocketBaseClient.BlazorPocket", "src\PocketBaseClient.BlazorPocket\PocketBaseClient.BlazorPocket.csproj", "{D6219270-40C3-4F81-9C10-3F953EF0AB4A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebAssemblyStandaloneTemplates", "WebAssemblyStandaloneTemplates", "{1E00FAFF-6C1C-4130-9A10-6C80BECA9788}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorPocket.WebAssembly.MudBlazorTemplate", "src\WebAssemblyStandaloneTemplates\BlazorPocket.WebAssembly.MudBlazorTemplate\BlazorPocket.WebAssembly.MudBlazorTemplate.csproj", "{620CB54D-1488-4FF2-AB20-3362B55F8169}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorPocket.Shared", "src\BlazorPocket.Shared\BlazorPocket.Shared.csproj", "{31585ABA-40F0-4429-8819-023981544778}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorPocket.WebAssembly.DefaultTemplate", "src\WebAssemblyStandaloneTemplates\BlazorPocket.WebAssembly.DefaultTemplate\BlazorPocket.WebAssembly.DefaultTemplate.csproj", "{99534A00-D3EE-497F-A1ED-148358F3AADC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +58,18 @@ Global
 		{D6219270-40C3-4F81-9C10-3F953EF0AB4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6219270-40C3-4F81-9C10-3F953EF0AB4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6219270-40C3-4F81-9C10-3F953EF0AB4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{620CB54D-1488-4FF2-AB20-3362B55F8169}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{620CB54D-1488-4FF2-AB20-3362B55F8169}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{620CB54D-1488-4FF2-AB20-3362B55F8169}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{620CB54D-1488-4FF2-AB20-3362B55F8169}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31585ABA-40F0-4429-8819-023981544778}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31585ABA-40F0-4429-8819-023981544778}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31585ABA-40F0-4429-8819-023981544778}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31585ABA-40F0-4429-8819-023981544778}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99534A00-D3EE-497F-A1ED-148358F3AADC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99534A00-D3EE-497F-A1ED-148358F3AADC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99534A00-D3EE-497F-A1ED-148358F3AADC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99534A00-D3EE-497F-A1ED-148358F3AADC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -61,6 +81,10 @@ Global
 		{882F09EF-2C6F-42ED-AFC3-F2E9ED75BBA0} = {9AB40228-41FF-484E-A077-87D097118380}
 		{384983D0-52B1-43C3-8B29-8738A826BCAB} = {9AB40228-41FF-484E-A077-87D097118380}
 		{D6219270-40C3-4F81-9C10-3F953EF0AB4A} = {2140ED0B-6641-42E6-9CA1-F41C56F3E0C2}
+		{1E00FAFF-6C1C-4130-9A10-6C80BECA9788} = {2140ED0B-6641-42E6-9CA1-F41C56F3E0C2}
+		{620CB54D-1488-4FF2-AB20-3362B55F8169} = {1E00FAFF-6C1C-4130-9A10-6C80BECA9788}
+		{31585ABA-40F0-4429-8819-023981544778} = {2140ED0B-6641-42E6-9CA1-F41C56F3E0C2}
+		{99534A00-D3EE-497F-A1ED-148358F3AADC} = {1E00FAFF-6C1C-4130-9A10-6C80BECA9788}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FBEE3E89-2F6F-4A1C-89CF-3CECF498D79B}

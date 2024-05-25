@@ -1,0 +1,92 @@
+﻿@page "/account/signup"
+@layout AuthenticationLayout
+@attribute [AllowAnonymous]
+@using System.ComponentModel.DataAnnotations
+@using Microsoft.AspNetCore.Components.Forms
+
+<PageTitle>Signup</PageTitle>
+
+<div class="paper pa-8" style="width: 100%; max-width: 500px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 16px; margin: auto;">
+    <div class="d-flex flex-row align-center gap-3 my-3">
+        <img src="mudblazor_logo.png" style="width: 60px; height: 60px;" alt="MudBlazor Logo" />
+        <h5>Create an Account</h5>
+    </div>
+    <div class="d-flex flex-column gap-2">
+        <div class="d-flex flex-row gap-1">
+            <span>Have an account?</span>
+            <a href="/account/signin">Sign In</a>
+        </div>
+        <EditForm Model="@model" OnValidSubmit="OnValidSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="d-flex flex-column gap-2">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <InputText id="email" @bind-Value="model.Email" class="form-control" placeholder="Email" />
+                    <ValidationMessage For="@(() => model.Email)" />
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <InputText id="password" type="password" @bind-Value="model.Password" class="form-control" placeholder="Password" />
+                    <ValidationMessage For="@(() => model.Password)" />
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <InputText id="confirmPassword" type="password" @bind-Value="model.ConfirmPassword" class="form-control" placeholder="Confirm Password" />
+                    <ValidationMessage For="@(() => model.ConfirmPassword)" />
+                </div>
+
+                <div class="d-flex flex-row align-center justify-space-between">
+                    <InputCheckbox @bind-Value="model.CheckPrivacy" />
+                    <label for="checkPrivacy">I agree to the terms and privacy</label>
+                    <ValidationMessage For="@(() => model.CheckPrivacy)" />
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Signup</button>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    private SignupModel model = new();
+
+    private async Task OnValidSubmit()
+    {
+        try
+        {
+            var result = await PocketbaseClient.Auth.User.CreateAsync(model.Email, model.Password, model.ConfirmPassword);
+            if (result is not null && result.Verified == false)
+            {
+                await PocketbaseClient.Auth.User.RequestVerificationAsync(model.Email);
+                Navigation.NavigateTo("/account/signupsuccessful");
+            }
+        }
+        catch (Exception e)
+        {
+            // Use your preferred method to show a message to the user
+            Console.WriteLine("An error occurred while creating your account. Please try again later.");
+        }
+    }
+
+    public class SignupModel
+    {
+        [Required]
+        [EmailAddress]
+        public string? Email { get; set; }
+
+        [Required]
+        [StringLength(30, ErrorMessage = "Password must be at least 6 characters long.", MinimumLength = 6)]
+        [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)(?=.*[\W_]).{6,}$", ErrorMessage = "Password must be at least 6 characters long and contain at least one letter, one number, and one special character.")]
+        public string? Password { get; set; }
+
+        [Required]
+        [Compare(nameof(Password))]
+        public string? ConfirmPassword { get; set; }
+
+        [Range(typeof(bool), "true", "true", ErrorMessage = "You must accept the privacy policy.")]
+        public bool CheckPrivacy { get; set; }
+    }
+}

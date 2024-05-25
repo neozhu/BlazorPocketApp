@@ -1,0 +1,24 @@
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@using BlazorPocket.WebAssembly.DefaultTemplate.Layout.Redirections
+@inherits LayoutComponentBase
+
+
+
+<AuthorizeView>
+    <Authorized>
+        <RedirectToHome />
+    </Authorized>
+    <NotAuthorized>
+        <div class="page">
+            <main>
+                <div class="d-flex flex-column mud-width-full">
+                    @Body
+                </div>
+            </main>
+        </div>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+
+}
