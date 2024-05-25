@@ -8,6 +8,7 @@
 // pocketbase-csharp-sdk project: https://github.com/PRCV1/pocketbase-csharp-sdk 
 // pocketbase project: https://github.com/pocketbase/pocketbase
 
+using pocketbase_csharp_sdk.Models;
 using pocketbase_csharp_sdk.Models.Files;
 using PocketBaseClient.Orm.Structures;
 
@@ -55,7 +56,13 @@ namespace PocketBaseClient.Orm
                                                                              (_) => Task.Run(() => Stream.Null));
             private set => _StreamGetterAsync = value;
         }
-
+        /// <summary>
+        /// Generates the URL for accessing a file associated with an item.
+        /// </summary>
+        /// <returns>
+        /// A string containing the URL for the file if the file name and item are not null or empty; otherwise, null.
+        /// </returns>
+        public string? GetFileUrl() => string.IsNullOrEmpty(FileName) || Item is null ? null: $"{Item?.Collection.App.AppUrl}/api/files/{Item?.Collection.Id}/{Item?.Id}/{FileName}";
         #region Ctor
         /// <summary>
         /// Ctor
