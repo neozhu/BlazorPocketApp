@@ -103,6 +103,7 @@
             {
                 // var user =await PocketbaseClient.Data.UsersCollection.GetByIdAsync(userInfo.Id);
                 // PocketbaseClient.Data.UsersCollection.Delete(user);
+                // await PocketbaseClient.Data.SaveChangesAsync();
                 Navigation.NavigateTo("/account/signin");
                 showDeleteAccountDialog = false;
                 Snackbar.Add("Your account has been deleted successfully.", Severity.Info);
