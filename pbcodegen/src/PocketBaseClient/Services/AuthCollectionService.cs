@@ -107,10 +107,10 @@ namespace PocketBaseClient.Services
         public void RequestEmailChange(string newEmail)
             => AuthService.RequestEmailChange(newEmail);
 
-        public async Task<T?> ConfirmEmailChangeAsync(string emailChangeToken, string userPassword)
-            => (await AuthService.ConfirmEmailChangeAsync(emailChangeToken, userPassword))?.Record;
-        public T? ConfirmEmailChange(string emailChangeToken, string userPassword)
-            => AuthService.ConfirmEmailChange(emailChangeToken, userPassword)?.Record;
+        public async Task ConfirmEmailChangeAsync(string emailChangeToken, string userPassword)
+            => await AuthService.ConfirmEmailChangeAsync(emailChangeToken, userPassword);
+        public void ConfirmEmailChange(string emailChangeToken, string userPassword)
+            => AuthService.ConfirmEmailChange(emailChangeToken, userPassword);
 
 
         public async Task<IEnumerable<ExternalAuthModel>?> GetExternalAuthenticationMethodsAsync(string userId)

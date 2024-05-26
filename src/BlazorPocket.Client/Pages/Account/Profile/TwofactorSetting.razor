@@ -14,18 +14,28 @@
         <MudCardContent>
             <MudList T="string">
                 <MudListItem>
-                    <div class="d-flex flex-row gap-2">
-                        <MudIcon Icon="@Icons.Material.Filled.Phone"></MudIcon>  <MudText Color="Color.Primary">Authenticator app</MudText>
+                    <div class="d-flex flex-row justify-space-between align-content-center">
+                        <div>
+                            <div class="d-flex flex-row gap-2">
+                                <MudIcon Icon="@Icons.Material.Filled.Phone"></MudIcon>  <MudText Color="Color.Primary">Authenticator app</MudText>
+                            </div>
+                            <MudText Typo="Typo.body2" Class="mud-text-secondary">Use an authentication app or browser extension to get two-factor authentication codes when prompted.</MudText>
+                        </div>
+                        <MudSwitch Value="false" Color="Color.Primary" />
                     </div>
-                    <MudText Typo="Typo.body2" Class="mud-text-secondary">Use an authentication app or browser extension to get two-factor authentication codes when prompted.</MudText>
                 </MudListItem>
                 <MudListItem>
-                    <div class="d-flex flex-row gap-2">
-                        <MudIcon Icon="@Icons.Material.Filled.Message"></MudIcon>  <MudText Color="Color.Primary">
-                            SMS/Text message
-                        </MudText>
+                    <div class="d-flex flex-row justify-space-between align-content-center">
+                        <div>
+                            <div class="d-flex flex-row gap-2">
+                                <MudIcon Icon="@Icons.Material.Filled.Message"></MudIcon>  <MudText Color="Color.Primary">
+                                    SMS/Text message
+                                </MudText>
+                            </div>
+                            <MudText Typo="Typo.body2" Class="mud-text-secondary">Get one-time codes sent to your phone via SMS to complete authentication requests.</MudText>
+                        </div>
+                        <MudSwitch Value="false" Color="Color.Primary" />
                     </div>
-                    <MudText Typo="Typo.body2" Class="mud-text-secondary">Get one-time codes sent to your phone via SMS to complete authentication requests.</MudText>
                 </MudListItem>
             </MudList>
         </MudCardContent>
