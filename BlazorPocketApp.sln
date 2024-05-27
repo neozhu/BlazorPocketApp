@@ -20,6 +20,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PocketBaseClient", "pbcodeg
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PocketBaseClient.BlazorPocket", "src\PocketBaseClient.BlazorPocket\PocketBaseClient.BlazorPocket.csproj", "{D6219270-40C3-4F81-9C10-3F953EF0AB4A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorPocket.Shared", "src\BlazorPocket.Shared\BlazorPocket.Shared.csproj", "{688D076B-3C7B-4E86-A0D5-34A968936DFE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +52,10 @@ Global
 		{D6219270-40C3-4F81-9C10-3F953EF0AB4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6219270-40C3-4F81-9C10-3F953EF0AB4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6219270-40C3-4F81-9C10-3F953EF0AB4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{688D076B-3C7B-4E86-A0D5-34A968936DFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{688D076B-3C7B-4E86-A0D5-34A968936DFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{688D076B-3C7B-4E86-A0D5-34A968936DFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{688D076B-3C7B-4E86-A0D5-34A968936DFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -61,6 +67,7 @@ Global
 		{882F09EF-2C6F-42ED-AFC3-F2E9ED75BBA0} = {9AB40228-41FF-484E-A077-87D097118380}
 		{384983D0-52B1-43C3-8B29-8738A826BCAB} = {9AB40228-41FF-484E-A077-87D097118380}
 		{D6219270-40C3-4F81-9C10-3F953EF0AB4A} = {2140ED0B-6641-42E6-9CA1-F41C56F3E0C2}
+		{688D076B-3C7B-4E86-A0D5-34A968936DFE} = {2140ED0B-6641-42E6-9CA1-F41C56F3E0C2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FBEE3E89-2F6F-4A1C-89CF-3CECF498D79B}
