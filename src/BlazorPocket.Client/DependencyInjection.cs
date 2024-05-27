@@ -1,7 +1,6 @@
 ﻿using BlazorPocket.Client.Services.UserPreferences;
 using BlazorPocket.Client.Services;
 using MudBlazor.Services;
-using MudExtensions.Services;
 using MudBlazor;
 using Blazored.LocalStorage;
 using BlazorPocket.Shared.Services.Interfaces;
@@ -35,7 +34,6 @@ public static class DependencyInjection
         services.AddMudPopoverService();
         services.AddMudBlazorSnackbar();
         services.AddMudBlazorDialog();
-        services.AddMudExtensions();
         services.AddBlazoredLocalStorage();
         services.AddScoped<IStorageService, LocalStorageService>();
         services.AddScoped<IUserPreferencesService, UserPreferencesService>();
@@ -68,7 +66,6 @@ public static class DependencyInjection
         services.AddMudPopoverService();
         services.AddMudBlazorSnackbar();
         services.AddMudBlazorDialog();
-        services.AddMudExtensions();
         services.AddBlazoredLocalStorageAsSingleton();
         services.AddSingleton<IStorageService, LocalStorageService>();
         services.AddSingleton<IUserPreferencesService, UserPreferencesService>();
