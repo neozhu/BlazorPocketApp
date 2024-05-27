@@ -53,12 +53,24 @@
 
     private async Task UploadFiles(IBrowserFile file)
     {
-        var fileName = file.Name;
-        var stream = new MemoryStream();
-        var user = await PocketbaseClient.Data.UsersCollection.GetByIdAsync(model.Id);
-        
-        await PocketbaseClient.Data.SaveChangesAsync();
-    
+        try
+        {
+            var fileName = file.Name;
+            var stream = new MemoryStream();
+            await file.OpenReadStream(int.MaxValue).CopyToAsync(stream);
+            var user = await PocketbaseClient.Data.UsersCollection.GetByIdAsync(model.Id);
+            user.Avatar.LoadFromFileBytes(stream.ToArray(), fileName);
+            await user.SaveAsync();
+            model = new ProfileModel { Id = user.Id, Email = user.Email?.Address, Name = user.Name, Username = user.Username, Avatar = user.Avatar, AvatarUrl = user.Avatar.GetFileUrl() };
+            StateHasChanged();
+            Snackbar.Add("User profile updated successfully.", Severity.Info);
+        }
+        catch
+        {
+            Snackbar.Add("Error updating user profile. Please try again.", Severity.Error);
+        }
+       
+
     }
     private async Task OnValidSubmit(EditContext context)
     {

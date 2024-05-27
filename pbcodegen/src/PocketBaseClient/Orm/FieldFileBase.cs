@@ -107,7 +107,21 @@ namespace PocketBaseClient.Orm
 
             ((IOwnedByItem)this).NotifyModificationToOwner();
         }
+        /// <summary>
+        /// Loads the file data from a byte array and sets the relevant properties.
+        /// </summary>
+        /// <param name="bytes">The byte array containing the file data.</param>
+        /// <param name="fileName">The name of the file.</param>
+        public void LoadFromFileBytes(byte[] bytes,string fileName)
+        {
+            Origin = FileOrigins.MemoryStream;
+            HasChanges = true;
+            FileName = fileName;
+            EntireLocalFileName = fileName;
+            StreamGetterAsync = (_) => Task.Run(() =>  new MemoryStream(bytes) as Stream);
 
+            ((IOwnedByItem)this).NotifyModificationToOwner();
+        }
 
         /// <summary>
         /// Saves the remote file to local file (async)
@@ -143,13 +157,22 @@ namespace PocketBaseClient.Orm
 
         internal FilepathFile? GetSdkFileToUpload()
         {
-            if (Origin != FileOrigins.LocalSystem)
-                return null;
-            return new FilepathFile(EntireLocalFileName)
+            if (Origin == FileOrigins.LocalSystem)
             {
-                FieldName = FieldName,
-                FileName = FileName
-            };
+                return new FilepathFile(EntireLocalFileName)
+                {
+                    FieldName = FieldName,
+                    FileName = FileName
+                };
+            }else if(Origin== FileOrigins.MemoryStream)
+            {
+                return new FilepathFile(FileName, StreamGetterAsync.Invoke(null).Result) {
+                    FieldName = FieldName,
+                    FileName = FileName
+                };
+            }
+            return null;
+            
         }
     }
 }
