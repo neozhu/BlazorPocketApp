@@ -38,7 +38,7 @@ public class Theme
             },
             PaletteDark = new()
             {
-                Primary = "#3B82F6", // Brighter deep blue, primary color for highlights and key elements
+                Primary = "#206bc4", // Brighter deep blue, primary color for highlights and key elements
                 Surface = "#1C1C2E", // Dark gray, for card surfaces or secondary backgrounds
                 Background = "#161625", // Dark gray, main background color
                 BackgroundGray = "#11111A", // Very dark gray, for subtle background areas
@@ -55,7 +55,7 @@ public class Theme
                 DrawerText = "#9CA3AF", // Medium gray, text color for drawer
                 GrayLight = "#1F2937", // Dark gray, for light gray elements
                 GrayLighter = "#1C1C2E", // Dark gray, for lighter gray elements
-                Info = "#3B82F6", // Bright blue, for informational messages
+                Info = "#4299e1", // Bright blue, for informational messages
                 Success = "#10B981", // Green, for success messages
                 Warning = "#F59E0B", // Orange, for warning messages
                 Error = "#EF4444", // Red, for error messages
@@ -103,8 +103,6 @@ public class Theme
                 WarningDarken = "#C47D08", // Darker orange for warnings
                 WarningLighten = "#FFB340", // Lighter orange for warnings
                 White = "#FFFFFF" // White color
-
-
             },
             Shadows = new()
             {

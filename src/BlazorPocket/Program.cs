@@ -1,12 +1,6 @@
-using Blazored.LocalStorage;
 using BlazorPocket.Client;
-using BlazorPocket.Client.Pages;
-using BlazorPocket.Client.Services;
-using BlazorPocket.Client.Services.UserPreferences;
 using BlazorPocket.Components;
-using MudBlazor;
-using MudBlazor.Services;
-using MudExtensions.Services;
+using BlazorPocket.Shared;
 
 var builder = WebApplication.CreateBuilder(args);
 

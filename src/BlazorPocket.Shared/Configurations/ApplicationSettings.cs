@@ -1,4 +1,4 @@
-﻿namespace BlazorPocket.Client.Configurations;
+﻿namespace BlazorPocket.Shared.Configurations;
 
 public class ApplicationSettings
 {

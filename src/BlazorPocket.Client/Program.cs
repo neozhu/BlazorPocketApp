@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using BlazorPocket.Client;
-using BlazorPocket.Client.Configurations;
-using System.Net.Http.Json;
+using BlazorPocket.Shared;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
