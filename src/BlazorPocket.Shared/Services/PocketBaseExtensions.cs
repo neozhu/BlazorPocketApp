@@ -1,10 +1,7 @@
-﻿using pocketbase_csharp_sdk.Models;
-using pocketbase_csharp_sdk;
-using ZXing;
-using PocketBaseClient.BlazorPocket.Models;
+﻿using PocketBaseClient.BlazorPocket.Models;
 using PocketBaseClient.BlazorPocket;
 
-namespace BlazorPocket.Client.Services;
+namespace BlazorPocket.Shared.Services;
 
 public static class PocketBaseExtensions
 {
