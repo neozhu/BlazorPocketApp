@@ -1,0 +1,16 @@
+.mud-main-content {
+    padding-top: 20px !important;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.mud-input-control > .mud-input-control-input-container > .mud-input-label-inputcontrol {
+    font-size: inherit !important;
+    font-weight: inherit !important;
+    line-height: inherit !important;
+}
+
+.mud-simple-table table * tr > td, .mud-simple-table table * tr th {
+    font-size: inherit !important;
+    line-height: inherit !important;
+}
