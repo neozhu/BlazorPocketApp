@@ -27,10 +27,11 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["src/BlazorPocket.WebAssembly/BlazorPocket.WebAssembly.csproj", "src/BlazorPocket.WebAssembly/"]
+COPY ["src/BlazorPocket.Shared/BlazorPocket.Shared.csproj", "src/BlazorPocket.Shared/"]
 COPY ["src/PocketBaseClient.BlazorPocket/PocketBaseClient.BlazorPocket.csproj", "src/PocketBaseClient.BlazorPocket/"]
 COPY ["pbcodegen/src/PocketBaseClient/PocketBaseClient.csproj", "pbcodegen/src/PocketBaseClient/"]
 COPY ["sdk/pocketbase-csharp-sdk/pocketbase-csharp-sdk.csproj", "sdk/pocketbase-csharp-sdk/"]
-RUN dotnet restore "./src/BlazorPocket/BlazorPocket.WebAssembly.csproj"
+RUN dotnet restore "./src/BlazorPocket.WebAssembly/BlazorPocket.WebAssembly.csproj"
 COPY . .
 WORKDIR "/src/src/BlazorPocket.WebAssembly"
 RUN dotnet build "./BlazorPocket.WebAssembly.csproj" -c $BUILD_CONFIGURATION -o /app/build
