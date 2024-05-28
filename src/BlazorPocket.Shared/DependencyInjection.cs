@@ -9,14 +9,8 @@ namespace BlazorPocket.Shared;
 public static class DependencyInjection
 {
  
-    public static void TryAddProcketbaseServer(this IServiceCollection services,IConfiguration config)
-    {
-        var appSettings = new ApplicationSettings();
-        config.GetSection(ApplicationSettings.KEY).Bind(appSettings);
-        services.AddSingleton(appSettings);
-        services.AddScoped(s => new BlazorPocketApplication(appSettings.PocketbaseUrl, appSettings.AppName));
-    }
-    public static void TryAddProcketbaseWebAssembly(this IServiceCollection services, IConfiguration config)
+
+    public static void TryAddProcketbase(this IServiceCollection services, IConfiguration config)
     {
    
         var appSettings= config.GetSection(ApplicationSettings.KEY).Get<ApplicationSettings>();
@@ -24,13 +18,8 @@ public static class DependencyInjection
         services.AddSingleton(s => new BlazorPocketApplication(appSettings.PocketbaseUrl, appSettings.AppName));
     }
 
-    public static void TrAddAuthenticationServer(this IServiceCollection services)
-    {
-        services.AddAuthorizationCore();
-        services.AddCascadingAuthenticationState();
-        services.AddScoped<AuthenticationStateProvider, PocketBaseAuthenticationStateProvider>();
-    }
-    public static void TrAddAuthenticationWebAssembly(this IServiceCollection services)
+   
+    public static void TrAddAuthentication(this IServiceCollection services)
     {
         services.AddAuthorizationCore();
         services.AddCascadingAuthenticationState();

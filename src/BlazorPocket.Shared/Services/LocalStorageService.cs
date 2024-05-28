@@ -12,9 +12,9 @@ public class LocalStorageService : IStorageService
         _localStorageService = localStorageService;
     }
 
-    public ValueTask<string?> GetItemAsync(string key)
+    public ValueTask<T?> GetItemAsync<T>(string key)
     {
-        return _localStorageService.GetItemAsync<string?>(key);
+        return _localStorageService.GetItemAsync<T>(key);
     }
 
     public ValueTask RemoveItemAsync(string key)
@@ -22,7 +22,7 @@ public class LocalStorageService : IStorageService
         return _localStorageService.RemoveItemAsync(key);
     }
 
-    public ValueTask SetItemAsync(string key, string value)
+    public ValueTask SetItemAsync<T>(string key, T value)
     {
         return _localStorageService.SetItemAsync(key, value);
     }

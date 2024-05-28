@@ -8,8 +8,8 @@ namespace BlazorPocket.Shared.Services.Interfaces;
 
 public interface IStorageService
 {
-    ValueTask<string?> GetItemAsync(string key);
+    ValueTask<T?> GetItemAsync<T>(string key);
     ValueTask RemoveItemAsync(string key);
-    ValueTask SetItemAsync(string key, string value);
+    ValueTask SetItemAsync<T>(string key, T value);
 }
 

@@ -3,6 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using Blazored.LocalStorage;
+using BlazorPocket.Shared.Services.Interfaces;
+using BlazorPocket.Shared.Services;
 using System;
 using System.Threading.Tasks;
 
@@ -25,10 +27,10 @@ public interface IUserPreferencesService
 
 public class UserPreferencesService : IUserPreferencesService
 {
-    private readonly ILocalStorageService _localStorage;
+    private readonly IStorageService _localStorage;
     private const string Key = "userPreferences";
 
-    public UserPreferencesService(ILocalStorageService localStorage)
+    public UserPreferencesService(IStorageService localStorage)
     {
         _localStorage = localStorage;
     }

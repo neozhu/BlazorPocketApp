@@ -43,7 +43,7 @@ public class PocketBaseAuthenticationStateProvider : AuthenticationStateProvider
     {
         try
         {
-            var savedToken = await _localStorage.GetItemAsync("token");
+            var savedToken = await _localStorage.GetItemAsync<string?>("token");
             if (string.IsNullOrWhiteSpace(savedToken))
             {
                 return new AuthenticationState(new ClaimsPrincipal());
@@ -58,8 +58,6 @@ public class PocketBaseAuthenticationStateProvider : AuthenticationStateProvider
             }
             var userid = parsedClaims.First(x => x.Type == "id").Value;
             _pocketBase.Auth.AuthStore.Token = savedToken;
-            var usermodel = await _pocketBase.Data.UsersCollection.GetByIdAsync(userid);
-            _pocketBase.Auth.AuthStore.Save(savedToken, usermodel);
             await _pocketBase.Sdk.User.RefreshAsync();
             return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(ParseClaimsFromJwt(savedToken), "jwt")));
         }

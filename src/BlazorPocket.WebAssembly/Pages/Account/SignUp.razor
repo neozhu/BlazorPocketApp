@@ -49,14 +49,14 @@
     {
         [Required]
         [EmailAddress]
-        public string? Email { get; set; }
+        public string Email { get; set; } = string.Empty;
         [Required]
         [StringLength(30, ErrorMessage = "Password must be at least 6 characters long.", MinimumLength = 6)]
         [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)(?=.*[\W_]).{6,}$", ErrorMessage = "Password must be at least 6 characters long and contain at least one letter, one number, and one special character.")]
-        public string? Password { get; set; }
+        public string Password { get; set; } = string.Empty;
         [Required]
         [Compare(nameof(Password))]
-        public string? ConfirmPassword { get; set; }
+        public string ConfirmPassword { get; set; } = string.Empty;
         [Range(typeof(bool), "true", "true", ErrorMessage = "You must accept the privacy policy.")]
         public bool CheckPrivacy { get; set; }
     }
