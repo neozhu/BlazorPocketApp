@@ -25,11 +25,15 @@ ARG BUILD_CONFIGURATION=Release
 RUN dotnet publish "BlazorPocket.WebAssembly.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 # Stage 2: Setup Apache HTTP Server with HTTPS
-FROM httpd:alpine AS final
+FROM httpd:2.4-alpine AS final
+
+# Install openssl and enable mod_ssl
+RUN apk add --no-cache openssl && \
+    sed -i '/^#LoadModule ssl_module/s/^#//' /usr/local/apache2/conf/httpd.conf && \
+    sed -i '/^#LoadModule socache_shmcb_module/s/^#//' /usr/local/apache2/conf/httpd.conf
 
 # Generate a self-signed certificate
-RUN apk add --no-cache openssl && \
-    mkdir -p /usr/local/apache2/conf/ssl && \
+RUN mkdir -p /usr/local/apache2/conf/ssl && \
     openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes \
     -keyout /usr/local/apache2/conf/ssl/private.key -out /usr/local/apache2/conf/ssl/certificate.crt \
     -subj "/C=US/ST=State/L=City/O=Organization/CN=localhost"
