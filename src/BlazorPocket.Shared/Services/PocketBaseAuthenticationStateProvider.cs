@@ -1,20 +1,19 @@
-﻿using Blazored.LocalStorage;
+﻿using BlazorPocket.Shared.Services.Interfaces;
 using Microsoft.AspNetCore.Components.Authorization;
 using pocketbase_csharp_sdk;
-using pocketbase_csharp_sdk.Models;
 using PocketBaseClient.BlazorPocket;
 using System.Security.Claims;
 using System.Text.Json;
 
-namespace BlazorPocket.Client.Services;
+namespace BlazorPocket.Shared.Services;
 
 public class PocketBaseAuthenticationStateProvider : AuthenticationStateProvider
 {
 
     private readonly BlazorPocketApplication _pocketBase;
-    private readonly ILocalStorageService _localStorage;
+    private readonly IStorageService _localStorage;
 
-    public PocketBaseAuthenticationStateProvider(BlazorPocketApplication pocketBase, ILocalStorageService localStorage)
+    public PocketBaseAuthenticationStateProvider(BlazorPocketApplication pocketBase, IStorageService localStorage)
     {
         _pocketBase = pocketBase;
         _localStorage = localStorage;
@@ -44,7 +43,7 @@ public class PocketBaseAuthenticationStateProvider : AuthenticationStateProvider
     {
         try
         {
-            var savedToken = await _localStorage.GetItemAsync<string>("token");
+            var savedToken = await _localStorage.GetItemAsync("token");
             if (string.IsNullOrWhiteSpace(savedToken))
             {
                 return new AuthenticationState(new ClaimsPrincipal());
@@ -59,7 +58,7 @@ public class PocketBaseAuthenticationStateProvider : AuthenticationStateProvider
             }
             var userid = parsedClaims.First(x => x.Type == "id").Value;
             _pocketBase.Auth.AuthStore.Token = savedToken;
-            var usermodel =await _pocketBase.Data.UsersCollection.GetByIdAsync(userid);
+            var usermodel = await _pocketBase.Data.UsersCollection.GetByIdAsync(userid);
             _pocketBase.Auth.AuthStore.Save(savedToken, usermodel);
             await _pocketBase.Sdk.User.RefreshAsync();
             return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(ParseClaimsFromJwt(savedToken), "jwt")));

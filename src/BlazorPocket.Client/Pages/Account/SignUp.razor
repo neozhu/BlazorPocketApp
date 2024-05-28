@@ -12,6 +12,7 @@
             <MudText>Have an account?</MudText> <MudLink Href="/account/signin">Sign In</MudLink>
         </div>
         <EditForm Model="@model" OnValidSubmit="OnValidSubmit">
+            <DataAnnotationsValidator />
             <div class="d-flex flex-column gap-2">
                 <MudTextField @bind-Value="model.Email" For="@(() => model.Email)" Label="Email" Placeholder="Email" Required="true" RequiredError="Email is required"></MudTextField>
                 <MudTextField @bind-Value="model.Password" For="@(() => model.Password)" InputType="InputType.Password" T="string" Label="Password" Placeholder="Password" Required="true" RequiredError="Password is required"></MudTextField>

@@ -1,13 +1,10 @@
 ﻿using BlazorPocket.Client.Services.UserPreferences;
 using BlazorPocket.Client.Services;
 using MudBlazor.Services;
-using MudExtensions.Services;
 using MudBlazor;
-
 using Blazored.LocalStorage;
-using BlazorPocket.Client.Configurations;
-using PocketBaseClient.BlazorPocket;
-using Microsoft.AspNetCore.Components.Authorization;
+using BlazorPocket.Shared.Services.Interfaces;
+using BlazorPocket.Shared.Services;
 namespace BlazorPocket.Client;
 
 public static class DependencyInjection
@@ -21,7 +18,7 @@ public static class DependencyInjection
             config.SnackbarConfiguration.PositionClass = Defaults.Classes.Position.BottomCenter;
             config.SnackbarConfiguration.NewestOnTop = false;
             config.SnackbarConfiguration.ShowCloseIcon = true;
-            config.SnackbarConfiguration.VisibleStateDuration = 10000;
+            config.SnackbarConfiguration.VisibleStateDuration = 3000;
             config.SnackbarConfiguration.HideTransitionDuration = 500;
             config.SnackbarConfiguration.ShowTransitionDuration = 500;
             config.SnackbarConfiguration.SnackbarVariant = Variant.Filled;
@@ -37,8 +34,8 @@ public static class DependencyInjection
         services.AddMudPopoverService();
         services.AddMudBlazorSnackbar();
         services.AddMudBlazorDialog();
-        services.AddMudExtensions();
         services.AddBlazoredLocalStorage();
+        services.AddScoped<IStorageService, LocalStorageService>();
         services.AddScoped<IUserPreferencesService, UserPreferencesService>();
         services.AddScoped<LayoutService>();
 
@@ -53,7 +50,7 @@ public static class DependencyInjection
             config.SnackbarConfiguration.PositionClass = Defaults.Classes.Position.BottomCenter;
             config.SnackbarConfiguration.NewestOnTop = false;
             config.SnackbarConfiguration.ShowCloseIcon = true;
-            config.SnackbarConfiguration.VisibleStateDuration = 10000;
+            config.SnackbarConfiguration.VisibleStateDuration = 3000;
             config.SnackbarConfiguration.HideTransitionDuration = 500;
             config.SnackbarConfiguration.ShowTransitionDuration = 500;
             config.SnackbarConfiguration.SnackbarVariant = Variant.Filled;
@@ -69,40 +66,13 @@ public static class DependencyInjection
         services.AddMudPopoverService();
         services.AddMudBlazorSnackbar();
         services.AddMudBlazorDialog();
-        services.AddMudExtensions();
         services.AddBlazoredLocalStorageAsSingleton();
+        services.AddSingleton<IStorageService, LocalStorageService>();
         services.AddSingleton<IUserPreferencesService, UserPreferencesService>();
         services.AddSingleton<LayoutService>();
 
         #endregion
     }
-
-    public static void TryAddProcketbaseServer(this IServiceCollection services,IConfiguration config)
-    {
-        var appSettings = new ApplicationSettings();
-        config.GetSection(ApplicationSettings.KEY).Bind(appSettings);
-        services.AddSingleton(appSettings);
-        services.AddScoped(s => new BlazorPocketApplication(appSettings.PocketbaseUrl, appSettings.AppName));
-    }
-    public static void TryAddProcketbaseWebAssembly(this IServiceCollection services, IConfiguration config)
-    {
-   
-        var appSettings= config.GetSection(ApplicationSettings.KEY).Get<ApplicationSettings>();
-        services.AddSingleton(appSettings);
-        services.AddSingleton(s => new BlazorPocketApplication(appSettings.PocketbaseUrl, appSettings.AppName));
-    }
-
-    public static void TrAddAuthenticationServer(this IServiceCollection services)
-    {
-        services.AddAuthorizationCore();
-        services.AddCascadingAuthenticationState();
-        services.AddScoped<AuthenticationStateProvider, PocketBaseAuthenticationStateProvider>();
-    }
-    public static void TrAddAuthenticationWebAssembly(this IServiceCollection services)
-    {
-        services.AddAuthorizationCore();
-        services.AddCascadingAuthenticationState();
-        services.AddSingleton<AuthenticationStateProvider, PocketBaseAuthenticationStateProvider>();
-    }
+ 
 }
 
