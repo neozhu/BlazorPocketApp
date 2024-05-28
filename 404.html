@@ -1,83 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+ <html>
+  <head>
+    <meta charset="utf-8">
+    <title>Single Page Apps for GitHub Pages</title>
+     <script type="text/javascript">
+     // Single Page Apps for GitHub Pages
+     // MIT License
+     // https://github.com/rafgraph/spa-github-pages
+     // This script takes the current url and converts the path and query
+     // string into just a query string, and then redirects the browser
+     // to the new url with only a query string and hash fragment
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BlazorPocket.WebAssembly</title>
-    <base href="https://neozhu.github.io/BlazorPocketApp/" />
-    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
-    <link rel="stylesheet" href="css/app.css" />
-    <!-- If you add any scoped CSS files, uncomment the following to load them
-    <link href="BlazorPocket.WebAssembly.styles.css" rel="stylesheet" />  -->
-    <link href="manifest.webmanifest" rel="manifest" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
-    <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
-    <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
-</head>
+     // If you're creating a Project Pages site and NOT using a custom domain,
+     // then set pathSegmentsToKeep to 1 (enterprise users may need to set it to > 1).
+     // This way the code will only replace the route part of the path, and not
+     // the real directory in which the app resides, for example:
+     // https://username.github.io/repo-name/one/two?a=b&c=d#qwe becomes
+     // https://username.github.io/repo-name/?/one/two&a=b~and~c=d#qwe
+     // Otherwise, leave pathSegmentsToKeep as 0.
 
-<body>
-    <div id="app">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-2"></div>
-                <div class="col-8">
-                    <p></p>
-                    Loading Blazor WebAssembly...
-                    <br />
-                    <div class="progress">
-                        <div id="progressbar" class="progress-bar progress-bar-striped active" role="progressbar" style="width: var(--blazor-load-percentage, 0%)"></div>
-                    </div>
-                </div>
-                <div class="col-2"></div>
-            </div>
-        </div>
-    </div>
-    <!-- Start Single Page Apps for GitHub Pages -->
-    <script type="text/javascript">
-        // Single Page Apps for GitHub Pages
-        // https://github.com/rafrex/spa-github-pages
-        // Copyright (c) 2016 Rafael Pedicini, licensed under the MIT License
-        // ----------------------------------------------------------------------
-        // This script checks to see if a redirect is present in the query string
-        // and converts it back into the correct url and adds it to the
-        // browser's history using window.history.replaceState(...),
-        // which won't cause the browser to attempt to load the new url.
-        // When the single page app is loaded further down in this file,
-        // the correct url will be waiting in the browser's history for
-        // the single page app to route accordingly.
-        (function (l) {
-            if (l.search) {
-                var q = {};
-                l.search.slice(1).split('&').forEach(function (v) {
-                    const a = v.split('=');
-                    q[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
-                });
-                if (q.p !== undefined) {
-                    window.history.replaceState(null,
-                        null,
-                        l.pathname.slice(0, -1) +
-                        (q.p || '') +
-                        (q.q ? (`?${q.q}`) : '') +
-                        l.hash
-                    );
-                }
-            }
-        }(window.location))
+     var pathSegmentsToKeep = 1;
+
+     var l = window.location;
+
+     l.replace(
+     l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+     l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
+     l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+     (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+     l.hash
+     );
+
     </script>
-    <!-- End Single Page Apps for GitHub Pages -->
-    <div id="blazor-error-ui">
-        An unhandled error has occurred.
-        <a href="" class="reload">Reload</a>
-        <a class="dismiss">🗙</a>
-    </div>
-    <script src="decode.js"></script>
-    <script src="_framework/blazor.webassembly.js"></script>
-    <script>navigator.serviceWorker.register('service-worker.js');</script>
-    <script src="_content/MudBlazor/MudBlazor.min.js"></script>
-
-</body>
-
-</html>
+    </head>
+       <body>
+      </body>
+ </html>
