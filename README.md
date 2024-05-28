@@ -2,7 +2,7 @@
 
 [![Build](https://github.com/neozhu/BlazorPocketApp/actions/workflows/dotnet.yml/badge.svg)](https://github.com/neozhu/BlazorPocketApp/actions/workflows/dotnet.yml)
 [![Docker Image CI](https://github.com/neozhu/BlazorPocketApp/actions/workflows/docker-image.yml/badge.svg)](https://github.com/neozhu/BlazorPocketApp/actions/workflows/docker-image.yml)
-
+[![build and deploy GitHub Pages](https://github.com/neozhu/BlazorPocketApp/actions/workflows/github-page.yml/badge.svg)](https://github.com/neozhu/BlazorPocketApp/actions/workflows/github-page.yml)
 
 BlazorPocket is a lightweight web application template that leverages the latest .NET 8.0 Blazor Web App with InteractiveAuto render mode and PocketBase for backend data storage. This project aims to streamline the development process, minimize repetitive coding, and provide a quick start for building efficient web applications.
 
