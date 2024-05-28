@@ -1,46 +1,47 @@
-#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
-
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-
-
-# Generate a self-signed certificate
-RUN mkdir -p /app/https && \
-    openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes \
-    -keyout /app/https/private.key -out /app/https/certificate.crt \
-    -subj "/C=US/ST=State/L=City/O=Organization/CN=localhost" && \
-    openssl pkcs12 -export -out /app/https/aspnetapp.pfx \
-    -inkey /app/https/private.key -in /app/https/certificate.crt \
-    -password pass:CREDENTIAL_PLACEHOLDER
-
-
-# Setup environment variables for the application to find the certificate
-ENV ASPNETCORE_URLS=http://+:80;https://+:443
-ENV ASPNETCORE_Kestrel__Certificates__Default__Password="CREDENTIAL_PLACEHOLDER"
-ENV ASPNETCORE_Kestrel__Certificates__Default__Path="/app/https/aspnetapp.pfx"
-
-WORKDIR /app
-EXPOSE 80
-EXPOSE 443
-
-
+# Stage 1: Build the Blazor WebAssembly project
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["src/BlazorPocket/BlazorPocket.csproj", "src/BlazorPocket/"]
-COPY ["src/BlazorPocket.Client/BlazorPocket.Client.csproj", "src/BlazorPocket.Client/"]
+
+# Copy project files
+COPY ["src/BlazorPocket.WebAssembly/BlazorPocket.WebAssembly.csproj", "src/BlazorPocket.WebAssembly/"]
+COPY ["src/BlazorPocket.Shared/BlazorPocket.Shared.csproj", "src/BlazorPocket.Shared/"]
 COPY ["src/PocketBaseClient.BlazorPocket/PocketBaseClient.BlazorPocket.csproj", "src/PocketBaseClient.BlazorPocket/"]
 COPY ["pbcodegen/src/PocketBaseClient/PocketBaseClient.csproj", "pbcodegen/src/PocketBaseClient/"]
 COPY ["sdk/pocketbase-csharp-sdk/pocketbase-csharp-sdk.csproj", "sdk/pocketbase-csharp-sdk/"]
-RUN dotnet restore "./src/BlazorPocket/BlazorPocket.csproj"
+
+# Restore dependencies
+RUN dotnet restore "src/BlazorPocket.WebAssembly/BlazorPocket.WebAssembly.csproj"
+
+# Copy the rest of the files
 COPY . .
-WORKDIR "/src/src/BlazorPocket"
-RUN dotnet build "./BlazorPocket.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
-FROM build AS publish
+# Build the project
+WORKDIR "/src/src/BlazorPocket.WebAssembly"
+RUN dotnet build "BlazorPocket.WebAssembly.csproj" -c $BUILD_CONFIGURATION -o /app/build
+
+# Publish the project
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./BlazorPocket.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "BlazorPocket.WebAssembly.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "BlazorPocket.dll"]
+# Stage 2: Setup Apache HTTP Server with HTTPS
+FROM httpd:alpine AS final
+
+# Generate a self-signed certificate
+RUN apk add --no-cache openssl && \
+    mkdir -p /usr/local/apache2/conf/ssl && \
+    openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes \
+    -keyout /usr/local/apache2/conf/ssl/private.key -out /usr/local/apache2/conf/ssl/certificate.crt \
+    -subj "/C=US/ST=State/L=City/O=Organization/CN=localhost"
+
+# Copy the published files from the build stage
+COPY --from=build /app/publish/wwwroot /usr/local/apache2/htdocs/
+
+# Copy custom httpd configuration to enable SSL
+COPY httpd-ssl.conf /usr/local/apache2/conf/extra/httpd-ssl.conf
+RUN echo "Include conf/extra/httpd-ssl.conf" >> /usr/local/apache2/conf/httpd.conf
+
+EXPOSE 80
+EXPOSE 443
+
+CMD ["httpd-foreground"]

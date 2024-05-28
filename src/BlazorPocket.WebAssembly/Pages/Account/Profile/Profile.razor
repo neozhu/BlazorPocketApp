@@ -1,0 +1,67 @@
+﻿@page "/account/profile"
+@using BlazorPocket.WebAssembly.Services
+@using PocketBaseClient.BlazorPocket.Models
+<PageTitle>Profile</PageTitle>
+<div class="d-flex flex-column justify-center gap-2">
+    <MudText Typo="Typo.h4" Align="Align.Center">Personal info</MudText>
+    <MudText Typo="Typo.body1" Align="Align.Center">Info about you and your preferences</MudText>
+    <MudPaper>
+        <MudList T="string">
+            <MudListSubheader>
+                <MudText Typo="Typo.h4"> Basic info</MudText>
+                <MudText Typo="Typo.body1">Some info may be visible to other people using Google services. Learn more</MudText>
+            </MudListSubheader>
+            @if (userInfo is not null)
+            {
+                <MudListItem>
+                    <div class="d-flex flex-row justify-space-between align-content-center gap-3">
+                        <MudText Style="min-width:120px">Profile picture</MudText>
+                        <MudText Style="min-width:200px">Add a profile picture to personalize your account</MudText>
+                        @if (userInfo?.Avatar.GetFileUrl() != null)
+                        {
+                            <MudAvatar Size="Size.Large">
+                                <MudImage Src="@userInfo?.Avatar.GetFileUrl()"></MudImage>
+                            </MudAvatar>
+                        }
+                        else
+                        {
+                            <MudAvatar Size="Size.Large">
+                                @userInfo?.Username?.FirstOrDefault()
+                            </MudAvatar>
+                        }
+                       
+                    </div>
+                </MudListItem>
+                <MudListItem>
+                    <div class="d-flex flex-row justify-space-between align-content-center gap-3">
+                        <MudText Style="min-width:120px">User name</MudText>
+                        <MudText Style="min-width:200px">@userInfo?.Username</MudText>
+                        <MudIcon Icon="@Icons.Material.Filled.KeyboardArrowRight"></MudIcon>
+                    </div>
+                </MudListItem>
+                <MudListItem>
+                    <div class="d-flex flex-row justify-space-between align-content-center gap-3">
+                        <MudText Style="min-width:120px">Name</MudText>
+                        <MudText Style="min-width:200px">@userInfo?.Name</MudText>
+                        <MudIcon Icon="@Icons.Material.Filled.KeyboardArrowRight"></MudIcon>
+                    </div>
+                </MudListItem>
+                <MudListItem>
+                    <div class="d-flex flex-row justify-space-between align-content-center gap-3">
+                        <MudText Style="min-width:120px">Email</MudText>
+                        <MudText Style="min-width:200px">@userInfo?.Email?.Address</MudText>
+                        <MudIcon Icon="@Icons.Material.Filled.KeyboardArrowRight"></MudIcon>
+                    </div>
+                </MudListItem>
+            }
+            
+        </MudList>
+    </MudPaper>
+</div>
+@code {
+    private User? userInfo;
+    protected override async Task OnInitializedAsync()
+    {
+        userInfo = await PocketbaseClient.GetCurrentUserAsync();
+    }
+}

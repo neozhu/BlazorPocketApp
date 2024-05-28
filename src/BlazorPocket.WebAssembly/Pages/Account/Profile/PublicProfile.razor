@@ -1,0 +1,109 @@
+﻿@using BlazorPocket.WebAssembly.Services
+@using PocketBaseClient.BlazorPocket.Models
+@using System.ComponentModel.DataAnnotations
+@using pocketbase_csharp_sdk.Models
+@using static PocketBaseClient.BlazorPocket.Models.User
+<EditForm Model="@model" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+    <div class="d-flex flex-row gap-3">
+        <div class="d-flex flex-column gap-2">
+            <MudText Typo="Typo.h4">Public profile</MudText>
+            <MudTextField Label="Name" @bind-Value="model.Name" For="@(() => model.Name)" ShrinkLabel="true" Adornment="Adornment.End" IconSize="Size.Small" AdornmentIcon="@Icons.Material.Filled.Edit" HelperText="Your name may appear around application where you contribute or are mentioned. You can remove it at any time."></MudTextField>
+            <MudTextField Label="User name" @bind-Value="model.Username" For="@(() => model.Username)" ShrinkLabel="true" Adornment="Adornment.End" IconSize="Size.Small" AdornmentIcon="@Icons.Material.Filled.Edit"></MudTextField>
+            <MudTextField Label="Email" @bind-Value="model.Email" For="@(() => model.Email)" ShrinkLabel="true" ReadOnly></MudTextField>
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Save Profile</MudButton>
+        </div>
+        <div class="d-flex flex-column  gap-1 px-4">
+            @if (!string.IsNullOrEmpty(model.AvatarUrl))
+            {
+                <MudAvatar Style="width:150px;height:150px">
+                    <MudImage Src="@model.AvatarUrl" Width="150" Height="150" ObjectFit="ObjectFit.Cover" Alt="user name" Elevation="5" Class="rounded-lg"></MudImage>
+                </MudAvatar>
+            }
+            else
+            {
+                <MudAvatar Style="width:150px;height:150px">@model.Username?.FirstOrDefault()</MudAvatar>
+            }
+            <div class="flex-grow-0" style="margin-left:auto;margin-top:-35px;margin-right:20px">
+                <MudFileUpload T="IBrowserFile" FilesChanged="UploadFiles">
+                    <ActivatorContent>
+                        <MudIconButton HtmlTag="label"
+                                       Color="Color.Info"
+                                       Icon="@Icons.Material.Filled.PhotoCamera"
+                                       >
+                        </MudIconButton>
+                    </ActivatorContent>
+                </MudFileUpload>
+            </div>
+        </div>
+
+
+    </div>
+
+</EditForm>
+
+@code {
+    private ProfileModel model = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var userModel = await PocketbaseClient.GetCurrentUserAsync();
+        model = new ProfileModel { Id = userModel.Id, Email = userModel.Email?.Address, Name = userModel.Name, Username = userModel.Username, Avatar = userModel.Avatar, AvatarUrl = userModel.Avatar.GetFileUrl() };
+    }
+
+    private async Task UploadFiles(IBrowserFile file)
+    {
+        try
+        {
+            var fileName = file.Name;
+            var stream = new MemoryStream();
+            await file.OpenReadStream(int.MaxValue).CopyToAsync(stream);
+            var user = await PocketbaseClient.Data.UsersCollection.GetByIdAsync(model.Id);
+            user.Avatar.LoadFromFileBytes(stream.ToArray(), fileName);
+            await user.SaveAsync();
+            model = new ProfileModel { Id = user.Id, Email = user.Email?.Address, Name = user.Name, Username = user.Username, Avatar = user.Avatar, AvatarUrl = user.Avatar.GetFileUrl() };
+            StateHasChanged();
+            Snackbar.Add("User profile updated successfully.", Severity.Info);
+        }
+        catch
+        {
+            Snackbar.Add("Error updating user profile. Please try again.", Severity.Error);
+        }
+
+
+    }
+    private async Task OnValidSubmit(EditContext context)
+    {
+        try
+        {
+            var uitem = new User(model.Id, null, DateTime.Now, new System.Net.Mail.MailAddress(model.Email), true, model.Username, true, model.Name, model.Avatar);
+            var user = await PocketbaseClient.Data.UsersCollection.GetByIdAsync(model.Id);
+            user.UpdateWith(uitem);
+            await PocketbaseClient.Data.SaveChangesAsync();
+            Snackbar.Add("User profile updated successfully.", Severity.Info);
+            StateHasChanged();
+        }
+        catch
+        {
+            Snackbar.Add("Error updating user profile. Please try again.", Severity.Error);
+        }
+
+    }
+
+    public class ProfileModel
+    {
+        [Required]
+        public string Id { get; set; } = string.Empty;
+        [Required]
+        [RegularExpression(@"^[a-zA-Z0-9\s]+$", ErrorMessage = "Name contains special characters which are not allowed.")]
+        [StringLength(30, ErrorMessage = "Password must be at least 3 characters long.", MinimumLength = 3)]
+        public string Username { get; set; } = string.Empty;
+        [RegularExpression(@"^[a-zA-Z0-9\s]+$", ErrorMessage = "Name contains special characters which are not allowed.")]
+        public string Name { get; set; } = string.Empty;
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; } = string.Empty;
+        public string AvatarUrl { get; set; } = string.Empty;
+        public AvatarFile? Avatar { get; set; }
+    }
+}
