@@ -10,6 +10,7 @@
 // pocketbase project: https://github.com/pocketbase/pocketbase
 
 using pocketbase_csharp_sdk.Json;
+using pocketbase_csharp_sdk.Models;
 using PocketBaseClient.Orm;
 using PocketBaseClient.Orm.Attributes;
 using PocketBaseClient.Orm.Json;
@@ -98,5 +99,8 @@ namespace PocketBaseClient.BlazorPocket.Models
 
         public static User? GetById(string id, bool reload = false)
             => GetCollection().GetById(id, reload);
+
+
+        
     }
 }
