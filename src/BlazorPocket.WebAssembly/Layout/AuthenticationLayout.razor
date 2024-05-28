@@ -1,0 +1,23 @@
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@using BlazorPocket.WebAssembly.Layout.Redirections
+@inherits LayoutComponentBase
+@layout MainLayout
+<MudLayout>
+     <AuthorizeView>
+        <Authorized>
+            <RedirectToHome /> 
+        </Authorized>
+        <NotAuthorized>
+            <MudContainer MaxWidth="MaxWidth.ExtraSmall" Class="d-flex align-center" Style="height: 100vh;">
+                <div class="d-flex flex-column mud-width-full">
+                    @Body
+                </div>
+            </MudContainer>
+        </NotAuthorized>
+           
+      </AuthorizeView>
+</MudLayout>
+
+@code {
+
+}
