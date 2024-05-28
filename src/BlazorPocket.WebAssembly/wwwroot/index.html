@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BlazorPocket.WebAssembly</title>
+    <base href="/" />
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/app.css" />
+    <!-- If you add any scoped CSS files, uncomment the following to load them
+    <link href="BlazorPocket.WebAssembly.styles.css" rel="stylesheet" />  -->
+    <link href="manifest.webmanifest" rel="manifest" />
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="app">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-8">
+                    <p></p>
+                    Loading Blazor WebAssembly...
+                    <br />
+                    <div class="progress">
+                        <div id="progressbar" class="progress-bar progress-bar-striped active" role="progressbar" style="width:0"></div>
+                    </div>
+                </div>
+                <div class="col-2"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+    <script src="_framework/blazor.webassembly.js" autostart="false"></script>
+    <script>navigator.serviceWorker.register('service-worker.js');</script>
+    <script src="_content/MudBlazor/MudBlazor.min.js"></script>
+    <script type="text/javascript">
+        const progressbar = document.getElementById('progressbar');
+        let i = 1; // this is 'blazor.boot.json'
+        window.loadResourceCallback = (total, name, response) => {
+            if (!name.includes('blazor.boot.json') && total > 1) {
+                i++;
+
+                const value = parseInt((i * 100.0) / total);
+                const pct = value + '%';
+
+                progressbar.style.width = pct;
+                //console.log(i + '/' + total + ' (' + pct + ') ' + name);
+            }
+        }
+    </script>
+
+    <script type="text/javascript">
+        // https://github.com/dotnet/aspnetcore/issues/25165
+        if (location.hostname === 'localhost') {
+            caches.keys().then(function (keyList) {
+                return Promise.all(keyList.map(function (key) {
+                    return caches.delete(key);
+                }));
+            });
+        }
+    </script>
+
+    <!-- Start Single Page Apps for GitHub Pages -->
+    <script type="text/javascript">
+        // Single Page Apps for GitHub Pages
+        // https://github.com/rafrex/spa-github-pages
+        // Copyright (c) 2016 Rafael Pedicini, licensed under the MIT License
+        // ----------------------------------------------------------------------
+        // This script checks to see if a redirect is present in the query string
+        // and converts it back into the correct url and adds it to the
+        // browser's history using window.history.replaceState(...),
+        // which won't cause the browser to attempt to load the new url.
+        // When the single page app is loaded further down in this file,
+        // the correct url will be waiting in the browser's history for
+        // the single page app to route accordingly.
+        (function (l) {
+            if (l.search) {
+                var q = {};
+                l.search.slice(1).split('&').forEach(function (v) {
+                    const a = v.split('=');
+                    q[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
+                });
+                if (q.p !== undefined) {
+                    window.history.replaceState(null,
+                        null,
+                        l.pathname.slice(0, -1) +
+                        (q.p || '') +
+                        (q.q ? (`?${q.q}`) : '') +
+                        l.hash
+                    );
+                }
+            }
+        }(window.location))
+    </script>
+    <!-- End Single Page Apps for GitHub Pages -->
+    <script>
+        // 1.
+        // https://github.com/dotnet/aspnetcore/issues/25165
+
+        // 2.
+        // Workaround for serving compressed content from GitHub Pages
+        // For framework resources, use the precompressed .br files for faster downloads
+        // This is needed only because GitHub pages doesn't natively support Brotli (or even gzip for .dll files)
+
+        const allResourcesBeingLoaded = [];
+
+        Blazor.start({
+            loadBootResource: function (type, name, defaultUri, integrity) {
+                //console.log(`loadBootResource: ${name} ${defaultUri}`);
+
+                if (type === "dotnetjs") {
+                    return defaultUri;
+                }
+
+                const isLocalHost = location.hostname === 'localhost';
+
+                const defaultUriBr = !isLocalHost ? `${defaultUri}.br` : defaultUri;
+
+                //console.log(`fetching: ${defaultUriBr}`);
+
+                const fetchPromise = fetch(defaultUriBr, {
+                    cache: 'no-cache',
+                    // integrity: integrity,
+                    headers: { 'MyCustomHeader': `Stef Heyenrath ${Date.now()}` }
+                });
+
+                allResourcesBeingLoaded.push(fetchPromise);
+
+                fetchPromise.then((response) => {
+                    window.loadResourceCallback(allResourcesBeingLoaded.length, response.url);
+                });
+
+                return new Promise((resolve, reject) => {
+                    fetchPromise.then((response) => {
+                        const originalResponseBufferPromise = response.arrayBuffer();
+                        originalResponseBufferPromise.then((originalResponseBuffer) => {
+                            const originalResponseArray = new Int8Array(originalResponseBuffer);
+                            const decompressedResponseArray = isLocalHost ? originalResponseArray : BrotliDecode(originalResponseArray);
+
+                            //console.log(`fetched: ${defaultUriBr} ${originalResponseArray.length}/${decompressedResponseArray.length}`);
+
+                            const contentType = type === 'dotnetwasm' ? 'application/wasm' : 'application/octet-stream';
+                            resolve(new Response(decompressedResponseArray, { headers: { 'content-type': contentType } }));
+                        });
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

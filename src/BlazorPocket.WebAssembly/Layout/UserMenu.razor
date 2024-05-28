@@ -1,0 +1,80 @@
+﻿@using BlazorPocket.WebAssembly.Services
+@using Microsoft.AspNetCore.Components.Authorization
+@using PocketBaseClient.BlazorPocket.Models
+@using pocketbase_csharp_sdk
+@using pocketbase_csharp_sdk.Models
+@using pocketbase_csharp_sdk.Models.Auth
+@implements IDisposable
+<MudMenu Class="ml-1" PositionAtCursor="false" AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.BottomLeft">
+    <ActivatorContent>
+        <MudStack Row="true" AlignItems="AlignItems.Center">
+            @if (string.IsNullOrEmpty(userModel?.Avatar.FileName??string.Empty))
+            {
+                <MudAvatar Size="Size.Medium" Square="true">@userModel?.Username?.FirstOrDefault()</MudAvatar>
+            }
+            else
+            {
+                <MudAvatar Size="Size.Medium" Square="true">
+                    <MudImage Src="@GetAvatarUrl()"></MudImage>
+                </MudAvatar>
+            }
+            <MudStack Justify="Justify.Center" Spacing="0">
+                <MudText Typo="Typo.body2">@(string.IsNullOrEmpty(userModel?.Name) ? userModel?.Username : userModel?.Name)</MudText>
+                <MudText Typo="Typo.body2" Class="mud-text-secondary">@userModel?.Email</MudText>
+            </MudStack>
+        </MudStack>
+    </ActivatorContent>
+    <ChildContent>
+        <MudMenuItem Href="/account/profile">
+            <div class="d-flex align-center">
+                <MudIcon Class="mr-1" Size="Size.Small"
+                         Icon="@Icons.Material.Filled.Person" />
+                <MudText Align="Align.Center">Profile</MudText>
+            </div>
+        </MudMenuItem>
+        <MudMenuItem Href="/profile/setting">
+            <div class="d-flex align-center">
+                <MudIcon Class="mr-1" Size="Size.Small"
+                         Icon="@Icons.Material.Filled.Settings" />
+                <MudText Align="Align.Center">Settings</MudText>
+            </div>
+        </MudMenuItem>
+        <MudMenuItem OnClick="OnSignOut">
+            <div class="d-flex align-center">
+                <MudIcon Class="mr-1" Size="Size.Small"
+                         Icon="@Icons.Material.Filled.Logout" />
+                <MudText Align="Align.Center">Logout</MudText>
+            </div>
+        </MudMenuItem>
+
+    </ChildContent>
+</MudMenu>
+
+
+@code {
+    [Inject]
+    public AuthenticationStateProvider AuthenticationStateProvider { get; set; } = null!;
+
+    private User? userModel { get; set; }
+    private string? GetAvatarUrl() => userModel?.Avatar.GetFileUrl();
+    
+    protected override async Task OnInitializedAsync()
+    {
+        PocketbaseClient.Auth.AuthStore.OnChange += AuthStore_OnChange;
+        userModel = await PocketbaseClient.GetCurrentUserAsync();
+    }
+    private void AuthStore_OnChange(object? sender, AuthStoreEvent e)
+    {
+
+        userModel = PocketbaseClient.GetCurrentUser();
+        InvokeAsync(StateHasChanged);
+    }
+    private void OnSignOut()
+    {
+        ((PocketBaseAuthenticationStateProvider)AuthenticationStateProvider).MarkUserAsLoggedOut();
+    }
+    public void Dispose()
+    {
+        PocketbaseClient.Auth.AuthStore.OnChange -= AuthStore_OnChange;
+    }
+}

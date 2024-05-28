@@ -24,7 +24,7 @@ namespace PocketBaseClient.BlazorPocket.Models
 
             public AvatarFile() : base("avatar", owner: null) { }
 
-            public AvatarFile(User? user) : base("avatar", user) { }
+            public AvatarFile(User? user) : base("avatar", user) {  }
 
         }
     }
