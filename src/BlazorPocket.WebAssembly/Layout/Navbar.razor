@@ -1,9 +1,9 @@
 ﻿<MudPaper Elevation="1" Square="true">
     <MudToolBar Class="gap-2" Style="height:50px">
         <MudButton StartIcon="@Icons.Material.Filled.Home" Href="/" Variant="Variant.Text">Home</MudButton>
-        <MudMenu Color="Color.Inherit" Variant="Variant.Text" Class="mx-1 px-3" ListClass="d-flex px-4 pb-2" LockScroll="true" Label="Application" EndIcon="@Icons.Material.Filled.KeyboardArrowDown" AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.BottomRight">
+        <MudMenu Color="Color.Inherit" StartIcon="@Icons.Material.Filled.AppRegistration" Variant="Variant.Text" Class="mx-1 px-3" ListClass="d-flex px-4 pb-2" LockScroll="true" Label="Application" EndIcon="@Icons.Material.Filled.KeyboardArrowDown" AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.BottomRight">
             <MudList T="string">
-                <MudListSubheader>
+                <MudListSubheader Class="pt-4 pb-2">
                     Products
                 </MudListSubheader>
                 <MudListItem>
@@ -26,7 +26,7 @@
                 </MudListItem>
             </MudList>
             <MudList T="string" Class="relative">
-                <MudListSubheader>
+                <MudListSubheader Class="pt-4 pb-2">
                     Inventory Management
                 </MudListSubheader>
                 <MudOverlay Visible="true" LightBackground="true" Absolute="true" Class="docs-menu-overlay" />
