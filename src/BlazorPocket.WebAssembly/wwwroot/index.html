@@ -220,24 +220,22 @@
                 offset: '-=350',
                 delay: anime.stagger(100, { start: 500 }) // delay each character
             }).add({
-                    targets: '#logo-text p',
-                    opacity: [0, 1],
-                    translateX: ['-0.5em', 0],
-                    easing: 'easeOutExpo',
-                    duration: 100,
-            })
-    .add({
-        targets: '#logo-text .progress',
-        opacity: [0, 1],
-        translateX: ['-0.5em', 0],
-        easing: 'easeOutExpo',
-        duration: 100,
-    })
-                .finished.then(() => {
-                    document.querySelectorAll('.site-title-text span.blazor').forEach(span => {
-                        span.classList.add('light');
-                    });
-                });;
+                targets: '#logo-text p',
+                opacity: [0, 1],
+                translateX: ['-0.5em', 0],
+                easing: 'easeOutExpo',
+                duration: 100,
+            }).add({
+                targets: '#logo-text .progress',
+                opacity: [0, 1],
+                translateX: ['-0.5em', 0],
+                easing: 'easeOutExpo',
+                duration: 100,
+            }).finished.then(() => {
+                document.querySelectorAll('.site-title-text span.blazor').forEach(span => {
+                    span.classList.add('light');
+                });
+            });;
 
         </script>
     </div>
