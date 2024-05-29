@@ -15,7 +15,7 @@
     <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
-   
+
 </head>
 
 <body>
@@ -195,8 +195,8 @@
                 duration: 900
             }).add({
                 targets: '#logo-hexagon',
-                rotate: [-90, 0],
-                duration: 600,
+                rotate: [-180, 0],
+                duration: 1000,
                 elasticity: 600,
                 offset: '-=200'
             }).add({
@@ -217,12 +217,27 @@
                 translateX: ['-0.5em', 0],
                 easing: 'easeOutExpo',
                 duration: 300,
+                offset: '-=350',
                 delay: anime.stagger(100, { start: 500 }) // delay each character
-            }).finished.then(() => {
-                document.querySelectorAll('.site-title-text span.blazor').forEach(span => {
-                    span.classList.add('light');
-                });
-            });;
+            }).add({
+                    targets: '#logo-text p',
+                    opacity: [0, 1],
+                    translateX: ['-0.5em', 0],
+                    easing: 'easeOutExpo',
+                    duration: 100,
+            })
+    .add({
+        targets: '#logo-text .progress',
+        opacity: [0, 1],
+        translateX: ['-0.5em', 0],
+        easing: 'easeOutExpo',
+        duration: 100,
+    })
+                .finished.then(() => {
+                    document.querySelectorAll('.site-title-text span.blazor').forEach(span => {
+                        span.classList.add('light');
+                    });
+                });;
 
         </script>
     </div>
