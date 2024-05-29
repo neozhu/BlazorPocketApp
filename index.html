@@ -117,7 +117,7 @@
                 }
 
                 [id="logo"] circle {
-                    transform-origin: 80% 80%;
+                    transform-origin: 60% 60%;
                 }
 
             .site-title {
@@ -148,38 +148,12 @@
                 .site-title-text p {
                     font-size: 0.8125rem;
                     font-weight: 500;
+                    color: #3f3c3c;
                     padding-bottom: 0.15rem;
                     margin-bottom: 1px;
                 }
 
-                .site-title-text span.light::before {
-                    content: '';
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.6), transparent);
-                    background-size: 200%;
-                    z-index: 1;
-                    opacity: 0;
-                    transition: opacity 0.3s ease-in-out;
-                }
-
-            @keyframes light-sweep {
-                0% {
-                    background-position: -200%;
-                }
-
-                100% {
-                    background-position: 200%;
-                }
-            }
-
-            .site-title-text span.light::before {
-                animation: light-sweep 2s infinite;
-                opacity: 1;
-            }
+          
         </style>
         <script>
             const logoAnimation = anime.timeline({
@@ -203,7 +177,7 @@
                 targets: '#logo-circle',
                 scale: [0, 1],
                 duration: 600,
-                elasticity: 600,
+                easing: 'easeOutElastic(1, .8)',
                 offset: '-=100'
             }).add({
                 targets: '#logo-mask',
@@ -214,7 +188,7 @@
             }).add({
                 targets: '#logo-text span',
                 opacity: [0, 1],
-                translateX: ['-0.5em', 0],
+                translateX: ['-3.5em', 0],
                 easing: 'easeOutExpo',
                 duration: 300,
                 offset: '-=350',
@@ -222,20 +196,31 @@
             }).add({
                 targets: '#logo-text p',
                 opacity: [0, 1],
-                translateX: ['-0.5em', 0],
+                translateX: ['-1.5em', 0],
                 easing: 'easeOutExpo',
                 duration: 100,
             }).add({
                 targets: '#logo-text .progress',
                 opacity: [0, 1],
-                translateX: ['-0.5em', 0],
+                translateX: ['-1.5em', 0],
                 easing: 'easeOutExpo',
                 duration: 100,
             }).finished.then(() => {
-                document.querySelectorAll('.site-title-text span.blazor').forEach(span => {
-                    span.classList.add('light');
-                });
-            });;
+    const totalDuration = 3000;
+    const characterDuration = 500;
+    const staggerDelay = (totalDuration - characterDuration) / (6 - 1);
+
+    anime({
+        targets: '#logo-text span.blazor',
+        opacity: [0.8, 0, 1, 0.5, 1, 0, 0.9],
+        scale: [0.9, 1, 1.1, 1, 1.1, 1, 0.9],
+        translateX: ['0rem', '-0.1rem'],
+        easing: 'easeInOutSine',
+        duration: characterDuration,
+        delay: anime.stagger(staggerDelay, { start: 0 }),
+        loop: true
+    });
+            });
 
         </script>
     </div>
