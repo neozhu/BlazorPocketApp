@@ -4,6 +4,31 @@
 [![Docker Image CI](https://github.com/neozhu/BlazorPocketApp/actions/workflows/docker-image.yml/badge.svg)](https://github.com/neozhu/BlazorPocketApp/actions/workflows/docker-image.yml)
 
 
+created a shared library and a webassembly standalone template for MudBlazor and for the default blazor project.
+the idea is just to use the pockethost.io to connect the blazor app to the backend, and then everything is working.
+so new users can simply:
+
+create a project using this webassembly standalone template
+create an account and instance in pockethost.io
+configure the url in the appsettings
+and configure an automatic deploy to azure app service
+and it is done, the use achived to create an app 100% free, without hosting costs.
+also azure static web app allows custom domain with no additional cost (ofcorse you have to own a domain name first).
+check my deploy, that was exactly the steps I listed here:
+https://zealous-ocean-019afa910-preview.centralus.5.azurestaticapps.net/
+
+and this is the app with default template, pointing to the same pockethost instance
+https://happy-moss-0bb0d6110-preview.centralus.5.azurestaticapps.net
+
+is your app template, but it is simply pointing to my instance in pockethost (that I just created few hours ago, very simple)
+
+note that the avatar image is a fish, and the product overview is pointing to the page Counter (just to test the webassembly)
+
+on appsettings.json,
+"PocketbaseUrl": "https://blazorwasm-app1-api.pockethost.io"
+
+
+
 BlazorPocket is a lightweight web application template that leverages the latest .NET 8.0 Blazor Web App with InteractiveAuto render mode and PocketBase for backend data storage. This project aims to streamline the development process, minimize repetitive coding, and provide a quick start for building efficient web applications.
 
 
