@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BlazorPocket.WebAssembly</title>
     <base href="/" />
-    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
     <link rel="stylesheet" href="css/app.css" />
     <!-- If you add any scoped CSS files, uncomment the following to load them
     <link href="BlazorPocket.WebAssembly.styles.css" rel="stylesheet" />  -->
@@ -16,24 +15,229 @@
     <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
+
 </head>
 
 <body>
     <div id="app">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-2"></div>
-                <div class="col-8">
-                    <p></p>
-                    Loading Blazor WebAssembly...
-                    <br />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+        <div class="site-logo">
+            <figure id="logo">
+                <svg width="100%" height="100%" viewBox="0 0 148 128">
+                    <defs>
+                        <mask id="circle-mask">
+                            <rect fill="white" width="100%" height="100%"></rect>
+                            <circle id="logo-mask" fill="black" cx="120" cy="96" r="28"></circle>
+                        </mask>
+                    </defs>
+                    <polygon id="logo-hexagon" fill="#1E3A8A" points="64 128 8.574 96 8.574 32 64 0 119.426 32 119.426 96" mask="url(#circle-mask)"></polygon>
+                    <circle id="logo-circle" fill="#3F3C3C" cx="120" cy="96" r="20"></circle>
+                </svg>
+            </figure>
+            <div class="site-title">
+                <div id="logo-text" class="site-title-text">
+                    <span class="blazor">B</span><span class="blazor">l</span><span class="blazor">a</span><span class="blazor">z</span><span class="blazor">o</span><span class="blazor">r</span><span class="highlight">P</span><span class="highlight">o</span><span class="highlight">c</span><span class="highlight">k</span><span class="highlight">e</span><span class="highlight">t</span>
+                    <p> Loading ...</p>
                     <div class="progress">
                         <div id="progressbar" class="progress-bar progress-bar-striped active" role="progressbar" style="width: var(--blazor-load-percentage, 0%)"></div>
                     </div>
                 </div>
-                <div class="col-2"></div>
             </div>
         </div>
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+            /* Style for the progress container */
+            .progress {
+                width: 100%;
+                height: 1rem;
+                background-color: #f3f3f3;
+                border-radius: 0.25rem;
+                overflow: hidden;
+                margin-top: 1px;
+                margin-bottom: 0px;
+                position: relative;
+            }
+
+            /* Style for the progress bar */
+            .progress-bar {
+                height: 100%;
+                background-color: #1E3A8A;
+                transition: width 0.6s ease;
+                border-radius: 0.25rem 0 0 0.25rem;
+            }
+
+            /* Style for the striped effect */
+            .progress-bar-striped {
+                background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+                background-size: 1rem 1rem;
+            }
+
+                /* Active animation for the progress bar */
+                .progress-bar-striped.active {
+                    animation: progress-bar-stripes 1s linear infinite;
+                }
+
+            /* Keyframes for the striped animation */
+            @keyframes progress-bar-stripes {
+                from {
+                    background-position: 1rem 0;
+                }
+
+                to {
+                    background-position: 0 0;
+                }
+            }
+
+            body {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+                font-family: "Dosis", sans-serif;
+                color: #3f3c3c;
+            }
+
+            .site-logo {
+                display: flex;
+                align-items: center;
+                transform: translateZ(0);
+            }
+
+            [id="logo"] {
+                position: relative;
+                flex: 0 0 3.75rem;
+                width: 3.75rem;
+                z-index: 2;
+            }
+
+                [id="logo"] polygon {
+                    transform-origin: 50%;
+                }
+
+                [id="logo"] circle {
+                    transform-origin: 80% 80%;
+                }
+
+            .site-title {
+                position: relative;
+                overflow: hidden;
+                margin-left: -1.5rem;
+                z-index: 1;
+                transform: translateZ(0);
+            }
+
+            .site-title-text {
+                padding: 0.25rem 0.375rem 0.25rem 1.75rem;
+                color: #3f3c3c;
+                font-size: 2rem;
+                font-weight: 800;
+            }
+
+                .site-title-text span {
+                    display: inline-block;
+                    color: #3f3c3c;
+                    opacity: 0;
+                }
+
+                    .site-title-text span.highlight {
+                        color: #1E3A8A;
+                    }
+
+                .site-title-text p {
+                    font-size: 0.8125rem;
+                    font-weight: 500;
+                    padding-bottom: 0.15rem;
+                    margin-bottom: 1px;
+                }
+
+                .site-title-text span.light::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+                    background-size: 200%;
+                    z-index: 1;
+                    opacity: 0;
+                    transition: opacity 0.3s ease-in-out;
+                }
+
+            @keyframes light-sweep {
+                0% {
+                    background-position: -200%;
+                }
+
+                100% {
+                    background-position: 200%;
+                }
+            }
+
+            .site-title-text span.light::before {
+                animation: light-sweep 2s infinite;
+                opacity: 1;
+            }
+        </style>
+        <script>
+            const logoAnimation = anime.timeline({
+                autoplay: true,
+                delay: 200
+            });
+
+            logoAnimation.add({
+                targets: '#logo',
+                translateY: [-100, 0],
+                opacity: [0, 1],
+                elasticity: 600,
+                duration: 900
+            }).add({
+                targets: '#logo-hexagon',
+                rotate: [-180, 0],
+                duration: 1000,
+                elasticity: 600,
+                offset: '-=200'
+            }).add({
+                targets: '#logo-circle',
+                scale: [0, 1],
+                duration: 600,
+                elasticity: 600,
+                offset: '-=100'
+            }).add({
+                targets: '#logo-mask',
+                scale: [0, 1],
+                duration: 500,
+                elasticity: 600,
+                offset: '-=350'
+            }).add({
+                targets: '#logo-text span',
+                opacity: [0, 1],
+                translateX: ['-0.5em', 0],
+                easing: 'easeOutExpo',
+                duration: 300,
+                offset: '-=350',
+                delay: anime.stagger(100, { start: 500 }) // delay each character
+            }).add({
+                targets: '#logo-text p',
+                opacity: [0, 1],
+                translateX: ['-0.5em', 0],
+                easing: 'easeOutExpo',
+                duration: 100,
+            }).add({
+                targets: '#logo-text .progress',
+                opacity: [0, 1],
+                translateX: ['-0.5em', 0],
+                easing: 'easeOutExpo',
+                duration: 100,
+            }).finished.then(() => {
+                document.querySelectorAll('.site-title-text span.blazor').forEach(span => {
+                    span.classList.add('light');
+                });
+            });;
+
+        </script>
     </div>
     <!-- Start Single Page Apps for GitHub Pages -->
     <script type="text/javascript">
@@ -73,7 +277,7 @@
         <a href="" class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
-    <script src="decode.js"></script>
+
     <script src="_framework/blazor.webassembly.js"></script>
     <script>navigator.serviceWorker.register('service-worker.js');</script>
     <script src="_content/MudBlazor/MudBlazor.min.js"></script>
