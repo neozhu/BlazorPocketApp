@@ -2,7 +2,15 @@
 @using PocketBaseClient.BlazorPocket.Models
 @using pocketbase_csharp_sdk.Models
 
- 
+<PageTitle>Product</PageTitle>
+
+<MudStack Row AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
+    <MudText Typo="Typo.h5">Product overview</MudText>
+    <MudStack Row Spacing="2">
+        <MudButton>New</MudButton>
+        <MudButton>Delete</MudButton>
+    </MudStack>
+</MudStack>
 
 <MudList T="Product">
     <MudListSubheader>
