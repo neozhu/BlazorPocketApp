@@ -5,10 +5,14 @@
 <PageTitle>Product</PageTitle>
 
 <MudStack Row AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
-    <MudText Typo="Typo.h5">Product overview</MudText>
+    <MudStack Spacing="0">
+        <MudText Typo="Typo.h5">Product overview</MudText>
+        <MudText Typo="Typo.body2">View all products</MudText>
+    </MudStack>
+    
     <MudStack Row Spacing="2">
-        <MudButton>New</MudButton>
-        <MudButton>Delete</MudButton>
+        <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Add">New</MudButton>
+        <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Delete">Delete</MudButton>
     </MudStack>
 </MudStack>
 
