@@ -16,6 +16,7 @@ public static class DependencyInjection
         var appSettings= config.GetSection(ApplicationSettings.KEY).Get<ApplicationSettings>();
         services.AddSingleton(appSettings);
         services.AddSingleton(s => new BlazorPocketApplication(appSettings.PocketbaseUrl, appSettings.AppName));
+         
     }
 
    
