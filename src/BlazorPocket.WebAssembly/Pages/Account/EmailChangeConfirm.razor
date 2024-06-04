@@ -91,7 +91,7 @@
     {
         try
         {
-            await PocketbaseClient.Sdk.User.ConfirmEmailChangeAsync(model.EmailChangeResetToken, model.Password);
+            await PocketbaseClient.Auth.User.ConfirmEmailChangeAsync(model.EmailChangeResetToken, model.Password);
             var result = await PocketbaseClient.Sdk.User.AuthenticateWithPasswordAsync(model.NewEmail, model.Password);
             if (result?.Record?.Verified ?? false)
             {
