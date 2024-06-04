@@ -34,9 +34,12 @@ namespace PocketBaseClient.BlazorPocket.Models
         public CollectionQuery<CollectionProducts, Product.Sorts, Product> Filter(Func<Product.Filters, FilterCommand> filter)
             => new CollectionQuery<CollectionProducts, Product.Sorts, Product>(this, filter(new Product.Filters()));
 
+       
+
         /// <summary> Query all data at PocketBase, over collection 'products' </summary>
         public CollectionQuery<CollectionProducts, Product.Sorts, Product> All()
             => new CollectionQuery<CollectionProducts, Product.Sorts, Product>(this, null);
 
+       
     }
 }
