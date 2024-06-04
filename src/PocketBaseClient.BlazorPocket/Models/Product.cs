@@ -60,7 +60,7 @@ namespace PocketBaseClient.BlazorPocket.Models
         [PocketBaseField(id: "tv34msy1", name: "unit", required: true, system: false, unique: false, type: "select")]
         [Display(Name = "Unit")]
         [Required(ErrorMessage = @"Unit is required")]
-        [JsonConverter(typeof(EnumConverter<UnitEnum>))]
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public UnitEnum Unit { get => Get(() => _Unit ??= default); set => Set(value, ref _Unit); }
 
         private float? _Price = null;
@@ -75,7 +75,7 @@ namespace PocketBaseClient.BlazorPocket.Models
         [JsonPropertyName("currency")]
         [PocketBaseField(id: "pddjipx1", name: "currency", required: false, system: false, unique: false, type: "select")]
         [Display(Name = "Currency")]
-        [JsonConverter(typeof(EnumConverter<CurrencyEnum>))]
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public CurrencyEnum? Currency { get => Get(() => _Currency); set => Set(value, ref _Currency); }
 
         #endregion Field Properties
