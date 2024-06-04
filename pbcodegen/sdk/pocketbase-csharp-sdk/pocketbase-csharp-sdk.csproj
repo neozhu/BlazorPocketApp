@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<PackageVersion>1.2.0-prerelease</PackageVersion>
-		<TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+		<TargetFrameworks>net8.0</TargetFrameworks>
 		<RootNamespace>pocketbase_csharp_sdk</RootNamespace>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
