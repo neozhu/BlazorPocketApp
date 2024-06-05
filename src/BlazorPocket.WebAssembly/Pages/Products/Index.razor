@@ -1,0 +1,57 @@
+﻿@page "/products/index"
+@using PocketBaseClient.BlazorPocket.Models
+@using pocketbase_csharp_sdk.Models
+
+<PageTitle>Product</PageTitle>
+
+<MudStack Row AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
+    <MudStack Spacing="0">
+        <MudText Typo="Typo.h5">Product overview</MudText>
+        <MudText Typo="Typo.body2">View all products</MudText>
+    </MudStack>
+    <MudStack Row Spacing="2">
+        <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Add">New</MudButton>
+        <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Delete">Delete</MudButton>
+    </MudStack>
+</MudStack>
+
+<MudList T="Product">
+    <MudListSubheader>
+        <MudTextField T="string" Variant="Variant.Outlined" Label="Search" @bind-Value="@keyword" AdornmentAriaLabel="Query" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Search" OnAdornmentClick="Query"></MudTextField>
+        @result.TotalItems, @result.TotalPages 
+        
+    </MudListSubheader>
+    @foreach (var p in result.Items ?? Enumerable.Empty<Product>())
+    {
+        <MudListItem >@p.Name, @p.Unit</MudListItem>
+    }
+</MudList>
+
+
+<MudList T="Product">
+     
+    @foreach (var p in list ?? Enumerable.Empty<Product>())
+    {
+        <MudListItem>@p.Name, @p.Unit</MudListItem>
+    }
+</MudList>
+@code {
+    private string? keyword;
+    private List<Product>? list=new List<Product>();
+    private PagedCollectionModel<Product> result = new PagedCollectionModel<Product>();
+    protected override async Task OnInitializedAsync()
+    {
+        var products = PocketbaseClient.Data.ProductsCollection;
+
+        result = await products.GetPagedItemsAsync(1, 50);
+    }
+
+    private async Task Query()
+    {
+        list = new List<Product>();
+        var products = PocketbaseClient.Data.ProductsCollection;
+        // var result = await products.Filter(x => x.Name.Contains(keyword)).GetPagedItemsAsync(1, 50);
+        // list = result.Items?.ToList();
+        list =(await products.GetFullListAsync()).ToList();
+    }
+}
