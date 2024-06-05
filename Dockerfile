@@ -45,6 +45,9 @@ COPY --from=build /app/publish/wwwroot /usr/local/apache2/htdocs/
 COPY httpd-ssl.conf /usr/local/apache2/conf/extra/httpd-ssl.conf
 RUN echo "Include conf/extra/httpd-ssl.conf" >> /usr/local/apache2/conf/httpd.conf
 
+# Configure Apache to redirect 404 errors to the root
+RUN echo "ErrorDocument 404 /index.html" >> /usr/local/apache2/conf/httpd.conf
+
 EXPOSE 80
 EXPOSE 443
 

@@ -175,13 +175,13 @@ public class Theme
                 {
                     FontSize = "1.35rem",
                     FontWeight = 700,
-                    LineHeight = 2,
+                    LineHeight = 1.5,
                 },
                 H6 = new H6()
                 {
                     FontSize = "1.125rem",
                     FontWeight = 700,
-                    LineHeight = 2,
+                    LineHeight = 1.5,
                 },
                 Subtitle1 = new Subtitle1()
                 {
