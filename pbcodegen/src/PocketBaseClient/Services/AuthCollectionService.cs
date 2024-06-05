@@ -125,5 +125,11 @@ namespace PocketBaseClient.Services
         public void UnlinkExternalAuthentication(string userId, string provider)
             => AuthService.UnlinkExternalAuthentication(userId, provider);
 
+
+        public Task RequestPasswordResetAsync(string email) => AuthService.RequestPasswordResetAsync(email);
+        public void RequestPasswordReset(string email) => AuthService.RequestPasswordReset(email);
+
+        public Task ConfirmPasswordResetAsync(string passwordResetToken, string password, string passwordConfirm) => AuthService.ConfirmPasswordResetAsync(passwordResetToken, password, passwordConfirm);
+        public void ConfirmPasswordReset(string passwordResetToken, string password, string passwordConfirm) => AuthService.ConfirmPasswordReset(passwordResetToken, password, passwordConfirm);
     }
 }

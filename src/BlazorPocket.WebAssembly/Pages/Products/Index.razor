@@ -1,0 +1,87 @@
+﻿@page "/products/index"
+@using PocketBaseClient.BlazorPocket.Models
+@using pocketbase_csharp_sdk.Models
+
+<PageTitle>Product</PageTitle>
+
+<MudStack Row AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween" Class="mb-3">
+    <MudStack Spacing="0">
+        <MudText Typo="Typo.h5">Product overview</MudText>
+        <MudText Typo="Typo.body2">View all products</MudText>
+    </MudStack>
+    <MudStack Row Spacing="2">
+        <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Add">New</MudButton>
+        <MudButton Variant="Variant.Outlined" Disabled="@(!selectedItems.Any())" OnClick="@(()=>OnDelete())" StartIcon="@Icons.Material.Filled.Delete">Delete</MudButton>
+    </MudStack>
+</MudStack>
+
+<MudDataGrid T="Product" @ref="dataGrid" ServerData="@(ServerReload)" MultiSelection="true" @bind-SelectedItems="selectedItems">
+    <ToolBarContent>
+        <MudStack Row AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween" Class="flex-grow-1 mb-3">
+            <MudSpacer></MudSpacer>
+            <MudSpacer></MudSpacer>
+            <MudTextField T="string" @bind-Value="keyword" TextChanged="@(()=>dataGrid.ReloadServerData())" Placeholder="Search" Adornment="Adornment.End"
+                          AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Small">
+            </MudTextField>
+        </MudStack>
+       
+    </ToolBarContent>
+    <Columns>
+        <SelectColumn ShowInFooter="false"></SelectColumn>
+        <PropertyColumn Property="x => x.Name" Title="Product Name" />
+        <PropertyColumn Property="x => x.Description" />
+        <PropertyColumn Property="x => x.Spec"  />
+        <PropertyColumn Property="x => x.Unit" />
+        <PropertyColumn Property="x => x.Price">
+            <CellTemplate>
+                <MudStack Row Spacing="1">
+                    <MudText>@context.Item.Price?.ToString("#,#")</MudText>
+                    <MudText Typo="Typo.body1">@context.Item.Currency?.ToString().ToUpper()</MudText>
+                </MudStack>
+            </CellTemplate>
+        </PropertyColumn>
+     
+    </Columns>
+</MudDataGrid>
+
+
+@code {
+    private string? keyword;
+    private HashSet<Product> selectedItems = new();
+    private MudDataGrid<Product> dataGrid = default!;
+    private CollectionProducts query => PocketbaseClient.Data.ProductsCollection;
+    private bool loading;
+
+    private async Task<GridData<Product>> ServerReload(GridState<Product> state)
+    {
+        try
+        {
+            loading = true;
+            var result = await query.Filter(x=>x.Name.Contains(keyword).Or(x.Description.Contains(keyword))).GetPagedItemsAsync(state.Page, state.PageSize);
+            return new GridData<Product> { TotalItems = result.TotalItems, Items = result.Items ?? Enumerable.Empty<Product>() };
+        }
+        finally
+        {
+            loading = false;
+        }
+    }
+    private async Task OnDelete()
+    {
+        var parameters = new DialogParameters<DeleteConfirmation>
+        {
+            { x => x.ContentText, string.Format("Are you sure you want to delete the selected items: {0}?", selectedItems.Count) }
+        };
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true };
+        var dialog = DialogService.Show<DeleteConfirmation>("",parameters, options);
+        var state = await dialog.Result;
+        if (!state.Canceled)
+        {
+            // foreach(var item in selectedItems)
+            // {
+            //     query.Delete(item);
+            // }
+            // await query.SaveChangesAsync();
+            // await dataGrid.ReloadServerData();
+        }
+    }
+}
