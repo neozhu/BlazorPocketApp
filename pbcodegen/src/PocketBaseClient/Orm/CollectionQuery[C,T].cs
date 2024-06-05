@@ -10,6 +10,7 @@
 
 using pocketbase_csharp_sdk.Models;
 using PocketBaseClient.Orm.Filters;
+using PocketBaseClient.Orm.Structures;
 using System.Collections;
 using System.Runtime.CompilerServices;
 
@@ -84,30 +85,8 @@ namespace PocketBaseClient.Orm
         /// <param name="pageNumber">The page number to retrieve.</param>
         /// <param name="perPage">The number of items per page.</param>
         /// <returns>A task that represents the asynchronous operation. The task result contains a PagedCollectionModel of items.</returns>
-        public async Task<PagedCollectionModel<T>> GetPagedItemsAsync(int pageNumber, int perPage)
-        {
-            var page = await Collection.GetPageFromPbAsync(pageNumber, perPage, Filter?.Command, Sort?.Command);
-            if (page == null)
-            {
-                return new PagedCollectionModel<T>
-                {
-                    Page = pageNumber,
-                    PerPage = perPage,
-                    TotalItems = 0,
-                    TotalPages = 0,
-                    Items = Array.Empty<T>()
-                };
-            }
-
-            // Cache all items in the page
-            foreach (var item in page.Items ?? Enumerable.Empty<T>())
-            {
-                Collection.Cache.AddOrUpdate(item);
-                item.Metadata_.SetLoaded();
-            }
-
-            return page;
-        }
+        public Task<PagedCollectionModel<T>> GetPagedItemsAsync(int pageNumber, int perPage) => Collection.GetPagedItemsAsync(pageNumber, perPage, Filter?.Command, Sort?.Command);
+        
 
         /// <summary>
         /// Gets a page of items from PocketBase.
@@ -115,29 +94,28 @@ namespace PocketBaseClient.Orm
         /// <param name="pageNumber">The page number to retrieve.</param>
         /// <param name="perPage">The number of items per page.</param>
         /// <returns>A PagedCollectionModel of items.</returns>
-        public PagedCollectionModel<T> GetPagedItems(int pageNumber, int perPage)
-        {
-            var page = Collection.GetPageFromPb(pageNumber, perPage, Filter?.Command, Sort?.Command);
-            if (page == null)
-            {
-                return new PagedCollectionModel<T>
-                {
-                    Page = pageNumber,
-                    PerPage = perPage,
-                    TotalItems = 0,
-                    TotalPages = 0,
-                    Items = Array.Empty<T>()
-                };
-            }
+        public PagedCollectionModel<T> GetPagedItems(int pageNumber, int perPage) => Collection.GetPagedItems(pageNumber, perPage, Filter?.Command, Sort?.Command);
 
-            // Cache all items in the page
-            foreach (var item in page.Items ?? Enumerable.Empty<T>())
-            {
-                Collection.Cache.AddOrUpdate(item);
-                item.Metadata_.SetLoaded();
-            }
 
-            return page;
-        }
+        /// <summary>
+        /// Asynchronously retrieves the full list of items from the Collection.
+        /// This method returns a Task representing an asynchronous operation that, when completed, 
+        /// contains an IEnumerable of items of type T.
+        /// </summary>
+        /// <param name="reload">If true, forces reload of all cached items. Default is false.</param>
+        /// <param name="include">Filter to determine which items to include in the returned list. Default is Load and New.</param>
+        /// <returns>A Task that represents the asynchronous operation, containing an IEnumerable of items of type T.</returns>
+        public Task<IEnumerable<T>> GetFullListAsync(bool reload = false, GetItemsFilter include = GetItemsFilter.Load | GetItemsFilter.New) => Collection.GetFullListAsync(reload, include);
+
+        /// <summary>
+        /// Synchronously retrieves the full list of items from the Collection.
+        /// This method directly returns an IEnumerable of items of type T.
+        /// </summary>
+        /// <param name="reload">If true, forces reload of all cached items. Default is false.</param>
+        /// <param name="include">Filter to determine which items to include in the returned list. Default is Load and New.</param>
+        /// <returns>An IEnumerable of items of type T.</returns>
+        public IEnumerable<T> GetFullList(bool reload = false, GetItemsFilter include = GetItemsFilter.Load | GetItemsFilter.New) => Collection.GetFullList(reload, include);
+
+
     }
 }

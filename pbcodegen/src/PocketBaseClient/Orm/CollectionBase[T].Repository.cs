@@ -55,6 +55,41 @@ namespace PocketBaseClient.Orm
 
             return page;
         }
+        internal virtual IEnumerable<T> GetFullListFromPb(int batch = 100, string? filter = null, string? sort = null)
+        {
+            List<T> result = new();
+            int currentPage = 1;
+            PagedCollectionModel<T>? lastResponse;
+            do
+            {
+                lastResponse = GetPageFromPb(pageNumber: currentPage, perPage: batch, filter: filter, sort: sort);
+                if (lastResponse is not null && lastResponse.Items is not null)
+                {
+                    result.AddRange(lastResponse.Items);
+                }
+                currentPage++;
+            } while (lastResponse?.Items?.Length > 0 && lastResponse?.TotalItems > result.Count);
+
+            return result;
+        }
+
+        internal virtual async Task<IEnumerable<T>> GetFullListFromPbAsync(int batch = 100, string? filter = null, string? sort = null)
+        {
+            List<T> result = new();
+            int currentPage = 1;
+            PagedCollectionModel<T>? lastResponse;
+            do
+            {
+                lastResponse = await GetPageFromPbAsync(currentPage, perPage: batch, filter: filter, sort: sort);
+                if (lastResponse is not null && lastResponse.Items is not null)
+                {
+                    result.AddRange(lastResponse.Items);
+                }
+                currentPage++;
+            } while (lastResponse?.Items?.Length > 0 && lastResponse?.TotalItems > result.Count);
+
+            return result;
+        }
         internal async IAsyncEnumerable<T> GetItemsFromPbAsync(string? filter = null, string? sort = null)
         {
             int loadedItems = 0;
@@ -266,7 +301,7 @@ namespace PocketBaseClient.Orm
                 while (_PocketBaseItemsCount == null || loadedItems < _PocketBaseItemsCount)
                 {
                     // Get page in sync mode
-                    var page =await GetPageFromPbAsync(currentPage);
+                    var page = await GetPageFromPbAsync(currentPage);
                     if (page != null)
                     {
                         currentPage++;
@@ -445,6 +480,151 @@ namespace PocketBaseClient.Orm
             return page;
         }
         #endregion Paged Query
+
+        #region Get full list
+
+        /// <summary>
+        /// Synchronous method to get the full list of items.
+        /// This method retrieves items from the cache or reloads them from the PocketBase if necessary.
+        /// </summary>
+        /// <param name="reload">If true, forces reload of all cached items.</param>
+        /// <param name="include">Filter to determine which items to include in the returned list.</param>
+        /// <returns>An IEnumerable of items of type T.</returns>
+        public IEnumerable<T> GetFullList(bool reload = false, GetItemsFilter include = GetItemsFilter.Load | GetItemsFilter.New)
+        {
+            // If an Item has local changes? Changes will be lost? 
+            // Force Reload all cached items? Also items not yielded?
+
+            var allCachedItems = Cache.AllItems.ToList();
+
+            // Count not new Items to compare with _PocketBaseCount
+            if (!reload && allCachedItems.Count(i => !i.Metadata_.IsNew) == _PocketBaseItemsCount)
+            {
+                // Return cached items
+                foreach (var item in allCachedItems)
+                {
+                    // Check if item must be returned
+                    if (item.Metadata_.MatchFilter(include))
+                        yield return item;
+                }
+            }
+            else
+            {
+                // Return cached new items if must be returned
+                if ((include & GetItemsFilter.New) == GetItemsFilter.New)
+                    foreach (var item in allCachedItems.Where(i => i.Metadata_.SyncStatus == ItemSyncStatuses.ToBeCreated))
+                        yield return item;
+
+                // Clean cached items and return items from PocketBase
+                // Set all cached loaded items as NeedToBeLoaded
+                var idsToTrash = new List<string>();
+                foreach (var notNewItem in allCachedItems.Where(i => i.Metadata_.SyncStatus != ItemSyncStatuses.ToBeCreated))
+                {
+                    notNewItem.Metadata_.SetNeedBeLoaded();
+                    idsToTrash.Add(notNewItem.Id!);
+                }
+
+                var result = GetFullListFromPb();
+                if (result != null)
+                {
+                    _PocketBaseItemsCount = result.Count();
+                    foreach (var item in result)
+                        idsToTrash.Remove(item.Id!);
+
+                    foreach (var item in result)
+                        // Check if item must be returned
+                        if (item.Metadata_.MatchFilter(include))
+                            yield return item;
+                }
+                // Mark as Trash all not downloaded
+                foreach (var idToTrash in idsToTrash)
+                {
+                    var itemToTrash = Cache.Get(idToTrash);
+                    if (itemToTrash != null)
+                        itemToTrash.Metadata_.IsTrash = true;
+                }
+                Cache.RemoveTrash();
+            }
+        }
+
+        /// <summary>
+        /// Asynchronous method to get the full list of items.
+        /// This method retrieves items from the cache or reloads them from the PocketBase if necessary.
+        /// </summary>
+        /// <param name="reload">If true, forces reload of all cached items.</param>
+        /// <param name="include">Filter to determine which items to include in the returned list.</param>
+        /// <returns>A Task that represents the asynchronous operation, containing an IEnumerable of items of type T.</returns>
+        public async Task<IEnumerable<T>> GetFullListAsync(bool reload = false, GetItemsFilter include = GetItemsFilter.Load | GetItemsFilter.New)
+        {
+            // If an Item has local changes? Changes will be lost? 
+            // Force Reload all cached items? Also items not yielded?
+
+            var allCachedItems = Cache.AllItems.ToList();
+
+            // Count not new Items to compare with _PocketBaseCount
+            if (!reload && allCachedItems.Count(i => !i.Metadata_.IsNew) == _PocketBaseItemsCount)
+            {
+                // Return cached items
+                var resultList = new List<T>();
+                foreach (var item in allCachedItems)
+                {
+                    // Check if item must be returned
+                    if (item.Metadata_.MatchFilter(include))
+                        resultList.Add(item);
+                }
+                return resultList;
+            }
+            else
+            {
+                var resultList = new List<T>();
+
+                // Return cached new items if must be returned
+                if ((include & GetItemsFilter.New) == GetItemsFilter.New)
+                {
+                    foreach (var item in allCachedItems.Where(i => i.Metadata_.SyncStatus == ItemSyncStatuses.ToBeCreated))
+                        resultList.Add(item);
+                }
+
+                // Clean cached items and return items from PocketBase
+                // Set all cached loaded items as NeedToBeLoaded
+                var idsToTrash = new List<string>();
+                foreach (var notNewItem in allCachedItems.Where(i => i.Metadata_.SyncStatus != ItemSyncStatuses.ToBeCreated))
+                {
+                    notNewItem.Metadata_.SetNeedBeLoaded();
+                    idsToTrash.Add(notNewItem.Id!);
+                }
+
+                var result = await GetFullListFromPbAsync();
+                if (result != null)
+                {
+                    _PocketBaseItemsCount = result.Count();
+                    foreach (var item in result)
+                        idsToTrash.Remove(item.Id!);
+
+                    foreach (var item in result)
+                    {
+                        // Check if item must be returned
+                        if (item.Metadata_.MatchFilter(include))
+                            resultList.Add(item);
+                    }
+                }
+
+                // Mark as Trash all not downloaded
+                foreach (var idToTrash in idsToTrash)
+                {
+                    var itemToTrash = Cache.Get(idToTrash);
+                    if (itemToTrash != null)
+                        itemToTrash.Metadata_.IsTrash = true;
+                }
+                Cache.RemoveTrash();
+
+                return resultList;
+            }
+        }
+
+        #endregion
+
+
         #region Save
         private async Task<bool> SaveInternalAsync(T item, bool onlyIfChanges = true)
         {
