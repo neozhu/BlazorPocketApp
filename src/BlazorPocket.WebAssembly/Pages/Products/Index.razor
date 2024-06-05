@@ -4,7 +4,7 @@
 
 <PageTitle>Product</PageTitle>
 
-<MudStack Row AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
+<MudStack Row AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween" Class="mb-3">
     <MudStack Spacing="0">
         <MudText Typo="Typo.h5">Product overview</MudText>
         <MudText Typo="Typo.body2">View all products</MudText>
@@ -15,37 +15,45 @@
     </MudStack>
 </MudStack>
 
-<MudList T="Product">
-    <MudListSubheader>
-        <MudTextField T="string" Variant="Variant.Outlined" Label="Search" @bind-Value="@keyword" AdornmentAriaLabel="Query" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Search" OnAdornmentClick="Query"></MudTextField>
-        @result.TotalItems, @result.TotalPages 
-        
-    </MudListSubheader>
-    @foreach (var p in result.Items ?? Enumerable.Empty<Product>())
-    {
-        <MudListItem >@p.Name, @p.Unit</MudListItem>
-    }
-</MudList>
-
-
-<MudList T="Product">
+<MudDataGrid T="Product" ServerData="@(ServerReload)">
+    <Columns>
+        <PropertyColumn Property="x => x.Name" Title="Product Name" />
+        <PropertyColumn Property="x => x.Description" />
+        <PropertyColumn Property="x => x.Spec"  />
+        <PropertyColumn Property="x => x.Unit" />
+        <PropertyColumn Property="x => x.Price">
+            <CellTemplate>
+                <MudStack Row Spacing="1">
+                    <MudText>@context.Item.Price?.ToString("#,#")</MudText>
+                    <MudText Typo="Typo.body1">@context.Item.Currency?.ToString().ToUpper()</MudText>
+                </MudStack>
+            </CellTemplate>
+        </PropertyColumn>
      
-    @foreach (var p in list ?? Enumerable.Empty<Product>())
-    {
-        <MudListItem>@p.Name, @p.Unit</MudListItem>
-    }
-</MudList>
+    </Columns>
+</MudDataGrid>
+
+
 @code {
     private string? keyword;
     private List<Product>? list=new List<Product>();
     private PagedCollectionModel<Product> result = new PagedCollectionModel<Product>();
-    protected override async Task OnInitializedAsync()
+    private CollectionProducts query => PocketbaseClient.Data.ProductsCollection;
+    private bool loading;
+
+    private async Task<GridData<Product>> ServerReload(GridState<Product> state)
     {
-        var products = PocketbaseClient.Data.ProductsCollection;
-
-        result = await products.GetPagedItemsAsync(1, 50);
+        try
+        {
+            loading = true;
+            var result = await query.GetPagedItemsAsync(state.Page, state.PageSize);
+            return new GridData<Product> { TotalItems = result.TotalItems, Items = result.Items ?? Enumerable.Empty<Product>() };
+        }
+        finally
+        {
+            loading = false;
+        }
     }
-
     private async Task Query()
     {
         list = new List<Product>();
