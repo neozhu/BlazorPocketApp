@@ -1,0 +1,16 @@
+﻿@typeparam TItem
+<MudDialog>
+    <DialogContent>
+        <DynamicForm TItem="TItem" Item="Item"></DynamicForm>
+    </DialogContent>
+    
+</MudDialog>
+
+@code
+{
+    [CascadingParameter] private MudDialogInstance MudDialog { get; set; } = default!;
+
+    [Parameter]
+    public TItem Item { get; set; }
+
+}
