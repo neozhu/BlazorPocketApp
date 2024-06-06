@@ -10,7 +10,7 @@
         <MudText Typo="Typo.body2">View all products</MudText>
     </MudStack>
     <MudStack Row Spacing="2">
-        <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Add">New</MudButton>
+        <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Add" OnClick="@(()=>OnCreate())">New</MudButton>
         <MudButton Variant="Variant.Outlined" Disabled="@(!selectedItems.Any())" OnClick="@(()=>OnDelete())" StartIcon="@Icons.Material.Filled.Delete">Delete</MudButton>
     </MudStack>
 </MudStack>
@@ -67,7 +67,7 @@
     }
     private async Task OnDelete()
     {
-       
+
         var state = await DialogServiceHelper.ShowConfirmationDialog(title: "Delete Confirmation",
                                                                contentText: string.Format("Are you sure you want to delete the selected items: {0}?", selectedItems.Count));
         if (state)
@@ -78,6 +78,25 @@
             // }
             // await query.SaveChangesAsync();
             // await dataGrid.ReloadServerData();
+        }
+    }
+
+    private async Task OnCreate()
+    {
+        var parameters = new DialogParameters<EditFormDialog<Product>>
+        {
+            { x => x.Item, new Product() }
+        };
+
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true };
+        var dialog = DialogService.Show<EditFormDialog<Product>>("Dynamic Form", parameters, options);
+        var result = await dialog.Result;
+
+        if (!result.Canceled)
+        {
+            // Handle the result if necessary
+            
+            // Do something with the updated item
         }
     }
 }
