@@ -67,14 +67,10 @@
     }
     private async Task OnDelete()
     {
-        var parameters = new DialogParameters<DeleteConfirmation>
-        {
-            { x => x.ContentText, string.Format("Are you sure you want to delete the selected items: {0}?", selectedItems.Count) }
-        };
-        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true };
-        var dialog = DialogService.Show<DeleteConfirmation>("",parameters, options);
-        var state = await dialog.Result;
-        if (!state.Canceled)
+       
+        var state = await DialogServiceHelper.ShowConfirmationDialog(title: "Delete Confirmation",
+                                                               contentText: string.Format("Are you sure you want to delete the selected items: {0}?", selectedItems.Count));
+        if (state)
         {
             // foreach(var item in selectedItems)
             // {
