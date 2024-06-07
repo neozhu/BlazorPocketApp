@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/pbcodegen/">
+    <Project Path="pbcodegen\src\PocketBaseClient.CodeGenerator\PocketBaseClient.CodeGenerator.csproj" />
+    <Project Path="pbcodegen\src\PocketBaseClient\PocketBaseClient.csproj" />
+  </Folder>
+  <Folder Name="/pbcodegen/sdk/">
+    <Project Path="pbcodegen\sdk\pocketbase-csharp-sdk\pocketbase-csharp-sdk.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src\BlazorPocket.Shared\BlazorPocket.Shared.csproj" />
+    <Project Path="src\BlazorPocket.WebAssembly\BlazorPocket.WebAssembly.csproj" />
+    <Project Path="src\PocketBaseClient.BlazorPocket\PocketBaseClient.BlazorPocket.csproj" />
+  </Folder>
+</Solution>
