@@ -15,7 +15,7 @@
     </MudStack>
 </MudStack>
 
-<MudDataGrid T="Product" @ref="dataGrid" ServerData="@(ServerReload)" MultiSelection="true" @bind-SelectedItems="selectedItems">
+<MudDataGrid @ref="dataGrid" Loading="@loading" ServerData="@(ServerReload)" MultiSelection="true" @bind-SelectedItems="selectedItems">
     <ToolBarContent>
         <MudStack Row AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween" Class="flex-grow-1 mb-3">
             <MudSpacer></MudSpacer>
@@ -24,13 +24,18 @@
                           AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Small">
             </MudTextField>
         </MudStack>
-       
+
     </ToolBarContent>
     <Columns>
         <SelectColumn ShowInFooter="false"></SelectColumn>
+        <TemplateColumn CellStyle="width:60px" Title="Command" Sortable="false">
+            <CellTemplate>
+                <MudIconButton Icon="@Icons.Material.Filled.Edit" OnClick="@(() => OnEdit(context.Item))"></MudIconButton>
+            </CellTemplate>
+        </TemplateColumn>
         <PropertyColumn Property="x => x.Name" Title="Product Name" />
         <PropertyColumn Property="x => x.Description" />
-        <PropertyColumn Property="x => x.Spec"  />
+        <PropertyColumn Property="x => x.Spec" />
         <PropertyColumn Property="x => x.Unit" />
         <PropertyColumn Property="x => x.Price">
             <CellTemplate>
@@ -40,7 +45,7 @@
                 </MudStack>
             </CellTemplate>
         </PropertyColumn>
-     
+
     </Columns>
 </MudDataGrid>
 
@@ -56,8 +61,9 @@
     {
         try
         {
+            selectedItems = new();
             loading = true;
-            var result = await query.Filter(x=>x.Name.Contains(keyword).Or(x.Description.Contains(keyword))).GetPagedItemsAsync(state.Page, state.PageSize);
+            var result = await query.Filter(x => x.Name.Contains(keyword).Or(x.Description.Contains(keyword))).GetPagedItemsAsync(state.Page, state.PageSize);
             return new GridData<Product> { TotalItems = result.TotalItems, Items = result.Items ?? Enumerable.Empty<Product>() };
         }
         finally
@@ -72,31 +78,62 @@
                                                                contentText: string.Format("Are you sure you want to delete the selected items: {0}?", selectedItems.Count));
         if (state)
         {
-            // foreach(var item in selectedItems)
-            // {
-            //     query.Delete(item);
-            // }
-            // await query.SaveChangesAsync();
-            // await dataGrid.ReloadServerData();
+            foreach (var item in selectedItems)
+            {
+                query.Delete(item);
+            }
+            await query.SaveChangesAsync();
+            await dataGrid.ReloadServerData();
+            
         }
     }
 
     private async Task OnCreate()
     {
-        var parameters = new DialogParameters<EditFormDialog<Product>>
+        var product = new Product();
+        await ShowEditDialog(product, "Create a product",
+            async () =>
+            {
+                await product.SaveAsync();
+                await dataGrid.ReloadServerData();
+            },
+            () =>{
+                product.Delete();
+                return Task.CompletedTask;
+            }
+        );
+    }
+
+    private async Task OnEdit(Product item)
+    {
+        await ShowEditDialog(item, "Edit the product",
+            async () =>
+            {
+                await item.SaveAsync();
+                await dataGrid.ReloadServerData();
+            },
+           () => item.ReloadAsync()
+        );
+    }
+
+    private async Task ShowEditDialog(Product product, string title, Func<Task> onSave, Func<Task>? onCancel = null)
+    {
+        var parameters = new DialogParameters<EditFormDialog>
         {
-            { x => x.Item, new Product() }
+            { x=>x.Model, product }
         };
 
-        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true };
-        var dialog = DialogService.Show<EditFormDialog<Product>>("Dynamic Form", parameters, options);
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true };
+        var dialog = DialogService.Show<EditFormDialog>(title, parameters, options);
         var result = await dialog.Result;
 
         if (!result.Canceled)
         {
-            // Handle the result if necessary
-            
-            // Do something with the updated item
+            await onSave();
+        }
+        else if (onCancel != null)
+        {
+            await onCancel();
         }
     }
 }

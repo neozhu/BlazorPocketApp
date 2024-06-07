@@ -1,9 +1,42 @@
-﻿@typeparam TItem
+﻿@using PocketBaseClient.BlazorPocket.Models
+@using static PocketBaseClient.BlazorPocket.Models.Product
+
 <MudDialog>
     <DialogContent>
-        <DynamicForm TItem="TItem" Item="Item"></DynamicForm>
+        <EditForm Model="@Model" OnValidSubmit="@HandleValidSubmit">
+            <DataAnnotationsValidator />
+            <MudGrid Spacing="3">
+                <MudItem xs="6">
+                    <MudTextField Label="Product Name"
+                                  @bind-Value="Model.Name" For="@(() => Model.Name)" />
+                </MudItem>
+                <MudItem xs="6">
+                    <MudTextField Label="Spec"
+                                  @bind-Value="Model.Spec" For="@(() => Model.Spec)" />
+                </MudItem>
+                <MudItem xs="12">
+                    <MudTextField Label="Description"
+                                  @bind-Value="Model.Description" For="@(() => Model.Description)" />
+                </MudItem>
+                <MudItem xs="4">
+                    <MudEnumSelect TEnum="UnitEnum" Label="Select Unit"
+                                    @bind-Value="Model.Unit" For="@(() => Model.Unit)"></MudEnumSelect>
+                </MudItem>
+                <MudItem xs="4">
+                    <MudNumericField Label="Price"
+                                     @bind-Value="Model.Price" For="@(() => Model.Price)" />
+                </MudItem>
+                <MudItem xs="4">
+                    <MudEnumSelect TEnum="CurrencyEnum?" Label="Select Currency"
+                                   @bind-Value="Model.Currency" For="@(() => Model.Currency)">
+                    </MudEnumSelect>
+                </MudItem>
+            </MudGrid>
+            <MudStack Row AlignItems="AlignItems.End" Justify="Justify.FlexEnd" Class="my-5">
+                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled">Save</MudButton>
+            </MudStack>
+        </EditForm>
     </DialogContent>
-    
 </MudDialog>
 
 @code
@@ -11,6 +44,10 @@
     [CascadingParameter] private MudDialogInstance MudDialog { get; set; } = default!;
 
     [Parameter]
-    public TItem Item { get; set; }
-
+    public Product Model { get; set; } = new();
+    private void HandleValidSubmit()
+    {
+        MudDialog.Close(DialogResult.Ok(Model));
+    }
+    
 }

@@ -18,13 +18,13 @@ namespace PocketBaseClient.BlazorPocket.Models
         public enum CurrencyEnum
         {
             [Description("USD")]
-            Usd,
+            USD,
 
             [Description("EUR")]
-            Eur,
+            EUR,
 
             [Description("CNY")]
-            Cny,
+            CNY,
 
 
         }
