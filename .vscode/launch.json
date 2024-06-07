@@ -1,0 +1,18 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch and Debug (HTTPS)",
+            "type": "blazorwasm",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/BlazorPocket.WebAssembly/BlazorPocket.WebAssembly.csproj",
+            "cwd": "${workspaceFolder}/src/BlazorPocket.WebAssembly",
+            "url": "https://localhost:7192", // Change this to the port your app is running on
+            "trace": "verbose",
+            "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}"
+        }
+    ]
+}
