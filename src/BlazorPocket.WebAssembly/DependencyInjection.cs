@@ -39,7 +39,7 @@ public static class DependencyInjection
         services.AddSingleton<IStorageService, LocalStorageService>();
         services.AddSingleton<IUserPreferencesService, UserPreferencesService>();
         services.AddSingleton<LayoutService>();
-
+        services.AddScoped<DialogServiceHelper>();
         #endregion
     }
  
