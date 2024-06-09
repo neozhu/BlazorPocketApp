@@ -74,18 +74,17 @@
     private async Task OnDelete()
     {
 
-        var state = await DialogServiceHelper.ShowConfirmationDialog(title: "Delete Confirmation",
-                                                               contentText: string.Format("Are you sure you want to delete the selected items: {0}?", selectedItems.Count));
-        if (state)
-        {
-            foreach (var item in selectedItems)
-            {
-                query.Delete(item);
-            }
-            await query.SaveChangesAsync();
-            await dataGrid.ReloadServerData();
-            
-        }
+        await DialogServiceHelper.ShowConfirmationDialog(title: "Delete Confirmation",
+                                                                    contentText: string.Format("Are you sure you want to delete the selected items: {0}?", selectedItems.Count),
+                                                                    async ()=>
+                                                                    {
+                                                                        foreach (var item in selectedItems)
+                                                                        {
+                                                                            query.Delete(item);
+                                                                        }
+                                                                        await query.SaveChangesAsync();
+                                                                        await dataGrid.ReloadServerData();
+                                                                    });
     }
 
     private async Task OnCreate()

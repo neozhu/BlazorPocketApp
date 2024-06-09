@@ -12,7 +12,7 @@ public class DialogServiceHelper
         _dialogService = dialogService;
     }
 
-    public async Task<bool> ShowConfirmationDialog(string title, string contentText)
+    public async Task ShowConfirmationDialog(string title, string contentText, Func<Task> onConfirm, Func<Task>? onCancel = null)
     {
         var parameters = new DialogParameters
         {
@@ -21,7 +21,14 @@ public class DialogServiceHelper
         var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true };
         var dialog = _dialogService.Show<ConfirmationDialog>(title, parameters, options);
         var result = await dialog.Result;
-        return !result.Canceled;
+        if (!result.Canceled)
+        {
+            await onConfirm();
+        }
+        else if (onCancel != null)
+        {
+            await onCancel();
+        }
     }
 }
 

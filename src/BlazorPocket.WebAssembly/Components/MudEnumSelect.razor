@@ -17,11 +17,7 @@
 
     protected override void OnInitialized()
     {
-        Dense = true;
-        TransformOrigin = Origin.TopLeft;
-        AnchorOrigin = Origin.BottomLeft;
-        _isFlagsEnum = EnumOrUnderlyingType!.GetCustomAttribute<FlagsAttribute>() != null;
-        MultiSelection = _isFlagsEnum;
+        SetupSelect();
         base.OnInitialized();
         Setup();
     }
@@ -31,21 +27,28 @@
         await base.SetParametersAsync(parameters);
         SetSelectedValues();
     }
-
+    private void SetupSelect()
+    {
+        Dense = true;
+        TransformOrigin = Origin.TopLeft;
+        AnchorOrigin = Origin.BottomLeft;
+        _isFlagsEnum = EnumOrUnderlyingType!.GetCustomAttribute<FlagsAttribute>() != null;
+        MultiSelection = _isFlagsEnum;
+    }
     private void SetSelectedValues()
     {
         if (_isFlagsEnum)
         {
-            var valueEnum = Value as Enum;
-            var toSelect = EnumValueList.Where(e => valueEnum?.HasFlag((e as Enum)!) == true).ToList();
-            SelectedValues = toSelect;
-        }
-        else if (Value != null)
-        {
-            SelectedValues = new[] { Value };
+            SetSelectedValuesForFlagsEnum();
         }
     }
 
+    private void SetSelectedValuesForFlagsEnum()
+    {
+        var valueEnum = Value as Enum;
+        var toSelect = EnumValueList.Where(e => valueEnum?.HasFlag((e as Enum)!) == true).ToList();
+        SelectedValues = toSelect;
+    }
     private static string GetDescriptionText<T>(T val)
     {
         if (val is null)
