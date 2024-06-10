@@ -1,0 +1,92 @@
+﻿@typeparam TItem
+@using System.Reflection
+
+<EditForm Model="@Item" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator /> 
+    <ValidationSummary />
+    @foreach (var property in ItemProperties)
+    {
+        @if (property.PropertyType == typeof(string))
+        {
+            <MudTextField T="string" Label="@property.Name" Value="GetStringProperty(property)" ValueChanged="v => SetStringProperty(property, v)"/>
+        }
+        else if (property.PropertyType == typeof(int) || property.PropertyType == typeof(int?))
+        {
+            <MudNumericField T="int?" Label="@property.Name" Value="GetIntProperty(property)" ValueChanged="v => SetIntProperty(property, v)" />
+        }
+        else if (property.PropertyType == typeof(float) || property.PropertyType == typeof(float?))
+        {
+            <MudNumericField T="float?" Label="@property.Name" Value="GetFloatProperty(property)" ValueChanged="v => SetFloatProperty(property, v)" />
+        }
+        else if (property.PropertyType == typeof(DateTime) || property.PropertyType == typeof(DateTime?))
+        {
+            <MudDatePicker Label="@property.Name" Date="GetDateTimeProperty(property)" DateChanged="v => SetDateTimeProperty(property, v)" />
+        }
+        <MudSpacer />
+    }
+    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">Submit</MudButton>
+</EditForm>
+
+@code {
+    [Parameter]
+    public TItem Item { get; set; }
+
+    private PropertyInfo[] ItemProperties => typeof(TItem).GetProperties();
+
+    private void HandleValidSubmit()
+    {
+        // 处理表单提交逻辑
+    }
+
+    private string GetStringProperty(PropertyInfo property)
+    {
+        return (string)GetPropertyValue(Item, property.Name);
+    }
+
+    private void SetStringProperty(PropertyInfo property, string value)
+    {
+        SetPropertyValue(Item, property.Name, value);
+    }
+
+    private int? GetIntProperty(PropertyInfo property)
+    {
+        return (int?)GetPropertyValue(Item, property.Name);
+    }
+    private float? GetFloatProperty(PropertyInfo property)
+    {
+        return (float?)GetPropertyValue(Item, property.Name);
+    }
+    private void SetIntProperty(PropertyInfo property, int? value)
+    {
+        SetPropertyValue(Item, property.Name, value);
+    }
+    private void SetFloatProperty(PropertyInfo property, float? value)
+    {
+        SetPropertyValue(Item, property.Name, value);
+    }
+    private DateTime? GetDateTimeProperty(PropertyInfo property)
+    {
+        return (DateTime?)GetPropertyValue(Item, property.Name);
+    }
+
+    private void SetDateTimeProperty(PropertyInfo property, DateTime? value)
+    {
+        SetPropertyValue(Item, property.Name, value);
+    }
+
+    private object GetPropertyValue(object obj, string propertyName)
+    {
+        return obj.GetType().GetProperty(propertyName)?.GetValue(obj, null);
+    }
+
+    private void SetPropertyValue(object obj, string propertyName, object value)
+    {
+        var property = obj.GetType().GetProperty(propertyName);
+        if (property != null)
+        {
+            var propertyType = Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType;
+            object safeValue = (value == null) ? null : Convert.ChangeType(value, propertyType);
+            property.SetValue(obj, safeValue);
+        }
+    }
+}
