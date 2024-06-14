@@ -10,11 +10,11 @@ public class Theme
             PaletteLight = new()
             {
                 Primary = "#1E3A8A", // Deep blue, primary color for highlights and key elements
-                Surface = "#F3F4F6", // Light gray, for card surfaces or secondary backgrounds
-                Background = "#FFFFFF", // White, main background color
+                Surface = "#FFF", // Light gray, for card surfaces or secondary backgrounds
+                Background = "#f1f4f6", // White, main background color
                 BackgroundGray = "#F9FAFB", // Very light gray, for subtle background areas
                 AppbarText = "#1F2937", // Dark gray, text color for app bar
-                AppbarBackground = "rgba(255,255,255,0.8)", // Semi-transparent white, background for app bar
+                AppbarBackground = "rgba(255,255,255,1)", // Semi-transparent white, background for app bar
                 DrawerBackground = "#FFFFFF", // White, background for drawer
                 ActionDefault = "#6B7280", // Gray, default action color
                 //ActionDisabled = "#D1D5DB4D", // Semi-transparent gray, color for disabled actions

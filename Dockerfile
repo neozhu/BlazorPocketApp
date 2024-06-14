@@ -8,7 +8,7 @@ COPY ["src/BlazorPocket.WebAssembly/BlazorPocket.WebAssembly.csproj", "src/Blazo
 COPY ["src/BlazorPocket.Shared/BlazorPocket.Shared.csproj", "src/BlazorPocket.Shared/"]
 COPY ["src/PocketBaseClient.BlazorPocket/PocketBaseClient.BlazorPocket.csproj", "src/PocketBaseClient.BlazorPocket/"]
 COPY ["pbcodegen/src/PocketBaseClient/PocketBaseClient.csproj", "pbcodegen/src/PocketBaseClient/"]
-COPY ["sdk/pocketbase-csharp-sdk/pocketbase-csharp-sdk.csproj", "sdk/pocketbase-csharp-sdk/"]
+COPY ["pbcodegen/sdk/pocketbase-csharp-sdk/pocketbase-csharp-sdk.csproj", "pbcodegen/sdk/pocketbase-csharp-sdk/"]
 
 # Restore dependencies
 RUN dotnet restore "src/BlazorPocket.WebAssembly/BlazorPocket.WebAssembly.csproj"
