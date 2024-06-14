@@ -75,7 +75,7 @@ namespace PocketBaseClient.BlazorPocket.Models
         [JsonPropertyName("currency")]
         [PocketBaseField(id: "pddjipx1", name: "currency", required: false, system: false, unique: false, type: "select")]
         [Display(Name = "Currency")]
-        [JsonConverter(typeof(JsonStringEnumConverter))]
+        [JsonConverter(typeof(StringNullableEnumConverter<Nullable<CurrencyEnum>>))]
         public CurrencyEnum? Currency { get => Get(() => _Currency); set => Set(value, ref _Currency); }
 
         #endregion Field Properties
