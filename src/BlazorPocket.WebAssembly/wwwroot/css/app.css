@@ -18,8 +18,11 @@
 .mud-table-cell {
     font-size: inherit !important;
     line-height: inherit !important;
+    padding: 8px 24px 8px 16px !important;
 }
-
-.mud-tabs-panels {
+.mud-table-dense * .mud-table-row .mud-table-cell {
+    padding: 3px 24px 3px 16px !important;
+}
+    .mud-tabs-panels {
     background-color: var(--mud-palette-surface);
 }
