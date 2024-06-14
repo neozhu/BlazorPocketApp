@@ -19,3 +19,7 @@
     font-size: inherit !important;
     line-height: inherit !important;
 }
+
+.mud-tabs-panels {
+    background-color: var(--mud-palette-surface);
+}
