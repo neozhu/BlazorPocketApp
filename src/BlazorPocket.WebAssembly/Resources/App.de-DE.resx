@@ -549,4 +549,10 @@
   <data name="Username" xml:space="preserve">
     <value>Nutzername</value>
   </data>
+  <data name="Documentaion" xml:space="preserve">
+    <value>Dokumentation</value>
+  </data>
+  <data name="Changelog" xml:space="preserve">
+    <value>Änderungsprotokoll</value>
+  </data>
 </root>

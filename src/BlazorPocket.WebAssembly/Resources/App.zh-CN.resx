@@ -549,4 +549,10 @@
   <data name="Username" xml:space="preserve">
     <value>用户名</value>
   </data>
+  <data name="Documentaion" xml:space="preserve">
+    <value>文档</value>
+  </data>
+  <data name="Changelog" xml:space="preserve">
+    <value>更新日志</value>
+  </data>
 </root>
