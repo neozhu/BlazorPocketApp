@@ -27,8 +27,9 @@
                                      @bind-Value="Model.Price" For="@(() => Model.Price)" />
                 </MudItem>
                 <MudItem xs="4">
-                    <MudEnumSelect TEnum="CurrencyEnum?" Label="Select Currency"
-                                   @bind-Value="Model.Currency" For="@(() => Model.Currency)">
+                    <MudEnumSelect TEnum="Nullable<CurrencyEnum>" Label="Select Currency"
+                                   @bind-Value="Model.Currency" For="@(() => Model.Currency)"
+                                  >
                     </MudEnumSelect>
                 </MudItem>
             </MudGrid>
@@ -44,10 +45,21 @@
     [CascadingParameter] private MudDialogInstance MudDialog { get; set; } = default!;
 
     [Parameter]
-    public Product Model { get; set; } = new();
+    public Product? Model { get; set; }
     private void HandleValidSubmit()
     {
-        MudDialog.Close(DialogResult.Ok(Model));
+        if (ValidatePriceAndCurrency())
+        {
+            MudDialog.Close(DialogResult.Ok(Model));
+        }
     }
-    
+    private bool ValidatePriceAndCurrency()
+    {
+        if (Model?.Price.HasValue == true && Model?.Currency.HasValue == false)
+        {
+            Snackbar.Add("Currency must be set if Price is set.", Severity.Error);
+            return false;
+        }
+        return true;
+    }
 }
