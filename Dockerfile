@@ -1,5 +1,5 @@
 # Stage 1: Build the Blazor WebAssembly project
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:9.0.0-preview.3-alpine3.19-amd64 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
