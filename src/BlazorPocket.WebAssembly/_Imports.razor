@@ -15,11 +15,12 @@
 @using PocketBaseClient.BlazorPocket
 @using BlazorPocket.WebAssembly.Layout
 @using BlazorPocket.WebAssembly.Components
+@using Microsoft.Extensions.Localization
 @inject NavigationManager Navigation
 @inject ApplicationSettings AppSettings
 @inject ISnackbar Snackbar
 @inject IDialogService DialogService
 @inject BlazorPocketApplication PocketbaseClient
 @inject DialogServiceHelper DialogServiceHelper
-
+@inject IStringLocalizer<App> L
  
