@@ -1,16 +1,16 @@
 ﻿@page "/profile/setting"
-<PageTitle>Setting</PageTitle>
-<MudText Typo="Typo.h2">Settings</MudText>
+<PageTitle>@L["Setting"]</PageTitle>
+<MudText Typo="Typo.h2">@L["Settings"]</MudText>
 <MudTabs Outlined="true" Position="Position.Left" Class="mt-3"  Border="true"
     ApplyEffectsToContainer="true" PanelClass="pa-6">
-    <MudTabPanel Text="Profile">
+    <MudTabPanel Text="@L["Profile"]">
         <PublicProfile />
     </MudTabPanel>
-    <MudTabPanel Text="Account">
+    <MudTabPanel Text="@L["Account"]">
         <AccountSetting></AccountSetting>
     </MudTabPanel>
-    
-    <MudTabPanel Text="Security">
+
+    <MudTabPanel Text="@L["Security"]">
       <TwofactorSetting></TwofactorSetting>
     </MudTabPanel>
 </MudTabs>

@@ -35,6 +35,7 @@ public static class DependencyInjection
         services.AddMudPopoverService();
         services.AddMudBlazorSnackbar();
         services.AddMudBlazorDialog();
+        services.AddMudLocalization();
         services.AddBlazoredLocalStorageAsSingleton();
         services.AddSingleton<IStorageService, LocalStorageService>();
         services.AddSingleton<IUserPreferencesService, UserPreferencesService>();

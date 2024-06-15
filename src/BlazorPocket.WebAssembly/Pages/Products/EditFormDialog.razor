@@ -7,34 +7,34 @@
             <DataAnnotationsValidator />
             <MudGrid Spacing="3">
                 <MudItem xs="6">
-                    <MudTextField Label="Product Name"
+                    <MudTextField Label="@L["Product Name"]"
                                   @bind-Value="Model.Name" For="@(() => Model.Name)" />
                 </MudItem>
                 <MudItem xs="6">
-                    <MudTextField Label="Spec"
+                    <MudTextField Label="@L["Spec"]"
                                   @bind-Value="Model.Spec" For="@(() => Model.Spec)" />
                 </MudItem>
                 <MudItem xs="12">
-                    <MudTextField Label="Description"
+                    <MudTextField Label="@L["Description"]"
                                   @bind-Value="Model.Description" For="@(() => Model.Description)" />
                 </MudItem>
                 <MudItem xs="4">
-                    <MudEnumSelect TEnum="UnitEnum" Label="Select Unit"
+                    <MudEnumSelect TEnum="UnitEnum" Label="@L["Select Unit"]"
                                     @bind-Value="Model.Unit" For="@(() => Model.Unit)"></MudEnumSelect>
                 </MudItem>
                 <MudItem xs="4">
-                    <MudNumericField Label="Price"
+                    <MudNumericField Label="@L["Price"]"
                                      @bind-Value="Model.Price" For="@(() => Model.Price)" />
                 </MudItem>
                 <MudItem xs="4">
-                    <MudEnumSelect TEnum="Nullable<CurrencyEnum>" Label="Select Currency"
+                    <MudEnumSelect TEnum="Nullable<CurrencyEnum>" Label="@L["Select Currency"]"
                                    @bind-Value="Model.Currency" For="@(() => Model.Currency)"
                                   >
                     </MudEnumSelect>
                 </MudItem>
             </MudGrid>
             <MudStack Row AlignItems="AlignItems.End" Justify="Justify.FlexEnd" Class="my-5">
-                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled">Save</MudButton>
+                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled">@L["Save"]</MudButton>
             </MudStack>
         </EditForm>
     </DialogContent>
@@ -57,7 +57,7 @@
     {
         if (Model?.Price.HasValue == true && Model?.Currency.HasValue == false)
         {
-            Snackbar.Add("Currency must be set if Price is set.", Severity.Error);
+            Snackbar.Add(L["Currency must be set if Price is set."], Severity.Error);
             return false;
         }
         return true;
