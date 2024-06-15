@@ -7,11 +7,11 @@
     <DataAnnotationsValidator />
     <div class="d-flex flex-row gap-3">
         <div class="d-flex flex-column gap-2">
-            <MudText Typo="Typo.h4">Public profile</MudText>
-            <MudTextField Label="Name" @bind-Value="model.Name" For="@(() => model.Name)" ShrinkLabel="true" Adornment="Adornment.End" IconSize="Size.Small" AdornmentIcon="@Icons.Material.Filled.Edit" HelperText="Your name may appear around application where you contribute or are mentioned. You can remove it at any time."></MudTextField>
-            <MudTextField Label="User name" @bind-Value="model.Username" For="@(() => model.Username)" ShrinkLabel="true" Adornment="Adornment.End" IconSize="Size.Small" AdornmentIcon="@Icons.Material.Filled.Edit"></MudTextField>
-            <MudTextField Label="Email" @bind-Value="model.Email" For="@(() => model.Email)" ShrinkLabel="true" ReadOnly></MudTextField>
-            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Save Profile</MudButton>
+            <MudText Typo="Typo.h4">@L["Public profile"]</MudText>
+            <MudTextField Label="@L["Name"]" @bind-Value="model.Name" For="@(() => model.Name)" ShrinkLabel="true" Adornment="Adornment.End" IconSize="Size.Small" AdornmentIcon="@Icons.Material.Filled.Edit" HelperText="@L["Your name may appear around application where you contribute or are mentioned. You can remove it at any time."]"></MudTextField>
+            <MudTextField Label="@L["User name"]" @bind-Value="model.Username" For="@(() => model.Username)" ShrinkLabel="true" Adornment="Adornment.End" IconSize="Size.Small" AdornmentIcon="@Icons.Material.Filled.Edit"></MudTextField>
+            <MudTextField Label="@L["Email"]" @bind-Value="model.Email" For="@(() => model.Email)" ShrinkLabel="true" ReadOnly></MudTextField>
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">@L["Save Profile"]</MudButton>
         </div>
         <div class="d-flex flex-column  gap-1 px-4">
             @if (!string.IsNullOrEmpty(model.AvatarUrl))
@@ -63,11 +63,11 @@
             await user.SaveAsync();
             model = new ProfileModel { Id = user.Id, Email = user.Email?.Address, Name = user.Name, Username = user.Username, Avatar = user.Avatar, AvatarUrl = user.Avatar.GetFileUrl() };
             StateHasChanged();
-            Snackbar.Add("User profile updated successfully.", Severity.Info);
+            Snackbar.Add(L["User profile updated successfully."], Severity.Info);
         }
         catch
         {
-            Snackbar.Add("Error updating user profile. Please try again.", Severity.Error);
+            Snackbar.Add(L["Error updating user profile. Please try again."], Severity.Error);
         }
 
 
@@ -80,12 +80,12 @@
             var user = await PocketbaseClient.Data.UsersCollection.GetByIdAsync(model.Id);
             user.UpdateWith(uitem);
             await PocketbaseClient.Data.SaveChangesAsync();
-            Snackbar.Add("User profile updated successfully.", Severity.Info);
+            Snackbar.Add(L["User profile updated successfully."], Severity.Info);
             StateHasChanged();
         }
         catch
         {
-            Snackbar.Add("Error updating user profile. Please try again.", Severity.Error);
+            Snackbar.Add(L["Error updating user profile. Please try again."], Severity.Error);
         }
 
     }

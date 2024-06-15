@@ -1,59 +1,59 @@
 ﻿<MudPaper Elevation="1" Square="true">
     <MudToolBar Class="gap-2" Style="height:50px">
-        <MudButton StartIcon="@Icons.Material.Filled.Home" Href="/" Variant="Variant.Text">Home</MudButton>
-        <MudMenu Color="Color.Inherit" StartIcon="@Icons.Material.Filled.AppRegistration" Variant="Variant.Text" Class="mx-1 px-3" ListClass="d-flex px-4 pb-2" LockScroll="true" Label="Application" EndIcon="@Icons.Material.Filled.KeyboardArrowDown" AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.BottomRight">
+        <MudButton StartIcon="@Icons.Material.Filled.Home" Href="/" Variant="Variant.Text">@L["Home"]</MudButton>
+        <MudMenu Color="Color.Inherit" StartIcon="@Icons.Material.Filled.AppRegistration" Variant="Variant.Text" Class="mx-1 px-3" ListClass="d-flex px-4 pb-2" LockScroll="true" Label="@L["Application"]" EndIcon="@Icons.Material.Filled.KeyboardArrowDown" AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.BottomRight">
             <MudList T="string">
                 <MudListSubheader Class="pt-4 pb-2">
-                    Products
+                    @L["Products"]
                 </MudListSubheader>
                 <MudListItem Href="/products/index">
                     <div class="d-flex">
-                        <MudText Color="Color.Primary">Product Overview</MudText>
+                        <MudText Color="Color.Primary">@L["Product Overview"]</MudText>
                     </div>
-                    <MudText Typo="Typo.body2">View all products</MudText>
+                    <MudText Typo="Typo.body2">@L["View all products"]</MudText>
                 </MudListItem>
                 <MudListItem>
                     <div class="d-flex">
-                        <MudText Color="Color.Primary">Categories</MudText>
+                        <MudText Color="Color.Primary">@L["Categories"]</MudText>
                     </div>
-                    <MudText Typo="Typo.body2">Browse product categories</MudText>
+                    <MudText Typo="Typo.body2">@L["Browse product categories"]</MudText>
                 </MudListItem>
                 <MudListItem>
                     <div class="d-flex">
-                        <MudText Color="Color.Primary">Top Sellers</MudText>
+                        <MudText Color="Color.Primary">@L["Top Sellers"]</MudText>
                     </div>
-                    <MudText Typo="Typo.body2">Best selling products</MudText>
+                    <MudText Typo="Typo.body2">@L["Best selling products"]</MudText>
                 </MudListItem>
             </MudList>
             <MudList T="string" Class="relative">
                 <MudListSubheader Class="pt-4 pb-2">
-                    Inventory Management
+                    @L["Inventory Management"]
                 </MudListSubheader>
                 <MudOverlay Visible="true" LightBackground="true" Absolute="true" Class="docs-menu-overlay" />
                 <MudListItem>
-                    <MudBadge Class="d-flex mr-20" Origin="Origin.CenterRight" Content="@("coming soon")" Color="Color.Info" Overlap="true" BadgeClass="ml-5">
-                        <MudText>Stock Overview</MudText>
+                    <MudBadge Class="d-flex mr-20" Origin="Origin.CenterRight" Content="@(L["coming soon"])" Color="Color.Info" Overlap="true" BadgeClass="ml-5">
+                        <MudText>@L["Stock Overview"]</MudText>
                     </MudBadge>
-                    <MudText Typo="Typo.body2">View current stock levels</MudText>
+                    <MudText Typo="Typo.body2">@L["View current stock levels"]</MudText>
                 </MudListItem>
                 <MudListItem>
-                    <MudBadge Class="d-flex mr-20" Origin="Origin.CenterRight" Content="@("coming soon")" Color="Color.Info" Overlap="true" BadgeClass="ml-5">
-                        <MudText>Incoming Shipments</MudText>
+                    <MudBadge Class="d-flex mr-20" Origin="Origin.CenterRight" Content="@(L["coming soon"])" Color="Color.Info" Overlap="true" BadgeClass="ml-5">
+                        <MudText>@L["Incoming Shipments"]</MudText>
                     </MudBadge>
-                    <MudText Typo="Typo.body2">Track incoming stock</MudText>
+                    <MudText Typo="Typo.body2">@L["Track incoming stock"]</MudText>
                 </MudListItem>
             </MudList>
         </MudMenu>
-        <MudMenu AnchorOrigin="Origin.BottomLeft" Label="Reports" StartIcon="@Icons.Material.Filled.Dashboard" EndIcon="@Icons.Material.Filled.KeyboardArrowDown">
-            <MudMenuItem IconSize="Size.Small" IconColor="Color.Secondary" Icon="@Icons.Material.Filled.AreaChart">Overview</MudMenuItem>
-            <MudMenuItem>Statistics</MudMenuItem>
-            <MudMenuItem>Activity Log</MudMenuItem>
+        <MudMenu AnchorOrigin="Origin.BottomLeft" Label="@L["Reports"]" StartIcon="@Icons.Material.Filled.Dashboard" EndIcon="@Icons.Material.Filled.KeyboardArrowDown">
+            <MudMenuItem IconSize="Size.Small" IconColor="Color.Secondary" Icon="@Icons.Material.Filled.AreaChart">@L["Overview"]</MudMenuItem>
+            <MudMenuItem>@L["Statistics"]</MudMenuItem>
+            <MudMenuItem>@L["Activity Log"]</MudMenuItem>
         </MudMenu>
-        <MudMenu AnchorOrigin="Origin.BottomLeft" Label="Help" StartIcon="@Icons.Material.Filled.Help" EndIcon="@Icons.Material.Filled.KeyboardArrowDown">
-            <MudMenuItem >Documentaion</MudMenuItem>
-            <MudMenuItem >Changelog</MudMenuItem>
-            <MudMenuItem  Href="https://github.com/neozhu/BlazorPocketApp">Source code</MudMenuItem>
-            <MudMenuItem IconSize="Size.Small" IconColor="Color.Secondary" Icon="@Icons.Material.Filled.FavoriteBorder">Sponsor project!</MudMenuItem>
+        <MudMenu AnchorOrigin="Origin.BottomLeft" Label="@L["Help"]" StartIcon="@Icons.Material.Filled.Help" EndIcon="@Icons.Material.Filled.KeyboardArrowDown">
+            <MudMenuItem>@L["Documentaion"]</MudMenuItem>
+            <MudMenuItem>@L["Changelog"]</MudMenuItem>
+            <MudMenuItem Href="https://github.com/neozhu/BlazorPocketApp">@L["Source code"]</MudMenuItem>
+            <MudMenuItem IconSize="Size.Small" IconColor="Color.Secondary" Icon="@Icons.Material.Filled.FavoriteBorder">@L["Sponsor project!"]</MudMenuItem>
         </MudMenu>
         <MudSpacer />
         <MudIconButton Icon="@Icons.Material.Outlined.MoreVert" Color="Color.Inherit" />
