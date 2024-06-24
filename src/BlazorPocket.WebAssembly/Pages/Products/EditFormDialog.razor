@@ -7,27 +7,27 @@
             <DataAnnotationsValidator />
             <MudGrid Spacing="3">
                 <MudItem xs="6">
-                    <MudTextField Label="@L["Product Name"]"
+                    <MudTextField Label="@Model.GetDisplayName(x=>x.Name)"
                                   @bind-Value="Model.Name" For="@(() => Model.Name)" />
                 </MudItem>
                 <MudItem xs="6">
-                    <MudTextField Label="@L["Spec"]"
+                    <MudTextField Label="@Model.GetDisplayName(x=>x.Spec)"
                                   @bind-Value="Model.Spec" For="@(() => Model.Spec)" />
                 </MudItem>
                 <MudItem xs="12">
-                    <MudTextField Label="@L["Description"]"
+                    <MudTextField Label="@Model.GetDisplayName(x=>x.Description)"
                                   @bind-Value="Model.Description" For="@(() => Model.Description)" />
                 </MudItem>
                 <MudItem xs="4">
-                    <MudEnumSelect TEnum="UnitEnum" Label="@L["Select Unit"]"
+                    <MudEnumSelect TEnum="UnitEnum" Label="@Model.GetDisplayName(x=>x.Unit)"
                                     @bind-Value="Model.Unit" For="@(() => Model.Unit)"></MudEnumSelect>
                 </MudItem>
                 <MudItem xs="4">
-                    <MudNumericField Label="@L["Price"]"
+                    <MudNumericField Label="@Model.GetDisplayName(x=>x.Price)"
                                      @bind-Value="Model.Price" For="@(() => Model.Price)" />
                 </MudItem>
                 <MudItem xs="4">
-                    <MudEnumSelect TEnum="Nullable<CurrencyEnum>" Label="@L["Select Currency"]"
+                    <MudEnumSelect TEnum="Nullable<CurrencyEnum>" Label="@Model.GetDisplayName(x=>x.Currency)"
                                    @bind-Value="Model.Currency" For="@(() => Model.Currency)"
                                   >
                     </MudEnumSelect>
@@ -45,7 +45,7 @@
     [CascadingParameter] private MudDialogInstance MudDialog { get; set; } = default!;
 
     [Parameter]
-    public Product? Model { get; set; }
+    public ProductDto Model { get; set; } = new();
     private void HandleValidSubmit()
     {
         if (ValidatePriceAndCurrency())

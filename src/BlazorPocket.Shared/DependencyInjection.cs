@@ -4,6 +4,7 @@ using BlazorPocket.Shared.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using BlazorPocket.Shared.Configurations;
+
 namespace BlazorPocket.Shared;
 
 public static class DependencyInjection
