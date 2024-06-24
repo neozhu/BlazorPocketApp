@@ -11,6 +11,9 @@ COPY ["pbcodegen/src/PocketBaseClient/PocketBaseClient.csproj", "pbcodegen/src/P
 COPY ["pbcodegen/src/PocketBaseClient.CodeGenerator/PocketBaseClient.CodeGenerator.csproj", "pbcodegen/src/PocketBaseClient.CodeGenerator/"]
 COPY ["pbcodegen/sdk/pocketbase-csharp-sdk/pocketbase-csharp-sdk.csproj", "pbcodegen/sdk/pocketbase-csharp-sdk/"]
 
+# Clear NuGet cache
+RUN dotnet nuget locals all --clear
+
 # Restore dependencies
 RUN dotnet restore "src/BlazorPocket.WebAssembly/BlazorPocket.WebAssembly.csproj"
 
