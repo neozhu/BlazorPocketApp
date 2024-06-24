@@ -1,16 +1,16 @@
 ﻿@page "/_/auth/confirm-verification/{token}"
 @using BlazorPocket.WebAssembly.Layout
-<PageTitle>Confirm Verification</PageTitle>
+<PageTitle>@L["Confirm Verification"]</PageTitle>
 <MudPaper Elevation="3" Class="pa-8" Width="100%" MaxWidth="500px">
     <div class="d-flex flex-row  align-center gap-3 my-3">
         <MudBlazorLogo Style="with:60px;height:60px"></MudBlazorLogo>
-        <MudText Typo="Typo.h5">Confirm Verification</MudText>
+        <MudText Typo="Typo.h5">@L["Confirm Verification"]</MudText>
     </div>
     <div class="d-flex flex-column gap-2">
         @if (success)
         {
             <MudAlert Severity="Severity.Success">@message</MudAlert>
-            <MudButton Href="/account/signin">Sign In</MudButton>
+            <MudButton Href="/account/signin">@L["Sign In"]</MudButton>
         }
         else
         {
@@ -27,7 +27,7 @@
     {
         if (string.IsNullOrEmpty(Token))
         {
-            message = "Invalid or missing token. Please check your verification link.";
+            message = L["Invalid or missing token. Please check your verification link."];
         }
         else
         {
@@ -35,11 +35,11 @@
             {
                 await PocketbaseClient.Auth.User.ConfirmVerificationAsync(Token);
                 success = true;
-                message = "Your email has been successfully verified. You can now sign in.";
+                message = L["Your email has been successfully verified. You can now sign in."];
             }
             catch (Exception e)
             {
-                message = "Verification failed. The token may be invalid or expired.";
+                message = L["Verification failed. The token may be invalid or expired."];
             }
         }
     }

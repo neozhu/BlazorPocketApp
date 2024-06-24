@@ -7,12 +7,20 @@ using System.Text.Json;
 
 namespace BlazorPocket.Shared.Services;
 
+
+/// <summary>
+/// Provides authentication state for the PocketBase application.
+/// </summary>
 public class PocketBaseAuthenticationStateProvider : AuthenticationStateProvider
 {
-
     private readonly BlazorPocketApplication _pocketBase;
     private readonly IStorageService _localStorage;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="PocketBaseAuthenticationStateProvider"/> class.
+    /// </summary>
+    /// <param name="pocketBase">The PocketBase application instance.</param>
+    /// <param name="localStorage">The storage service for storing authentication token.</param>
     public PocketBaseAuthenticationStateProvider(BlazorPocketApplication pocketBase, IStorageService localStorage)
     {
         _pocketBase = pocketBase;
@@ -22,7 +30,6 @@ public class PocketBaseAuthenticationStateProvider : AuthenticationStateProvider
 
     private async void AuthStore_OnChange(object? sender, AuthStoreEvent e)
     {
-
         if (e is null || string.IsNullOrWhiteSpace(e.Token))
         {
             MarkUserAsLoggedOut();
@@ -39,6 +46,10 @@ public class PocketBaseAuthenticationStateProvider : AuthenticationStateProvider
         }
     }
 
+    /// <summary>
+    /// Gets the authentication state asynchronously.
+    /// </summary>
+    /// <returns>The authentication state.</returns>
     public async override Task<AuthenticationState> GetAuthenticationStateAsync()
     {
         try
@@ -67,6 +78,10 @@ public class PocketBaseAuthenticationStateProvider : AuthenticationStateProvider
         }
     }
 
+    /// <summary>
+    /// Marks the user as authenticated with the specified claims.
+    /// </summary>
+    /// <param name="claims">The claims of the authenticated user.</param>
     public void MarkUserAsAuthenticated(IEnumerable<Claim> claims)
     {
         var authenticatedUser = new ClaimsPrincipal(new ClaimsIdentity(claims, "pocketbase"));
@@ -75,6 +90,9 @@ public class PocketBaseAuthenticationStateProvider : AuthenticationStateProvider
         NotifyAuthenticationStateChanged(authState);
     }
 
+    /// <summary>
+    /// Marks the user as logged out.
+    /// </summary>
     public async void MarkUserAsLoggedOut()
     {
         var anonymousUser = new ClaimsPrincipal(new ClaimsIdentity());
@@ -83,6 +101,11 @@ public class PocketBaseAuthenticationStateProvider : AuthenticationStateProvider
         NotifyAuthenticationStateChanged(authState);
     }
 
+    /// <summary>
+    /// Parses the claims from the JWT token.
+    /// </summary>
+    /// <param name="jwt">The JWT token.</param>
+    /// <returns>The claims parsed from the JWT token.</returns>
     public static IEnumerable<Claim> ParseClaimsFromJwt(string? jwt)
     {
         if (string.IsNullOrWhiteSpace(jwt))
@@ -104,6 +127,11 @@ public class PocketBaseAuthenticationStateProvider : AuthenticationStateProvider
             .ToList();
     }
 
+    /// <summary>
+    /// Parses the base64 string without padding.
+    /// </summary>
+    /// <param name="base64">The base64 string.</param>
+    /// <returns>The byte array parsed from the base64 string.</returns>
     public static byte[] ParseBase64WithoutPadding(string base64)
     {
         switch (base64.Length % 4)
@@ -122,5 +150,4 @@ public class PocketBaseAuthenticationStateProvider : AuthenticationStateProvider
     {
         return _pocketBase.Auth.AuthStore.IsValid;
     }
-
 }
