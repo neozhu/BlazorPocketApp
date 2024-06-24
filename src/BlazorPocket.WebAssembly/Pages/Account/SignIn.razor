@@ -1,31 +1,31 @@
 ﻿@page "/account/signin"
 @using BlazorPocket.WebAssembly.Layout
 @using System.ComponentModel.DataAnnotations
-<PageTitle>Login</PageTitle>
+<PageTitle>@L["Sign In"]</PageTitle>
 <MudPaper Elevation="3" Class="pa-8" Width="100%" MaxWidth="500px">
     <div class="d-flex flex-row  align-center gap-3 my-3">
         <MudBlazorLogo Style="with:60px;height:60px"></MudBlazorLogo>
-        <MudText Typo="Typo.h5">BlazorPocket App</MudText>
+        <MudText Typo="Typo.h5">@L["BlazorPocket App"]</MudText>
     </div>
     <div class="d-flex flex-column gap-2">
 
         <div class="d-flex flex-row gap-1">
-            <MudText>Don't have an account?</MudText> <MudLink Href="/account/signup">Signup</MudLink>
+            <MudText>@L["Don't have an account?"]</MudText> <MudLink Href="/account/signup">@L["Signup"]</MudLink>
         </div>
 
         <EditForm Model="@model" OnValidSubmit="OnValidSubmit">
             <DataAnnotationsValidator />
             <div class="d-flex flex-column gap-2">
                 <MudTextField @bind-Value="model.Email" For="@(() => model.Email)"
-                              Label="Email" Placeholder="Email"
-                              Required="true" RequiredError="Email is required">
+                              Label="@L["Email"]" Placeholder="@L["Email"]"
+                              Required="true" RequiredError="@L["Email is required"]">
                 </MudTextField>
-                <MudTextField InputType="@PasswordInput" @bind-Value="model.Password" For="@(() => model.Password)" Label="Password" Placeholder="Password" Required="true" RequiredError="Password is required" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ButtonPasswordClick" AdornmentAriaLabel="Show Password"></MudTextField>
+                <MudTextField InputType="@PasswordInput" @bind-Value="model.Password" For="@(() => model.Password)" Label="@L["Password"]" Placeholder="@L["Password"]" Required="true" RequiredError="@L["Password is required"]" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ButtonPasswordClick" AdornmentAriaLabel="Show Password"></MudTextField>
                 <div class="d-flex flex-row align-center justify-space-between">
-                    <MudCheckBox T="bool">remember me</MudCheckBox>
-                    <MudLink Href="/account/forgetpassword">forget password?</MudLink>
+                    <MudCheckBox T="bool">@L["remember me"]</MudCheckBox>
+                    <MudLink Href="/account/forgetpassword">@L["forget password?"]</MudLink>
                 </div>
-                <MudButton ButtonType="ButtonType.Submit" FullWidth="true" Color="Color.Primary" Variant="Variant.Filled">Sign In</MudButton>
+                <MudButton ButtonType="ButtonType.Submit" FullWidth="true" Color="Color.Primary" Variant="Variant.Filled">@L["Sign In"]</MudButton>
             </div>
         </EditForm>
     </div>
@@ -52,12 +52,12 @@
             }
             else
             {
-                Snackbar.Add("Your account is not verified. Please check your email for the verification link.", Severity.Error);
+                Snackbar.Add(L["Your account is not verified.Please check your email for the verification link."], Severity.Error);
             }
         }
         catch (Exception e)
         {
-            Snackbar.Add("Authentication failed. Please check your email and password and try again.", Severity.Error);
+            Snackbar.Add(L["Authentication failed.Please check your email and password and try again."], Severity.Error);
         }
     }
 

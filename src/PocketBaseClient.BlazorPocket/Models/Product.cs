@@ -36,8 +36,8 @@ namespace PocketBaseClient.BlazorPocket.Models
         /// <summary> Maps to 'name' field in PocketBase </summary>
         [JsonPropertyName("name")]
         [PocketBaseField(id: "xw8xxibu", name: "name", required: true, system: false, unique: false, type: "text")]
-        [Display(Name = "Name")]
-        [Required(ErrorMessage = @"Name is required")]
+        [Display(Name = "Product Name")]
+        [Required(ErrorMessage = @"Product name is required")]
         public string Name { get => Get(() => _Name ??= string.Empty); set => Set(value, ref _Name); }
 
         private string? _Spec = null;
