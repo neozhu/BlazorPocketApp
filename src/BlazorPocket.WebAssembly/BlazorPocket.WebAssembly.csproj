@@ -2,6 +2,7 @@
 
   <PropertyGroup>
 	  <TargetFramework>net9.0</TargetFramework>
+	  <RuntimeFrameworkVersion>9.0.0-preview.5.24306.7</RuntimeFrameworkVersion>
 	  <ImplicitUsings>enable</ImplicitUsings>
 	  <Nullable>enable</Nullable>
 	  <NoDefaultLaunchSettingsFile>true</NoDefaultLaunchSettingsFile>
