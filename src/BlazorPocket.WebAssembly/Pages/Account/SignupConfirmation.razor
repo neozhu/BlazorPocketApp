@@ -39,6 +39,7 @@
             }
             catch (Exception e)
             {
+                Logger.LogError(e,e.Message);
                 message = L["Verification failed. The token may be invalid or expired."];
             }
         }

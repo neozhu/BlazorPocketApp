@@ -51,7 +51,7 @@
 
 
 @code {
-    private string? keyword;
+    private string keyword=string.Empty;
     private HashSet<ProductDto> selectedItems = new();
     private MudDataGrid<ProductDto> dataGrid = default!;
     private CollectionProducts query => PocketbaseClient.Data.ProductsCollection;
@@ -106,7 +106,7 @@
         await ShowEditDialog(item, L["Edit the product"],
             async (p) =>
             {
-                var product = await query.GetByIdAsync(p.Id);
+                var product = await query.GetByIdAsync(p?.Id);
                 if (product is not null)
                 {
                     p.Adapt(product);

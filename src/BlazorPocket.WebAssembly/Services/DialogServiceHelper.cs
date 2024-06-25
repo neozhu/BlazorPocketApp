@@ -29,7 +29,7 @@ public class DialogServiceHelper
         var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true };
         var dialog = _dialogService.Show<ConfirmationDialog>(title, parameters, options);
         var result = await dialog.Result;
-        if (!result.Canceled)
+        if (result is not null && !result.Canceled)
         {
             await onConfirm();
         }

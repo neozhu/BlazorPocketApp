@@ -47,6 +47,7 @@
             catch (Exception e)
             {
                 message = e.Message;
+                Logger.LogError(e, e.Message);
             }
         }
     }
@@ -66,7 +67,7 @@
         // Extract the email from the dictionary
         if (keyValuePairs != null && keyValuePairs.TryGetValue("newEmail", out var email))
         {
-            return email.ToString();
+            return email?.ToString() ?? throw new ArgumentException(L["Email not found in token"]);
         }
         else
         {
@@ -105,6 +106,7 @@
         }
         catch (Exception e)
         {
+            Logger.LogError(e, e.Message);
             Snackbar.Add(L["Password reset request failed. Please check the email address and try again."], Severity.Error);
         }
     }

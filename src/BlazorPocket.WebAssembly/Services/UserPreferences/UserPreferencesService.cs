@@ -56,7 +56,7 @@ public class UserPreferencesService : IUserPreferencesService
     /// <inheritdoc/>
     public async Task<UserPreferences> LoadUserPreferences()
     {
-        return await _localStorage.GetItemAsync<UserPreferences>(Key);
+        return await _localStorage.GetItemAsync<UserPreferences>(Key) ?? new UserPreferences();
     }
 }
 

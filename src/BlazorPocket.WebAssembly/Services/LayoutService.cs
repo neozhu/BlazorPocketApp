@@ -17,7 +17,7 @@ public class LayoutService
     /// <summary>
     /// The user preferences.
     /// </summary>
-    private UserPreferences.UserPreferences _userPreferences;
+    private UserPreferences.UserPreferences? _userPreferences;
 
     /// <summary>
     /// The system preferences for dark mode.
@@ -50,8 +50,8 @@ public class LayoutService
     /// <param name="userPreferencesService">The user preferences service.</param>
     public LayoutService(IUserPreferencesService userPreferencesService)
     {
+        _userPreferencesService = userPreferencesService ?? throw new ArgumentNullException(nameof(userPreferencesService));
         CurrentTheme = Theme.ApplicationTheme();
-        _userPreferencesService = userPreferencesService;
     }
 
     /// <summary>
@@ -117,7 +117,7 @@ public class LayoutService
     /// <summary>
     /// Event that is triggered when a major update occurs.
     /// </summary>
-    public event EventHandler MajorUpdateOccurred;
+    public event EventHandler? MajorUpdateOccurred;
 
     /// <summary>
     /// Raises the MajorUpdateOccurred event.
@@ -146,7 +146,7 @@ public class LayoutService
                 break;
         }
 
-        _userPreferences.DarkLightTheme = CurrentDarkLightMode;
+        _userPreferences!.DarkLightTheme = CurrentDarkLightMode;
         await _userPreferencesService.SaveUserPreferences(_userPreferences);
         OnMajorUpdateOccurred();
     }
@@ -158,7 +158,7 @@ public class LayoutService
     public async Task ToggleRightToLeft()
     {
         IsRTL = !IsRTL;
-        _userPreferences.RightToLeft = IsRTL;
+        _userPreferences!.RightToLeft = IsRTL;
         await _userPreferencesService.SaveUserPreferences(_userPreferences);
         OnMajorUpdateOccurred();
     }

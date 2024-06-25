@@ -58,7 +58,7 @@
         
         <MudForm   @bind-IsValid="@deleteSuccess">
             <MudTextField T="string" Label="@L["User name"]" Placeholder="Enter your user name" @bind-Value="@confirmUsername" Required="true" RequiredError="@L["User name is required!"]"
-                          Validation="@(new Func<string, string>(userNameMatch))"></MudTextField>
+                          Validation="@(new Func<string, string?>(userNameMatch))"></MudTextField>
         </MudForm>
     </DialogContent>
     <DialogActions>
@@ -89,13 +89,14 @@
                 showChangeEmailDialog = false;
                 Snackbar.Add(L["Email change request sent successfully. Please check your new email for confirmation."], Severity.Info);
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Logger.LogError(e, e.Message);
                 Snackbar.Add(L["An error occurred while trying to change your email. Please try again later."], Severity.Error);
             }
         }
     }
-    private async Task OnDeleteAccount()
+    private Task OnDeleteAccount()
     {
         if (deleteSuccess)
         {
@@ -108,14 +109,17 @@
                 showDeleteAccountDialog = false;
                 Snackbar.Add(L["Your account has been deleted successfully."], Severity.Info);
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Logger.LogError(e, e.Message);
                 Snackbar.Add(L["An error occurred while trying to delete your account. Please try again later."], Severity.Error);
             }
+            
         }
+        return Task.CompletedTask;
     }
 
-    private string? userNameMatch(string arg)
+    private string? userNameMatch(string? arg)
     {
         if (userInfo?.Username!= arg)
             return L["Username does not match"];

@@ -57,6 +57,7 @@
         }
         catch (Exception e)
         {
+            Logger.LogError(e, e.Message);
             Snackbar.Add(L["Authentication failed.Please check your email and password and try again."], Severity.Error);
         }
     }
