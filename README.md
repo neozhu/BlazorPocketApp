@@ -4,7 +4,7 @@
 [![Docker Image CI](https://github.com/neozhu/BlazorPocketApp/actions/workflows/docker-image.yml/badge.svg)](https://github.com/neozhu/BlazorPocketApp/actions/workflows/docker-image.yml)
 [![build and deploy GitHub Pages](https://github.com/neozhu/BlazorPocketApp/actions/workflows/github-page.yml/badge.svg)](https://github.com/neozhu/BlazorPocketApp/actions/workflows/github-page.yml)
 
-BlazorPocket is a streamlined web application template built with the latest .NET 8.0 Blazor WebAssembly and PocketBase for backend data storage. Designed to simplify the development process and reduce repetitive coding, BlazorPocket provides a quick and efficient starting point for building modern web applications. With its WebAssembly mode, the application can be deployed on any server, offering flexible hosting options, whether on free hosting services or cloud platforms. This makes it easy to set up and run your web applications anywhere.
+BlazorPocket is a streamlined web application template built with the latest .NET 9.0 Blazor WebAssembly and PocketBase for backend data storage. Designed to simplify the development process and reduce repetitive coding, BlazorPocket provides a quick and efficient starting point for building modern web applications. With its WebAssembly mode, the application can be deployed on any server, offering flexible hosting options, whether on free hosting services or cloud platforms. This makes it easy to set up and run your web applications anywhere.
 
 
 <img width="1279" src="img/1.png">
@@ -18,7 +18,7 @@ BlazorPocket is a streamlined web application template built with the latest .NE
 
 ## Features
 
-- **Blazor WebAssembly**: Utilizes .NET 8.0 Blazor WebAssembly for client-side web development, allowing for a rich, interactive user experience.
+- **Blazor WebAssembly**: Utilizes .NET 9.0 Blazor WebAssembly for client-side web development, allowing for a rich, interactive user experience.
 - **PocketBase Integration**: Seamlessly integrates with PocketBase for backend data storage, providing a robust and scalable data solution.
 - **Streamlined Development**: Reduces repetitive coding tasks, enabling faster development and deployment of web applications.
 - **Cross-Platform Deployment**: The WebAssembly mode allows the application to be deployed on any server, offering flexibility to host on free services or cloud platforms.
@@ -35,7 +35,7 @@ BlazorPocket is a streamlined web application template built with the latest .NE
 version: '3.8'
 services:
   blazorpocketapp:
-    image: blazordevlab/blazorpocketapp:0.0.6-pre.73720a4
+    image: blazordevlab/blazorpocketapp:0.0.19-pre.3494121
     environment:
       - UseInMemoryDatabase=false
       - ASPNETCORE_ENVIRONMENT=Development
@@ -61,7 +61,7 @@ volumes:
 ```
 
 ### Prerequisites
-- [.NET 8.0 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
+- [.NET 9.0 SDK](https://dotnet.microsoft.com/download/dotnet/9.0)
 - [PocketBase](https://pocketbase.io/)
 - [Node.js](https://nodejs.org/) (for front-end development)
 

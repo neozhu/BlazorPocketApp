@@ -7,11 +7,11 @@
     <DataAnnotationsValidator />
     <div class="d-flex flex-row gap-3">
         <div class="d-flex flex-column gap-2">
-            <MudText Typo="Typo.h4">Public profile</MudText>
-            <MudTextField Label="Name" @bind-Value="model.Name" For="@(() => model.Name)" ShrinkLabel="true" Adornment="Adornment.End" IconSize="Size.Small" AdornmentIcon="@Icons.Material.Filled.Edit" HelperText="Your name may appear around application where you contribute or are mentioned. You can remove it at any time."></MudTextField>
-            <MudTextField Label="User name" @bind-Value="model.Username" For="@(() => model.Username)" ShrinkLabel="true" Adornment="Adornment.End" IconSize="Size.Small" AdornmentIcon="@Icons.Material.Filled.Edit"></MudTextField>
-            <MudTextField Label="Email" @bind-Value="model.Email" For="@(() => model.Email)" ShrinkLabel="true" ReadOnly></MudTextField>
-            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Save Profile</MudButton>
+            <MudText Typo="Typo.h4">@L["Public profile"]</MudText>
+            <MudTextField Label="@L["Name"]" @bind-Value="model.Name" For="@(() => model.Name)" ShrinkLabel="true" Adornment="Adornment.End" IconSize="Size.Small" AdornmentIcon="@Icons.Material.Filled.Edit" HelperText="@L["Your name may appear around application where you contribute or are mentioned. You can remove it at any time."]"></MudTextField>
+            <MudTextField Label="@L["User name"]" @bind-Value="model.Username" For="@(() => model.Username)" ShrinkLabel="true" Adornment="Adornment.End" IconSize="Size.Small" AdornmentIcon="@Icons.Material.Filled.Edit"></MudTextField>
+            <MudTextField Label="@L["Email"]" @bind-Value="model.Email" For="@(() => model.Email)" ShrinkLabel="true" ReadOnly></MudTextField>
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">@L["Save Profile"]</MudButton>
         </div>
         <div class="d-flex flex-column  gap-1 px-4">
             @if (!string.IsNullOrEmpty(model.AvatarUrl))
@@ -48,7 +48,15 @@
     protected override async Task OnInitializedAsync()
     {
         var userModel = await PocketbaseClient.GetCurrentUserAsync();
-        model = new ProfileModel { Id = userModel.Id, Email = userModel.Email?.Address, Name = userModel.Name, Username = userModel.Username, Avatar = userModel.Avatar, AvatarUrl = userModel.Avatar.GetFileUrl() };
+        model = new ProfileModel
+        {
+            Id = userModel?.Id ?? string.Empty,
+            Email = userModel?.Email?.Address ?? string.Empty,
+            Name = userModel?.Name ?? string.Empty,
+            Username = userModel?.Username ?? string.Empty,
+            Avatar = userModel?.Avatar,
+            AvatarUrl = userModel?.Avatar?.GetFileUrl() ?? string.Empty
+        };
     }
 
     private async Task UploadFiles(IBrowserFile file)
@@ -59,15 +67,26 @@
             var stream = new MemoryStream();
             await file.OpenReadStream(int.MaxValue).CopyToAsync(stream);
             var user = await PocketbaseClient.Data.UsersCollection.GetByIdAsync(model.Id);
-            user.Avatar.LoadFromFileBytes(stream.ToArray(), fileName);
-            await user.SaveAsync();
-            model = new ProfileModel { Id = user.Id, Email = user.Email?.Address, Name = user.Name, Username = user.Username, Avatar = user.Avatar, AvatarUrl = user.Avatar.GetFileUrl() };
-            StateHasChanged();
-            Snackbar.Add("User profile updated successfully.", Severity.Info);
+            if (user != null)
+            {
+                user.Avatar.LoadFromFileBytes(stream.ToArray(), fileName);
+                await user.SaveAsync();
+                model = new ProfileModel
+                {
+                    Id = user.Id ?? string.Empty,
+                    Email = user.Email?.Address ?? string.Empty,
+                    Name = user.Name ?? string.Empty,
+                    Username = user.Username ?? string.Empty,
+                    Avatar = user.Avatar,
+                    AvatarUrl = user.Avatar?.GetFileUrl() ?? string.Empty
+                };
+                StateHasChanged();
+                Snackbar.Add(L["User profile updated successfully."], Severity.Info);
+            }
         }
         catch
         {
-            Snackbar.Add("Error updating user profile. Please try again.", Severity.Error);
+            Snackbar.Add(L["Error updating user profile. Please try again."], Severity.Error);
         }
 
 
@@ -76,16 +95,19 @@
     {
         try
         {
-            var uitem = new User(model.Id, null, DateTime.Now, new System.Net.Mail.MailAddress(model.Email), true, model.Username, true, model.Name, model.Avatar);
+            var uitem = new User(model.Id, null, DateTime.Now, new System.Net.Mail.MailAddress(model.Email), true, model.Username, true, model.Name, model.Avatar ?? new AvatarFile());
             var user = await PocketbaseClient.Data.UsersCollection.GetByIdAsync(model.Id);
-            user.UpdateWith(uitem);
-            await PocketbaseClient.Data.SaveChangesAsync();
-            Snackbar.Add("User profile updated successfully.", Severity.Info);
-            StateHasChanged();
+            if (user != null)
+            {
+                user.UpdateWith(uitem);
+                await PocketbaseClient.Data.SaveChangesAsync();
+                Snackbar.Add(L["User profile updated successfully."], Severity.Info);
+                StateHasChanged();
+            }
         }
         catch
         {
-            Snackbar.Add("Error updating user profile. Please try again.", Severity.Error);
+            Snackbar.Add(L["Error updating user profile. Please try again."], Severity.Error);
         }
 
     }

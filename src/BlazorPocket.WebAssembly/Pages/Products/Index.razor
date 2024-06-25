@@ -1,21 +1,21 @@
 ﻿@page "/products/index"
-@using PocketBaseClient.BlazorPocket.Models
-@using pocketbase_csharp_sdk.Models
 
-<PageTitle>Product</PageTitle>
+
+
+<PageTitle>@L["Product"]</PageTitle>
 
 <MudStack Row AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween" Class="mb-3">
     <MudStack Spacing="0">
-        <MudText Typo="Typo.h5">Product overview</MudText>
-        <MudText Typo="Typo.body2">View all products</MudText>
+        <MudText Typo="Typo.h5">@L["Product overview"]</MudText>
+        <MudText Typo="Typo.body2">@L["View all products"]</MudText>
     </MudStack>
     <MudStack Row Spacing="2">
-        <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Add" OnClick="@(()=>OnCreate())">New</MudButton>
-        <MudButton Variant="Variant.Outlined" Disabled="@(!selectedItems.Any())" OnClick="@(()=>OnDelete())" StartIcon="@Icons.Material.Filled.Delete">Delete</MudButton>
+        <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Add" OnClick="@(()=>OnCreate())">@L["New"]</MudButton>
+        <MudButton Variant="Variant.Outlined" Disabled="@(!selectedItems.Any())" OnClick="@(()=>OnDelete())" StartIcon="@Icons.Material.Filled.Delete">@L["Delete"]</MudButton>
     </MudStack>
 </MudStack>
 
-<MudDataGrid @ref="dataGrid" Loading="@loading" ServerData="@(ServerReload)" MultiSelection="true" @bind-SelectedItems="selectedItems">
+<MudDataGrid @ref="dataGrid" Loading="@loading" ServerData="@(ServerReload)" MultiSelection="true" SelectedItem="dto" SelectedItems="selectedItems">
     <ToolBarContent>
         <MudStack Row AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween" Class="flex-grow-1 mb-3">
             <MudSpacer></MudSpacer>
@@ -33,11 +33,11 @@
                 <MudIconButton Icon="@Icons.Material.Filled.Edit" OnClick="@(() => OnEdit(context.Item))"></MudIconButton>
             </CellTemplate>
         </TemplateColumn>
-        <PropertyColumn Property="x => x.Name" Title="Product Name" />
-        <PropertyColumn Property="x => x.Description" />
-        <PropertyColumn Property="x => x.Spec" />
-        <PropertyColumn Property="x => x.Unit" />
-        <PropertyColumn Property="x => x.Price">
+        <PropertyColumn Property="x => x.Name" Title="@dto.GetDisplayName(x=>x.Name)" />
+        <PropertyColumn Property="x => x.Description" Title="@dto.GetDisplayName(x=>x.Description)" />
+        <PropertyColumn Property="x => x.Spec" Title="@dto.GetDisplayName(x=>x.Spec)" />
+        <PropertyColumn Property="x => x.Unit" Title="@dto.GetDisplayName(x=>x.Unit)" />
+        <PropertyColumn Property="x => x.Price" Title="@dto.GetDisplayName(x=>x.Price)">
             <CellTemplate>
                 <MudStack Row Spacing="1">
                     <MudText>@context.Item.Price?.ToString("#,#")</MudText>
@@ -45,26 +45,26 @@
                 </MudStack>
             </CellTemplate>
         </PropertyColumn>
-
+        <PropertyColumn Property="x => x.Created" Title="@dto.GetDisplayName(x=>x.Created)" Format="F" />
     </Columns>
 </MudDataGrid>
 
 
 @code {
-    private string? keyword;
-    private HashSet<Product> selectedItems = new();
-    private MudDataGrid<Product> dataGrid = default!;
+    private string keyword=string.Empty;
+    private HashSet<ProductDto> selectedItems = new();
+    private MudDataGrid<ProductDto> dataGrid = default!;
     private CollectionProducts query => PocketbaseClient.Data.ProductsCollection;
     private bool loading;
-
-    private async Task<GridData<Product>> ServerReload(GridState<Product> state)
+    private ProductDto dto = new();
+    private async Task<GridData<ProductDto>> ServerReload(GridState<ProductDto> state)
     {
         try
         {
             selectedItems = new();
             loading = true;
             var result = await query.Filter(x => x.Name.Contains(keyword).Or(x.Description.Contains(keyword))).GetPagedItemsAsync(state.Page, state.PageSize);
-            return new GridData<Product> { TotalItems = result.TotalItems, Items = result.Items ?? Enumerable.Empty<Product>() };
+            return new GridData<ProductDto> { TotalItems = result.TotalItems, Items = result.Items.Adapt<List<ProductDto>>() ?? Enumerable.Empty<ProductDto>() };
         }
         finally
         {
@@ -74,48 +74,50 @@
     private async Task OnDelete()
     {
 
-        await DialogServiceHelper.ShowConfirmationDialog(title: "Delete Confirmation",
-                                                                    contentText: string.Format("Are you sure you want to delete the selected items: {0}?", selectedItems.Count),
-                                                                    async ()=>
-                                                                    {
-                                                                        foreach (var item in selectedItems)
-                                                                        {
-                                                                            query.Delete(item);
-                                                                        }
-                                                                        await query.SaveChangesAsync();
-                                                                        await dataGrid.ReloadServerData();
-                                                                    });
+        await DialogServiceHelper.ShowConfirmationDialog(title: L["Delete Confirmation"],
+                                                   contentText: string.Format(L["Are you sure you want to delete the selected items: {0}?"], selectedItems.Count),
+                                                   async () =>
+                                                   {
+                                                       foreach (var item in selectedItems)
+                                                       {
+                                                           var product = await query.GetByIdAsync(item.Id);
+                                                           query.Delete(product);
+                                                       }
+                                                       await query.SaveChangesAsync();
+                                                       await dataGrid.ReloadServerData();
+                                                   });
     }
 
     private async Task OnCreate()
     {
-        var product = new Product();
-        await ShowEditDialog(product, "Create a product",
-            async () =>
+        var dto = new ProductDto();
+        await ShowEditDialog(dto, L["Create a product"],
+            async (p) =>
             {
+                var product = p.Adapt<Product>();
                 await product.SaveAsync();
                 await dataGrid.ReloadServerData();
-            },
-            () =>{
-                product.Delete();
-                return Task.CompletedTask;
             }
         );
     }
 
-    private async Task OnEdit(Product item)
+    private async Task OnEdit(ProductDto item)
     {
-        await ShowEditDialog(item, "Edit the product",
-            async () =>
+        await ShowEditDialog(item, L["Edit the product"],
+            async (p) =>
             {
-                await item.SaveAsync();
-                await dataGrid.ReloadServerData();
-            },
-           () => item.ReloadAsync()
+                var product = await query.GetByIdAsync(p?.Id);
+                if (product is not null)
+                {
+                    p.Adapt(product);
+                    await product.SaveAsync();
+                    await dataGrid.ReloadServerData();
+                }
+            }
         );
     }
 
-    private async Task ShowEditDialog(Product product, string title, Func<Task> onSave, Func<Task>? onCancel = null)
+    private async Task ShowEditDialog(ProductDto product, string title, Func<ProductDto?, Task> onSave, Func<Task>? onCancel = null)
     {
         var parameters = new DialogParameters<EditFormDialog>
         {
@@ -126,9 +128,10 @@
         var dialog = DialogService.Show<EditFormDialog>(title, parameters, options);
         var result = await dialog.Result;
 
-        if (!result.Canceled)
+        if (result is not null && !result.Canceled)
         {
-            await onSave();
+            var dto = result.Data as ProductDto;
+            await onSave(dto);
         }
         else if (onCancel != null)
         {
