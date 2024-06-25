@@ -1,7 +1,7 @@
 ﻿@using BlazorPocket.WebAssembly.Services
 @inherits LayoutComponentBase
 
-<PageTitle>BlazorPocket App</PageTitle>
+<PageTitle>@L["BlazorPocket App"]</PageTitle>
 
 <MudRTLProvider RightToLeft="@LayoutService.IsRTL">
     <MudThemeProvider @ref="@_mudThemeProvider" Theme="@LayoutService.CurrentTheme" IsDarkMode="@LayoutService.IsDarkMode" IsDarkModeChanged="@LayoutService.SetDarkMode" />
@@ -12,14 +12,16 @@
 </MudRTLProvider>
 
 @code{
-  
     [Inject]
-    public LayoutService LayoutService { get; set; }
-    private MudThemeProvider _mudThemeProvider;
+    public LayoutService LayoutService { get; set; } = default!;
+    private MudThemeProvider _mudThemeProvider=default!;
 
     protected override void OnInitialized()
     {
-        LayoutService.MajorUpdateOccurred += LayoutServiceOnMajorUpdateOccured;
+        if (LayoutService != null)
+        {
+            LayoutService.MajorUpdateOccurred += LayoutServiceOnMajorUpdateOccured;
+        }
         base.OnInitialized();
     }
 
@@ -30,26 +32,41 @@
         if (firstRender)
         {
             await ApplyUserPreferences();
-            await _mudThemeProvider.WatchSystemPreference(OnSystemPreferenceChanged);
+            if (_mudThemeProvider != null)
+            {
+                await _mudThemeProvider.WatchSystemPreference(OnSystemPreferenceChanged);
+            }
             StateHasChanged();
         }
     }
 
     private async Task ApplyUserPreferences()
     {
-        var defaultDarkMode = await _mudThemeProvider.GetSystemPreference();
-        await LayoutService.ApplyUserPreferences(defaultDarkMode);
+        if (_mudThemeProvider != null)
+        {
+            var defaultDarkMode = await _mudThemeProvider.GetSystemPreference();
+            if (LayoutService != null)
+            {
+                await LayoutService.ApplyUserPreferences(defaultDarkMode);
+            }
+        }
     }
 
     private async Task OnSystemPreferenceChanged(bool newValue)
     {
-        await LayoutService.OnSystemPreferenceChanged(newValue);
+        if (LayoutService != null)
+        {
+            await LayoutService.OnSystemPreferenceChanged(newValue);
+        }
     }
 
     public void Dispose()
     {
-        LayoutService.MajorUpdateOccurred -= LayoutServiceOnMajorUpdateOccured;
+        if (LayoutService != null)
+        {
+            LayoutService.MajorUpdateOccurred -= LayoutServiceOnMajorUpdateOccured;
+        }
     }
 
-    private void LayoutServiceOnMajorUpdateOccured(object sender, EventArgs e) => StateHasChanged();
+    private void LayoutServiceOnMajorUpdateOccured(object? sender, EventArgs e) => StateHasChanged();
 }

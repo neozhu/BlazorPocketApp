@@ -2,11 +2,11 @@
 @using BlazorPocket.WebAssembly.Layout
 @using System.ComponentModel.DataAnnotations
 @using System.Text.Json
-<PageTitle>Change email confirm</PageTitle>
+<PageTitle>@L["Change email confirm"]</PageTitle>
 <MudPaper Elevation="3" Class="pa-8" Width="100%" MaxWidth="500px">
     <div class="d-flex flex-row  align-center gap-3 my-3">
         <MudBlazorLogo Style="with:60px;height:60px"></MudBlazorLogo>
-        <MudText Typo="Typo.h5">Change email confirm</MudText>
+        <MudText Typo="Typo.h5">@L["Change email confirm"]</MudText>
     </div>
     <div class="d-flex flex-column gap-2">
         @if (string.IsNullOrEmpty(message))
@@ -14,9 +14,9 @@
             <EditForm Model="@model" OnValidSubmit="OnValidSubmit">
                 <DataAnnotationsValidator />
                 <div class="d-flex flex-column gap-2">
-                    <MudText>Type your password to confirm changing your email address to @model.NewEmail</MudText>
+                    <MudText>@L["Type your password to confirm changing your email address to"] @model.NewEmail</MudText>
                     <MudTextField InputType="InputType.Password" Label="Password" @bind-Value="model.Password" For="@(() => model.Password)" ShrinkLabel="true"></MudTextField>
-                    <MudButton ButtonType="ButtonType.Submit" FullWidth="true" Color="Color.Primary" Variant="Variant.Filled">Confirm new email</MudButton>
+                    <MudButton ButtonType="ButtonType.Submit" FullWidth="true" Color="Color.Primary" Variant="Variant.Filled">@L["Confirm new email"]</MudButton>
                 </div>
             </EditForm>
         }
@@ -35,7 +35,7 @@
     {
         if (string.IsNullOrEmpty(Token))
         {
-            message = "Invalid or missing token. Please check your verification link.";
+            message = L["Invalid or missing token. Please check your verification link."];
         }
         else
         {
@@ -47,6 +47,7 @@
             catch (Exception e)
             {
                 message = e.Message;
+                Logger.LogError(e, e.Message);
             }
         }
     }
@@ -66,11 +67,11 @@
         // Extract the email from the dictionary
         if (keyValuePairs != null && keyValuePairs.TryGetValue("newEmail", out var email))
         {
-            return email.ToString();
+            return email?.ToString() ?? throw new ArgumentException(L["Email not found in token"]);
         }
         else
         {
-            throw new ArgumentException("Email not found in token");
+            throw new ArgumentException(L["Email not found in token"]);
         }
     }
     private byte[] parseBase64WithoutPadding(string base64)
@@ -99,13 +100,14 @@
             }
             else
             {
-                Snackbar.Add("Your account is not verified. Please check your email for the verification link.", Severity.Error);
+                Snackbar.Add(L["Your account is not verified. Please check your email for the verification link."], Severity.Error);
             }
            
         }
         catch (Exception e)
         {
-            Snackbar.Add("Password reset request failed. Please check the email address and try again.", Severity.Error);
+            Logger.LogError(e, e.Message);
+            Snackbar.Add(L["Password reset request failed. Please check the email address and try again."], Severity.Error);
         }
     }
 
