@@ -1,8 +1,16 @@
 ﻿using MudBlazor;
 
 namespace BlazorPocket.WebAssembly;
+
+/// <summary>
+/// Represents the theme configuration for the application.
+/// </summary>
 public class Theme
 {
+    /// <summary>
+    /// Gets the application theme.
+    /// </summary>
+    /// <returns>The application theme.</returns>
     public static MudTheme ApplicationTheme()
     {
         var theme = new MudTheme()

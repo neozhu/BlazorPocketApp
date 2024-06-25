@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<PackageVersion>1.2.0-prerelease</PackageVersion>
-		<TargetFrameworks>net8.0</TargetFrameworks>
+		<TargetFrameworks>net9.0</TargetFrameworks>
 		<RootNamespace>pocketbase_csharp_sdk</RootNamespace>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
@@ -32,7 +32,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="MimeMapping" Version="1.0.1.50" />
+	  <PackageReference Include="MimeMapping" Version="3.0.1" />
 	</ItemGroup>
 
 
