@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Hello, world!" xml:space="preserve">
+    <value>Hallo, Welt!</value>
+  </data>
+  <data name="BlazorPocketApp" xml:space="preserve">
+    <value>BlazorPocketApp</value>
+  </data>
+  <data name="Welcome to your new app." xml:space="preserve">
+    <value>Willkommen zu Ihrer neuen App.</value>
+  </data>
+  <data name="BlazorPocket Application" xml:space="preserve">
+    <value>BlazorPocket Anwendung</value>
+  </data>
+  <data name="Light mode" xml:space="preserve">
+    <value>Lichtmodus</value>
+  </data>
+  <data name="Dark mode" xml:space="preserve">
+    <value>Dunkelmodus</value>
+  </data>
+  <data name="Left to right" xml:space="preserve">
+    <value>Von links nach rechts</value>
+  </data>
+  <data name="Right to left" xml:space="preserve">
+    <value>Von rechts nach links</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Startseite</value>
+  </data>
+  <data name="Videos" xml:space="preserve">
+    <value>Videos</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Erstellen</value>
+  </data>
+  <data name="BlazorPocket App" xml:space="preserve">
+    <value>BlazorPocket App</value>
+  </data>
+  <data name="Products" xml:space="preserve">
+    <value>Produkte</value>
+  </data>
+  <data name="Product overview" xml:space="preserve">
+    <value>Produktübersicht</value>
+  </data>
+  <data name="View all products" xml:space="preserve">
+    <value>Alle Produkte anzeigen</value>
+  </data>
+  <data name="Categories" xml:space="preserve">
+    <value>Kategorien</value>
+  </data>
+  <data name="Browse product categories" xml:space="preserve">
+    <value>Produktkategorien durchsuchen</value>
+  </data>
+  <data name="Top Sellers" xml:space="preserve">
+    <value>Bestseller</value>
+  </data>
+  <data name="Best selling products" xml:space="preserve">
+    <value>Bestseller-Produkte</value>
+  </data>
+  <data name="Inventory Management" xml:space="preserve">
+    <value>Bestandsverwaltung</value>
+  </data>
+  <data name="coming soon" xml:space="preserve">
+    <value>demnächst</value>
+  </data>
+  <data name="Stock Overview" xml:space="preserve">
+    <value>Lagerübersicht</value>
+  </data>
+  <data name="View current stock levels" xml:space="preserve">
+    <value>Aktuelle Lagerbestände anzeigen</value>
+  </data>
+  <data name="Incoming Shipments" xml:space="preserve">
+    <value>Eingehende Sendungen</value>
+  </data>
+  <data name="Track incoming stock" xml:space="preserve">
+    <value>Eingehenden Bestand verfolgen</value>
+  </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>Statistiken</value>
+  </data>
+  <data name="Activity Log" xml:space="preserve">
+    <value>Aktivitätenprotokoll</value>
+  </data>
+  <data name="Overview" xml:space="preserve">
+    <value>Überblick</value>
+  </data>
+  <data name="Source code" xml:space="preserve">
+    <value>Quellcode</value>
+  </data>
+  <data name="Sponsor project!" xml:space="preserve">
+    <value>Projekt sponsern!</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profil</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Abmelden</value>
+  </data>
+  <data name="Change email" xml:space="preserve">
+    <value>E-Mail ändern</value>
+  </data>
+  <data name="Changing your username can have unintended side effects." xml:space="preserve">
+    <value>Die Änderung Ihres Benutzernamens kann unbeabsichtigte Nebenwirkungen haben.</value>
+  </data>
+  <data name="Looking to manage account security settings? You can find them in the Password and authentication page." xml:space="preserve">
+    <value>Möchten Sie die Sicherheitseinstellungen Ihres Kontos verwalten? Sie finden sie auf der Seite 'Passwort und Authentifizierung'.</value>
+  </data>
+  <data name="You must remove yourself, transfer ownership, or delete these organizations before you can delete your user." xml:space="preserve">
+    <value>Sie müssen sich selbst entfernen, das Eigentum übertragen oder diese Organisationen löschen, bevor Sie Ihren Benutzer löschen können.</value>
+  </data>
+  <data name="Delete your account" xml:space="preserve">
+    <value>Ihr Konto löschen</value>
+  </data>
+  <data name="Change Your Email" xml:space="preserve">
+    <value>Ändern Sie Ihre E-Mail-Adresse</value>
+  </data>
+  <data name="Email is required!" xml:space="preserve">
+    <value>E-Mail ist erforderlich!</value>
+  </data>
+  <data name="The email address is invalid" xml:space="preserve">
+    <value>Die E-Mail-Adresse ist ungültig</value>
+  </data>
+  <data name="Change my email" xml:space="preserve">
+    <value>Meine E-Mail ändern</value>
+  </data>
+  <data name="Are you sure you want to delete your account? This action cannot be undone." xml:space="preserve">
+    <value>Sind Sie sicher, dass Sie Ihr Konto löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.</value>
+  </data>
+  <data name="Please type your username to confirm. Your current username is:" xml:space="preserve">
+    <value>Bitte geben Sie Ihren Benutzernamen zur Bestätigung ein. Ihr aktueller Benutzername lautet:</value>
+  </data>
+  <data name="Username is required!" xml:space="preserve">
+    <value>Benutzername ist erforderlich!</value>
+  </data>
+  <data name="Delete my account" xml:space="preserve">
+    <value>Mein Konto löschen</value>
+  </data>
+  <data name="Email change request sent successfully. Please check your new email for confirmation." xml:space="preserve">
+    <value>E-Mail-Änderungsanforderung erfolgreich gesendet. Bitte überprüfen Sie Ihre neue E-Mail zur Bestätigung.</value>
+  </data>
+  <data name="An error occurred while trying to change your email. Please try again later." xml:space="preserve">
+    <value>Beim Versuch, Ihre E-Mail zu ändern, ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.</value>
+  </data>
+  <data name="Your account has been deleted successfully." xml:space="preserve">
+    <value>Ihr Konto wurde erfolgreich gelöscht.</value>
+  </data>
+  <data name="An error occurred while trying to delete your account. Please try again later." xml:space="preserve">
+    <value>Beim Versuch, Ihr Konto zu löschen, ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.</value>
+  </data>
+  <data name="Username does not match" xml:space="preserve">
+    <value>Benutzername stimmt nicht überein</value>
+  </data>
+  <data name="Personal info" xml:space="preserve">
+    <value>Persönliche Informationen</value>
+  </data>
+  <data name="Info about you and your preferences" xml:space="preserve">
+    <value>Informationen über Sie und Ihre Vorlieben</value>
+  </data>
+  <data name="Basic info" xml:space="preserve">
+    <value>Basisinformationen</value>
+  </data>
+  <data name="Some info may be visible to other people using Google services. Learn more" xml:space="preserve">
+    <value>Einige Informationen können für andere Nutzer von Google-Diensten sichtbar sein. Erfahren Sie mehr</value>
+  </data>
+  <data name="Profile picture" xml:space="preserve">
+    <value>Profilbild</value>
+  </data>
+  <data name="Add a profile picture to personalize your account" xml:space="preserve">
+    <value>Fügen Sie ein Profilbild hinzu, um Ihr Konto zu personalisieren</value>
+  </data>
+  <data name="User name" xml:space="preserve">
+    <value>Benutzername</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="Public profile" xml:space="preserve">
+    <value>Öffentliches Profil</value>
+  </data>
+  <data name="Your name may appear around application where you contribute or are mentioned. You can remove it at any time." xml:space="preserve">
+    <value>Ihr Name kann in Anwendungen erscheinen, in denen Sie beitragen oder erwähnt werden. Sie können ihn jederzeit entfernen.</value>
+  </data>
+  <data name="Save Profile" xml:space="preserve">
+    <value>Profil speichern</value>
+  </data>
+  <data name="User profile updated successfully." xml:space="preserve">
+    <value>Benutzerprofil erfolgreich aktualisiert.</value>
+  </data>
+  <data name="Error updating user profile. Please try again." xml:space="preserve">
+    <value>Fehler beim Aktualisieren des Benutzerprofils. Bitte versuchen Sie es erneut.</value>
+  </data>
+  <data name="Setting" xml:space="preserve">
+    <value>Einstellung</value>
+  </data>
+  <data name="Account" xml:space="preserve">
+    <value>Konto</value>
+  </data>
+  <data name="Security" xml:space="preserve">
+    <value>Sicherheit</value>
+  </data>
+  <data name="Two-factor authentication" xml:space="preserve">
+    <value>Zwei-Faktor-Authentifizierung</value>
+  </data>
+  <data name="Because of your contributions on GitHub, two-factor authentication will be required for your account starting Sep 21, 2023. Thank you for helping keep the ecosystem safe! Learn more about our two-factor authentication initiative." xml:space="preserve">
+    <value>Aufgrund Ihrer Beiträge auf GitHub wird ab dem 21. September 2023 die Zwei-Faktor-Authentifizierung für Ihr Konto erforderlich sein. Vielen Dank, dass Sie dazu beitragen, das Ökosystem sicher zu halten! Erfahren Sie mehr über unsere Initiative zur Zwei-Faktor-Authentifizierung.</value>
+  </data>
+  <data name="Two-factor authentication adds an additional layer of security to your account by requiring more than just a password to sign in. Learn more about two-factor authentication." xml:space="preserve">
+    <value>Die Zwei-Faktor-Authentifizierung fügt Ihrem Konto eine zusätzliche Sicherheitsebene hinzu, indem sie mehr als nur ein Passwort zum Anmelden erfordert. Erfahren Sie mehr über die Zwei-Faktor-Authentifizierung.</value>
+  </data>
+  <data name="Two-factor methods" xml:space="preserve">
+    <value>Zwei-Faktor-Methoden</value>
+  </data>
+  <data name="uthenticator app" xml:space="preserve">
+    <value>Authenticator-App</value>
+  </data>
+  <data name="Use an authentication app or browser extension to get two-factor authentication codes when prompted." xml:space="preserve">
+    <value>Verwenden Sie eine Authentifizierungs-App oder Browser-Erweiterung, um Zwei-Faktor-Authentifizierungscodes bei Bedarf zu erhalten.</value>
+  </data>
+  <data name="SMS/Text message" xml:space="preserve">
+    <value>SMS/Textnachricht</value>
+  </data>
+  <data name="Get one-time codes sent to your phone via SMS to complete authentication requests." xml:space="preserve">
+    <value>Erhalten Sie Einmalkodes per SMS auf Ihr Telefon, um Authentifizierungsanfragen abzuschließen.</value>
+  </data>
+  <data name="Change email confirm" xml:space="preserve">
+    <value>E-Mail-Änderung bestätigen</value>
+  </data>
+  <data name="Type your password to confirm changing your email address to" xml:space="preserve">
+    <value>Geben Sie Ihr Passwort ein, um die Änderung Ihrer E-Mail-Adresse zu bestätigen</value>
+  </data>
+  <data name="Confirm new email" xml:space="preserve">
+    <value>Neue E-Mail bestätigen</value>
+  </data>
+  <data name="Invalid or missing token. Please check your verification link." xml:space="preserve">
+    <value>Ungültiges oder fehlendes Token. Bitte überprüfen Sie Ihren Bestätigungslink.</value>
+  </data>
+  <data name="Invalid token format" xml:space="preserve">
+    <value>Ungültiges Token-Format</value>
+  </data>
+  <data name="Email not found in token" xml:space="preserve">
+    <value>E-Mail im Token nicht gefunden</value>
+  </data>
+  <data name="Your account is not verified. Please check your email for the verification link." xml:space="preserve">
+    <value>Ihr Konto ist nicht verifiziert. Bitte überprüfen Sie Ihre E-Mail auf den Bestätigungslink.</value>
+  </data>
+  <data name="Password reset request failed. Please check the email address and try again." xml:space="preserve">
+    <value>Passwortzurücksetzungsanforderung fehlgeschlagen. Bitte überprüfen Sie die E-Mail-Adresse und versuchen Sie es erneut.</value>
+  </data>
+  <data name="Forgot Password?" xml:space="preserve">
+    <value>Passwort vergessen?</value>
+  </data>
+  <data name="No worries! Just enter your email address below and we'll send you a link to reset your password." xml:space="preserve">
+    <value>Keine Sorge! Geben Sie einfach Ihre E-Mail-Adresse unten ein und wir senden Ihnen einen Link zum Zurücksetzen Ihres Passworts.</value>
+  </data>
+  <data name="Email is required" xml:space="preserve">
+    <value>E-Mail ist erforderlich</value>
+  </data>
+  <data name="Send Email" xml:space="preserve">
+    <value>E-Mail senden</value>
+  </data>
+  <data name="Confirm password reset" xml:space="preserve">
+    <value>Passwortzurücksetzung bestätigen</value>
+  </data>
+  <data name="Set new password" xml:space="preserve">
+    <value>Neues Passwort festlegen</value>
+  </data>
+  <data name="Check Your Inbox" xml:space="preserve">
+    <value>Überprüfen Sie Ihr Postfach</value>
+  </data>
+  <data name="We've sent an email to the address you provided. Please check your inbox for a link to reset your password. If you don't see the email, be sure to check your spam or junk folder." xml:space="preserve">
+    <value>Wir haben eine E-Mail an die von Ihnen angegebene Adresse gesendet. Bitte überprüfen Sie Ihr Postfach auf einen Link zum Zurücksetzen Ihres Passworts. Wenn Sie die E-Mail nicht sehen, überprüfen Sie bitte Ihren Spam- oder Junk-Ordner.</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Anmelden</value>
+  </data>
+  <data name="Don't have an account?" xml:space="preserve">
+    <value>Haben Sie kein Konto?</value>
+  </data>
+  <data name="Signup" xml:space="preserve">
+    <value>Registrieren</value>
+  </data>
+  <data name="Password is required" xml:space="preserve">
+    <value>Passwort ist erforderlich</value>
+  </data>
+  <data name="forget password?" xml:space="preserve">
+    <value>Passwort vergessen?</value>
+  </data>
+  <data name="remember me" xml:space="preserve">
+    <value>Erinnere dich an mich</value>
+  </data>
+  <data name="Sign In" xml:space="preserve">
+    <value>Einloggen</value>
+  </data>
+  <data name="Your account is not verified.Please check your email for the verification link." xml:space="preserve">
+    <value>Ihr Konto ist nicht verifiziert. Bitte überprüfen Sie Ihre E-Mail auf den Bestätigungslink.</value>
+  </data>
+  <data name="Authentication failed.Please check your email and password and try again." xml:space="preserve">
+    <value>Authentifizierung fehlgeschlagen. Bitte überprüfen Sie Ihre E-Mail und Ihr Passwort und versuchen Sie es erneut.</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Passwort</value>
+  </data>
+  <data name="Create an Account" xml:space="preserve">
+    <value>Ein Konto erstellen</value>
+  </data>
+  <data name="Have an account?" xml:space="preserve">
+    <value>Haben Sie ein Konto?</value>
+  </data>
+  <data name="I agree to the terms and privacy" xml:space="preserve">
+    <value>Ich stimme den Bedingungen und der Datenschutzrichtlinie zu</value>
+  </data>
+  <data name="Confirm password" xml:space="preserve">
+    <value>Passwort bestätigen</value>
+  </data>
+  <data name="Confirm password is required" xml:space="preserve">
+    <value>Bestätigung des Passworts ist erforderlich</value>
+  </data>
+  <data name="An error occurred while creating your account. Please try again later." xml:space="preserve">
+    <value>Beim Erstellen Ihres Kontos ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.</value>
+  </data>
+  <data name="New password" xml:space="preserve">
+    <value>Neues Passwort</value>
+  </data>
+  <data name="New password confirm" xml:space="preserve">
+    <value>Neues Passwort bestätigen</value>
+  </data>
+  <data name="Confirm Verification" xml:space="preserve">
+    <value>Bestätigung überprüfen</value>
+  </data>
+  <data name="Your email has been successfully verified. You can now sign in." xml:space="preserve">
+    <value>Ihre E-Mail wurde erfolgreich verifiziert. Sie können sich jetzt anmelden.</value>
+  </data>
+  <data name="Verification failed. The token may be invalid or expired." xml:space="preserve">
+    <value>Verifizierung fehlgeschlagen. Der Token könnte ungültig oder abgelaufen sein.</value>
+  </data>
+  <data name="Signup Successful" xml:space="preserve">
+    <value>Anmeldung erfolgreich</value>
+  </data>
+  <data name="Thank you for signing up. To complete your registration, please activate your account by clicking the activation link sent to your email address. If you do not receive the email within a few minutes, please check your spam or junk folder." xml:space="preserve">
+    <value>Vielen Dank für Ihre Anmeldung. Um Ihre Registrierung abzuschließen, aktivieren Sie bitte Ihr Konto, indem Sie auf den Aktivierungslink klicken, der an Ihre E-Mail-Adresse gesendet wurde. Wenn Sie die E-Mail innerhalb weniger Minuten nicht erhalten, überprüfen Sie bitte Ihren Spam- oder Junk-Ordner.</value>
+  </data>
+  <data name="Product" xml:space="preserve">
+    <value>Produkt</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>Neu</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="Product Name" xml:space="preserve">
+    <value>Produktname</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="Spec" xml:space="preserve">
+    <value>Spezifikation</value>
+  </data>
+  <data name="Unit" xml:space="preserve">
+    <value>Einheit</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Preis</value>
+  </data>
+  <data name="Delete Confirmation" xml:space="preserve">
+    <value>Löschbestätigung</value>
+  </data>
+  <data name="Are you sure you want to delete the selected items: {0}?" xml:space="preserve">
+    <value>Möchten Sie die ausgewählten Artikel wirklich löschen: {0}?</value>
+  </data>
+  <data name="Create a product" xml:space="preserve">
+    <value>Ein Produkt erstellen</value>
+  </data>
+  <data name="Edit the product" xml:space="preserve">
+    <value>Das Produkt bearbeiten</value>
+  </data>
+  <data name="Select Unit" xml:space="preserve">
+    <value>Einheit auswählen</value>
+  </data>
+  <data name="Select Currency" xml:space="preserve">
+    <value>Währung auswählen</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="Currency must be set if Price is set." xml:space="preserve">
+    <value>Die Währung muss festgelegt sein, wenn der Preis festgelegt ist.</value>
+  </data>
+  <data name="Coming of an Angular project back to .NET, Blazor was the ideal choice and MudBlazor was the icing on the cake. . . not &quot;mud&quot; but a rich creamy sweet chocolate." xml:space="preserve">
+    <value>Von einem Angular-Projekt zurück zu .NET kommend, war Blazor die ideale Wahl und MudBlazor war das Sahnehäubchen. . . nicht 'Schlamm', sondern eine reichhaltige cremige süße Schokolade.</value>
+  </data>
+  <data name="Saving us from tons of tiny details and allowing us to deliver sharp looking modern web applications, MudBlazor is the king of open source UI frameworks that no one should miss when building apps with Blazor!" xml:space="preserve">
+    <value>MudBlazor erspart uns unzählige kleine Details und ermöglicht es uns, moderne, scharf aussehende Webanwendungen zu liefern. MudBlazor ist der König der Open-Source-UI-Frameworks, die niemand verpassen sollte, wenn er Apps mit Blazor erstellt!</value>
+  </data>
+  <data name="Best open source component library for Blazor out there and easy to understand!" xml:space="preserve">
+    <value>Beste Open-Source-Komponentenbibliothek für Blazor und leicht zu verstehen!</value>
+  </data>
+  <data name="A comprehensive library. Takes the hassle out of designing for Blazor. Used in many ongoing projects at the Mail Solutions Group. The MudBlazor team has a real gem here." xml:space="preserve">
+    <value>Eine umfassende Bibliothek. Erleichtert das Designen für Blazor. Wird in vielen laufenden Projekten bei der Mail Solutions Group verwendet. Das MudBlazor-Team hat hier einen echten Schatz.</value>
+  </data>
+  <data name="Very practical, convenient and user-friendly library that has massively helped us in developing our applications. Great community as well!" xml:space="preserve">
+    <value>Sehr praktische, bequeme und benutzerfreundliche Bibliothek, die uns massiv bei der Entwicklung unserer Anwendungen geholfen hat. Großartige Community auch!</value>
+  </data>
+  <data name="Comprehensive, ambitious, fresh and clean. Some really cool implementations. The development and improvement of components is really fast, and if a course correction is needed, they will do it. Garderoben, henon and all the other contributors are approachable. They are getting stuff done!" xml:space="preserve">
+    <value>Umfassend, ehrgeizig, frisch und sauber. Einige wirklich coole Implementierungen. Die Entwicklung und Verbesserung von Komponenten ist sehr schnell, und wenn eine Kurskorrektur nötig ist, werden sie es tun. Garderoben, henon und alle anderen Mitwirkenden sind ansprechbar. Sie bekommen die Sachen erledigt!</value>
+  </data>
+  <data name="Application" xml:space="preserve">
+    <value>Anwendung</value>
+  </data>
+  <data name="Coming of an Angular project back to .NET, Blazor was the ideal choice and MudBlazor was the icing on the cake. . . not \&quot;mud\&quot; but a rich creamy sweet chocolate." xml:space="preserve">
+    <value>Als ich von einem Angular-Projekt zurück zu .NET kam, war Blazor die ideale Wahl und MudBlazor war das Tüpfelchen auf dem i … kein „Schlamm“, sondern eine reichhaltige, cremige, süße Schokolade.</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Helfen</value>
+  </data>
+  <data name="Reports" xml:space="preserve">
+    <value>Berichte</value>
+  </data>
+  <data name="Delete account" xml:space="preserve">
+    <value>Konto löschen</value>
+  </data>
+  <data name="New email address" xml:space="preserve">
+    <value>Neue Email Adresse</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Nutzername</value>
+  </data>
+  <data name="Documentaion" xml:space="preserve">
+    <value>Dokumentation</value>
+  </data>
+  <data name="Changelog" xml:space="preserve">
+    <value>Änderungsprotokoll</value>
+  </data>
+</root>
