@@ -1,0 +1,72 @@
+﻿<div class="swiper-container-reverse">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide">
+            <MudCard Elevation="24">
+                <MudCardContent Class="py-10 px-6 pb-6 mud-typography-body1">
+                    @L["Tell me a fun fact about the Roman Empire"]
+                </MudCardContent>
+            </MudCard>
+        </div>
+        <div class="swiper-slide">
+            <MudCard Elevation="24">
+                <MudCardContent Class="py-10 px-6 pb-6 mud-typography-body1">
+                    @L["Write a text inviting my neighbors to a barbecue"]
+                </MudCardContent>
+            </MudCard>
+        </div>
+        <div class="swiper-slide">
+            <MudCard Elevation="24">
+
+                <MudCardContent Class="py-10 px-6 pb-6 mud-typography-body1">
+                    @L["Help me pick an outfit that will look good on camera"]
+                </MudCardContent>
+            </MudCard>
+        </div>
+        <div class="swiper-slide">
+            <MudCard Elevation="24">
+
+                <MudCardContent Class="py-10 px-6 pb-6 mud-typography-body1">
+                    @L["Write a message that goes with a kitten gif for a friend on a rough day"]
+                </MudCardContent>
+            </MudCard>
+        </div>
+        <div class="swiper-slide">
+            <MudCard Elevation="24">
+
+                <MudCardContent Class="py-10 px-6 pb-6 mud-typography-body1">
+                    @L["Quiz me on world capitals to enhance my geography skills"]
+                </MudCardContent>
+            </MudCard>
+        </div>
+        <div class="swiper-slide">
+            <MudCard Elevation="24">
+                <MudCardContent Class="py-10 px-6 pb-6 mud-typography-body1">
+                    @L["Make a sandwich using ingredients from my kitchen"]
+                </MudCardContent>
+            </MudCard>
+        </div>
+        <div class="swiper-slide">
+            <MudCard Elevation="24">
+                <MudCardContent Class="py-10 px-6 pb-6 mud-typography-body1">
+                    @L["Suggest fun activities to help me make friends in a new city"]
+                </MudCardContent>
+            </MudCard>
+        </div>
+        <div class="swiper-slide">
+            <MudCard Elevation="24">
+                <MudCardContent Class="py-10 px-6 pb-6 mud-typography-body1">
+                    @L["Give me ideas about how to plan my New Years resolutions"]
+                </MudCardContent>
+            </MudCard>
+        </div>
+    </div>
+</div>
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var result = await (new Swiper(JS)).Initialize(".swiper-container-reverse", true);
+        }
+    }
+}
