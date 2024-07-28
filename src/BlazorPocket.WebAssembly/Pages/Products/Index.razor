@@ -15,7 +15,7 @@
     </MudStack>
 </MudStack>
 
-<MudDataGrid @ref="dataGrid" Loading="@loading" ServerData="@(ServerReload)" MultiSelection="true" SelectedItem="dto" SelectedItems="selectedItems">
+<MudDataGrid @ref="dataGrid" Loading="@loading" ServerData="@(ServerReload)" MultiSelection="true" @bind-SelectedItem="dto" @bind-SelectedItems="selectedItems">
     <ToolBarContent>
         <MudStack Row AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween" Class="flex-grow-1 mb-3">
             <MudSpacer></MudSpacer>
