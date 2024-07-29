@@ -47,6 +47,9 @@
         </PropertyColumn>
         <PropertyColumn Property="x => x.Created" Title="@dto.GetDisplayName(x=>x.Created)" Format="F" />
     </Columns>
+    <PagerContent>
+        <MudDataGridPager T="ProductDto" />
+    </PagerContent>
 </MudDataGrid>
 
 
