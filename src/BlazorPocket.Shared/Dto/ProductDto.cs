@@ -1,6 +1,6 @@
 ﻿using BlazorPocket.Shared.Resources;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using static PocketBaseClient.BlazorPocket.Models.Product;
 
 namespace BlazorPocket.Shared.Dto;
 /// <summary>
@@ -54,7 +54,7 @@ public class ProductDto
     /// </summary>
     [Display(Name = nameof(SharedResources.Unit), ResourceType = typeof(SharedResources))]
     [Required(ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = nameof(SharedResources.UnitRequired))]
-    public UnitEnum Unit { get; set; }
+    public UnitDto Unit { get; set; }
 
     /// <summary>
     /// Gets or sets the price of the product.
@@ -69,7 +69,43 @@ public class ProductDto
     /// </summary>
     [Display(Name = nameof(SharedResources.Currency), ResourceType = typeof(SharedResources))]
     [Required(ErrorMessageResourceType = typeof(SharedResources), ErrorMessageResourceName = nameof(SharedResources.CurrencyRequired))]
-    public CurrencyEnum? Currency { get; set; }
+    public CurrencyDto? Currency { get; set; }
 
     #endregion Field Properties
+
+
+
+    public enum CurrencyDto
+    {
+        [Description("USD")]
+        USD,
+
+        [Description("EUR")]
+        EUR,
+
+        [Description("CNY")]
+        CNY,
+
+
+    }
+
+    public enum UnitDto
+    {
+        [Description("Packages")]
+        Packages,
+
+        [Description("Box")]
+        Box,
+
+        [Description("Pallet")]
+        Pallet,
+
+        [Description("Carton")]
+        Carton,
+
+        [Description("Drum")]
+        Drum,
+
+
+    }
 }
