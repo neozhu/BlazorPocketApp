@@ -4,11 +4,12 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+	<MapperlyAbstractionsScope>runtime</MapperlyAbstractionsScope>
   </PropertyGroup>
 
   <ItemGroup>
 	  <PackageReference Include="Blazored.LocalStorage" Version="4.5.0" />
-	  <PackageReference Include="Mapster" Version="7.4.1-pre01" />
+	  <PackageReference Include="Riok.Mapperly" Version="3.6.0" ExcludeAssets="runtime" PrivateAssets="all" />
 	  <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="9.0.0-preview.6.24328.4" />
 	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.0-preview.6.24328.4" />
     <ProjectReference Include="..\PocketBaseClient.BlazorPocket\PocketBaseClient.BlazorPocket.csproj" />

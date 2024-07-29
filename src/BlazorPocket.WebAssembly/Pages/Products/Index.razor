@@ -47,6 +47,9 @@
         </PropertyColumn>
         <PropertyColumn Property="x => x.Created" Title="@dto.GetDisplayName(x=>x.Created)" Format="F" />
     </Columns>
+    <PagerContent>
+        <MudDataGridPager T="ProductDto" />
+    </PagerContent>
 </MudDataGrid>
 
 
@@ -64,7 +67,7 @@
             selectedItems = new();
             loading = true;
             var result = await query.Filter(x => x.Name.Contains(keyword).Or(x.Description.Contains(keyword))).GetPagedItemsAsync(state.Page, state.PageSize);
-            return new GridData<ProductDto> { TotalItems = result.TotalItems, Items = result.Items.Adapt<List<ProductDto>>() ?? Enumerable.Empty<ProductDto>() };
+            return new GridData<ProductDto> { TotalItems = result.TotalItems, Items = ProjectMapper.ProjectToDto(result.Items ?? Enumerable.Empty<Product>()) };
         }
         finally
         {
@@ -94,7 +97,7 @@
         await ShowEditDialog(dto, L["Create a product"],
             async (p) =>
             {
-                var product = p.Adapt<Product>();
+                var product = ProjectMapper.MapProductDto(p);
                 await product.SaveAsync();
                 await dataGrid.ReloadServerData();
             }
@@ -109,7 +112,7 @@
                 var product = await query.GetByIdAsync(p?.Id);
                 if (product is not null)
                 {
-                    p.Adapt(product);
+                    ProjectMapper.ApplyUpdate(p,product);
                     await product.SaveAsync();
                     await dataGrid.ReloadServerData();
                 }

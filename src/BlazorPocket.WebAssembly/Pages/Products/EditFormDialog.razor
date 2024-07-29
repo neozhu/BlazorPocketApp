@@ -1,4 +1,5 @@
 ﻿@using PocketBaseClient.BlazorPocket.Models
+@using static BlazorPocket.Shared.Dto.ProductDto
 @using static PocketBaseClient.BlazorPocket.Models.Product
 
 <MudDialog>
@@ -19,7 +20,7 @@
                                   @bind-Value="Model.Description" For="@(() => Model.Description)" />
                 </MudItem>
                 <MudItem xs="4">
-                    <MudEnumSelect TEnum="UnitEnum" Label="@Model.GetDisplayName(x=>x.Unit)"
+                    <MudEnumSelect TEnum="UnitDto" Label="@Model.GetDisplayName(x=>x.Unit)"
                                     @bind-Value="Model.Unit" For="@(() => Model.Unit)"></MudEnumSelect>
                 </MudItem>
                 <MudItem xs="4">
@@ -27,7 +28,7 @@
                                      @bind-Value="Model.Price" For="@(() => Model.Price)" />
                 </MudItem>
                 <MudItem xs="4">
-                    <MudEnumSelect TEnum="Nullable<CurrencyEnum>" Label="@Model.GetDisplayName(x=>x.Currency)"
+                    <MudEnumSelect TEnum="Nullable<CurrencyDto>" Label="@Model.GetDisplayName(x=>x.Currency)"
                                    @bind-Value="Model.Currency" For="@(() => Model.Currency)"
                                   >
                     </MudEnumSelect>
