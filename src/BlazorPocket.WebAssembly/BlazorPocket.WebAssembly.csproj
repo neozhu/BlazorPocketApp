@@ -2,7 +2,6 @@
   <PropertyGroup>
 	  <TargetFramework>net9.0</TargetFramework>
 	  <ImplicitUsings>enable</ImplicitUsings>
-	  <RuntimeFrameworkVersion>9.0.0-preview.5.24306.7</RuntimeFrameworkVersion>
 	  <Nullable>enable</Nullable>
 	  <NoDefaultLaunchSettingsFile>true</NoDefaultLaunchSettingsFile>
 	  <StaticWebAssetProjectMode>Default</StaticWebAssetProjectMode>

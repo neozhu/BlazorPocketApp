@@ -17,7 +17,9 @@ namespace pocketbase_csharp_sdk.Models
         
         [JsonPropertyName("username")]
         public string? Username { get; set; }
-        
+        [JsonPropertyName("name")]
+        public string? Name { get; set; }
+
         [JsonPropertyName("verified")]
         public bool? Verified { get; set; }
     }

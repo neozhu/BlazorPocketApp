@@ -14,6 +14,7 @@ namespace pocketbase_csharp_sdk.Models
         bool? EmailVisibility { get; }
 
         string? Username { get; }
+        string? Name { get; }
 
         bool? Verified { get; }
     }
