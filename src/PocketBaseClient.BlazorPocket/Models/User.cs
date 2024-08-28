@@ -75,10 +75,10 @@ namespace PocketBaseClient.BlazorPocket.Models
         }
 
         [JsonConstructor]
-        public User(string? id, DateTime? created, DateTime? updated, MailAddress? email, bool? emailVisibility, string? username, bool? verified, string? @name, AvatarFile @avatar)
-            : base(id, created, updated, email, emailVisibility, username, verified)
+        public User(string? id, DateTime? created, DateTime? updated, MailAddress? email, bool? emailVisibility, string? username, bool? verified, string? name, AvatarFile @avatar)
+            : base(id, name, created, updated, email, emailVisibility, username, verified)
         {
-            this.Name = @name;
+            this.Name = name;
             this.Avatar = @avatar;
 
             AddInternal(this);
