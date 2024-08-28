@@ -9,7 +9,7 @@ namespace pocketbase_csharp_sdk.Models.Auth
 
         [JsonPropertyName("record")]
         public T? Record { get; set; }
-
+        [JsonIgnore]
         public IDictionary<string, object?>? meta { get; set; }
     }
 }
