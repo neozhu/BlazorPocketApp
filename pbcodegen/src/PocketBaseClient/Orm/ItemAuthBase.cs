@@ -35,6 +35,10 @@ namespace PocketBaseClient.Orm
         [JsonPropertyName("username")]
         [JsonInclude]
         public string? Username { get; private set; }
+        /// <summary> Maps to 'username' field in PocketBase </summary>
+        [JsonPropertyName("name")]
+        [JsonInclude]
+        public string? Name { get; private set; }
 
         /// <summary> Maps to 'verified' field in PocketBase </summary>
         [JsonPropertyName("verified")]
@@ -48,12 +52,13 @@ namespace PocketBaseClient.Orm
         public ItemAuthBase() : base() { }
 
         [JsonConstructor]
-        public ItemAuthBase(string? id, DateTime? created, DateTime? updated, MailAddress? email, bool? emailVisibility, string? username, bool? verified) 
+        public ItemAuthBase(string? id, string? name, DateTime? created, DateTime? updated, MailAddress? email, bool? emailVisibility, string? username, bool? verified) 
             : base(id, created, updated)
         {
             Email = email;
             EmailVisibility = emailVisibility;
             Username = username;
+            Name = name;
             Verified = verified;
         }
         #endregion Ctor
@@ -75,6 +80,7 @@ namespace PocketBaseClient.Orm
                 Email = item.Email;
                 EmailVisibility = item.EmailVisibility;
                 Username = item.Username;
+                Name = item.Name;
                 Verified = item.Verified;
             }
         }
