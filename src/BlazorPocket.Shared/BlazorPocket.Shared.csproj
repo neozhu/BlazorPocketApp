@@ -12,8 +12,8 @@
 	  <PackageReference Include="Riok.Mapperly" Version="4.0.0-next.3" ExcludeAssets="runtime" PrivateAssets="all">
 	    <IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	  </PackageReference>
-	  <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="9.0.0-preview.7.24406.2" />
-	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.0-preview.7.24406.2" />
+	  <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="9.0.0-rc.1.24452.1" />
+	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.0-rc.1.24452.1" />
     <ProjectReference Include="..\PocketBaseClient.BlazorPocket\PocketBaseClient.BlazorPocket.csproj" />
   </ItemGroup>
 
