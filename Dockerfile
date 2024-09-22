@@ -1,5 +1,9 @@
 # Stage 1: Build the Blazor WebAssembly project
-FROM mcr.microsoft.com/dotnet/nightly/sdk:9.0-preview AS build
+ARG IMAGE_VERSION=9.0-preview
+FROM mcr.microsoft.com/dotnet/sdk:${IMAGE_VERSION} AS build
+ARG DOTNET_CHANNEL=9.0.1.xx
+ARG DOTNET_NIGHTLY_VERSION=9.0.100-rc.2.24463.6
+ARG DOTNET_INSTALL_DIR=/.dotnet
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
