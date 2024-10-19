@@ -28,7 +28,9 @@ BlazorPocket is a streamlined web application template built with the latest .NE
 ## Getting Started
 
 ### Demo
+- https://blazorpocket.blazorserver.com
 - https://blazorpocket.blazors.app
+
 
 ### docker compose file
 ```sh
