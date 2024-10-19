@@ -152,74 +152,109 @@ public class Theme
             ZIndex = new ZIndex(),
             Typography = new()
             {
-                Default = new Default()
-                {
-                    FontFamily = new[] { "Public Sans", "Roboto", "Arial", "sans-serif" },
-                    LetterSpacing = "normal",
-                    FontSize = ".75rem"
+                Input = new InputTypography {
+                    FontSize = ".75rem",
                 },
-                H1 = new H1()
+                Default = new DefaultTypography
+                {
+                    FontSize = ".8125rem",
+                    FontWeight = "400",
+                    LineHeight = "1.4",
+                    LetterSpacing = "normal",
+                    FontFamily = new[] { "Public Sans", "Roboto", "Arial", "sans-serif" }
+                },
+                H1 = new H1Typography
+                {
+                    FontSize = "3.5rem",
+                    FontWeight = "700",
+                    LineHeight = "1.167",
+                    LetterSpacing = "-.01562em"
+                },
+                H2 = new H2Typography
                 {
                     FontSize = "3rem",
-                    FontWeight = 700,
+                    FontWeight = "300",
+                    LineHeight = "1.2",
+                    LetterSpacing = "-.00833em"
                 },
-                H2 = new H2()
-                {
-                    FontSize = "2.4rem",
-                    FontWeight = 700,
-                },
-                H3 = new H3()
+                H3 = new H3Typography
                 {
                     FontSize = "2rem",
-                    FontWeight = 600,
-                    LineHeight = 1.8,
+                    FontWeight = "600",
+                    LineHeight = "1.167",
+                    LetterSpacing = "0"
                 },
-                H4 = new H4()
+                H4 = new H4Typography
                 {
-                    FontSize = "1.6rem",
-                    FontWeight = 700,
+                    FontSize = "1.5rem",
+                    FontWeight = "400",
+                    LineHeight = "1.235",
+                    LetterSpacing = ".00735em"
                 },
-                H5 = new H5()
+                H5 = new H5Typography
                 {
-                    FontSize = "1.35rem",
-                    FontWeight = 700,
-                    LineHeight = 1.5,
+                    FontSize = "1.25rem",
+                    FontWeight = "400",
+                    LineHeight = "1.3",
+                    LetterSpacing = "0"
                 },
-                H6 = new H6()
+                H6 = new H6Typography
                 {
                     FontSize = "1.125rem",
-                    FontWeight = 700,
-                    LineHeight = 1.5,
+                    FontWeight = "600",
+                    LineHeight = "1.5",
+                    LetterSpacing = ".0075em"
                 },
-                Subtitle1 = new Subtitle1()
+                Button = new ButtonTypography
+                {
+                    FontSize = ".8125rem",
+                    FontWeight = "500",
+                    LineHeight = "1.75",
+                    LetterSpacing = ".02857em",
+                    TextTransform = "uppercase"
+                },
+                Subtitle1 = new Subtitle1Typography
+                {
+                    FontSize = "1rem",
+                    FontWeight = "600",
+                    LineHeight = "1.75",
+                    LetterSpacing = ".00938em",
+                    TextTransform = "none"
+                },
+                Subtitle2 = new Subtitle2Typography
+                {
+                    FontSize = ".875rem",
+                    FontWeight = "500",
+                    LineHeight = "1.57",
+                    LetterSpacing = ".00714em"
+                },
+                Body1 = new Body1Typography
+                {
+                    FontSize = "0.875rem",
+                    FontWeight = "400",
+                    LineHeight = "1.5",
+                    LetterSpacing = ".00938em"
+                },
+                Body2 = new Body2Typography
+                {
+                    FontSize = ".8125rem",
+                    FontWeight = "400",
+                    LineHeight = "1.43",
+                    LetterSpacing = ".01071em"
+                },
+                Caption = new CaptionTypography
                 {
                     FontSize = ".75rem",
-                    FontWeight = 500
+                    FontWeight = "400",
+                    LineHeight = "1.66",
+                    LetterSpacing = ".03333em"
                 },
-                Subtitle2 = new Subtitle2()
-                {
-                    FontSize = ".725rem",
-                    FontWeight = 600,
-                    LineHeight = 1.8,
-                },
-                Body1 = new Body1()
+                Overline = new OverlineTypography
                 {
                     FontSize = ".75rem",
-                    FontWeight = 400
-                },
-                Body2 = new Body2()
-                {
-                    FontSize = ".725rem",
-                    FontWeight = 400,
-                },
-                Button = new Button()
-                {
-                    TextTransform = "none",
-                    FontSize = ".75rem",
-                },
-                Input = new Input()
-                {
-                    FontSize = ".75rem",
+                    FontWeight = "400",
+                    LineHeight = "2.5",
+                    LetterSpacing = ".08333em"
                 }
             }
         };
