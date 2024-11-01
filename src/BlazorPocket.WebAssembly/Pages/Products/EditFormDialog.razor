@@ -35,7 +35,7 @@
                 </MudItem>
             </MudGrid>
             <MudStack Row AlignItems="AlignItems.End" Justify="Justify.FlexEnd" Class="my-5">
-                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled">@L["Save"]</MudButton>
+                <MudButton ButtonType="ButtonType.Submit" >@L["Save"]</MudButton>
             </MudStack>
         </EditForm>
     </DialogContent>
@@ -43,7 +43,7 @@
 
 @code
 {
-    [CascadingParameter] private MudDialogInstance MudDialog { get; set; } = default!;
+    [CascadingParameter] private IMudDialogInstance MudDialog { get; set; } = default!;
 
     [Parameter]
     public ProductDto Model { get; set; } = new();

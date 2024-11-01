@@ -10,8 +10,8 @@
         <MudText Typo="Typo.body2">@L["View all products"]</MudText>
     </MudStack>
     <MudStack Row Spacing="2">
-        <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Add" OnClick="@(()=>OnCreate())">@L["New"]</MudButton>
-        <MudButton Variant="Variant.Outlined" Disabled="@(!selectedItems.Any())" OnClick="@(()=>OnDelete())" StartIcon="@Icons.Material.Filled.Delete">@L["Delete"]</MudButton>
+        <MudButton  StartIcon="@Icons.Material.Filled.Add" OnClick="@(()=>OnCreate())">@L["New"]</MudButton>
+        <MudButton  Disabled="@(!selectedItems.Any())" OnClick="@(()=>OnDelete())" StartIcon="@Icons.Material.Filled.Delete">@L["Delete"]</MudButton>
     </MudStack>
 </MudStack>
 
