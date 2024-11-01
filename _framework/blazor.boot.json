@@ -1,11 +1,11 @@
 {
   "mainAssemblyName": "BlazorPocket.WebAssembly",
   "resources": {
-    "hash": "sha256-SkwEuA4evzENSR+0dRekTf/6S6XuTzp2lZ+7XTWd4nc=",
+    "hash": "sha256-lW+AnqUGQDRhTK68J+Ij9G8u4krprihtyuxuKPuDlxk=",
     "fingerprinting": {
       "Blazored.LocalStorage.12n6dz54qr.wasm": "Blazored.LocalStorage.wasm",
-      "BlazorPocket.Shared.o6l1zwo8xv.wasm": "BlazorPocket.Shared.wasm",
-      "BlazorPocket.WebAssembly.e63gj7zvhd.wasm": "BlazorPocket.WebAssembly.wasm",
+      "BlazorPocket.Shared.ekc1utne5j.wasm": "BlazorPocket.Shared.wasm",
+      "BlazorPocket.WebAssembly.83le1zdujx.wasm": "BlazorPocket.WebAssembly.wasm",
       "Microsoft.AspNetCore.Authorization.55us4zl1pt.wasm": "Microsoft.AspNetCore.Authorization.wasm",
       "Microsoft.AspNetCore.Components.Authorization.cwbi26r4i6.wasm": "Microsoft.AspNetCore.Components.Authorization.wasm",
       "Microsoft.AspNetCore.Components.Forms.8rc5truzkc.wasm": "Microsoft.AspNetCore.Components.Forms.wasm",
@@ -31,9 +31,9 @@
       "MimeMapping.gmxjevqz69.wasm": "MimeMapping.wasm",
       "MudBlazor.zncrvl26um.wasm": "MudBlazor.wasm",
       "netstandard.d2y0qpc9w1.wasm": "netstandard.wasm",
-      "pocketbase-csharp-sdk.zatdl7rdy8.wasm": "pocketbase-csharp-sdk.wasm",
-      "PocketBaseClient.BlazorPocket.tty711avb8.wasm": "PocketBaseClient.BlazorPocket.wasm",
-      "PocketBaseClient.42xffrkg1x.wasm": "PocketBaseClient.wasm",
+      "pocketbase-csharp-sdk.i4y3rjvlmt.wasm": "pocketbase-csharp-sdk.wasm",
+      "PocketBaseClient.BlazorPocket.73hpe33yyd.wasm": "PocketBaseClient.BlazorPocket.wasm",
+      "PocketBaseClient.igknme2ja7.wasm": "PocketBaseClient.wasm",
       "System.Collections.Concurrent.7j7cummyij.wasm": "System.Collections.Concurrent.wasm",
       "System.Collections.Immutable.huiuxx40ls.wasm": "System.Collections.Immutable.wasm",
       "System.Collections.NonGeneric.6d6g1fhf8o.wasm": "System.Collections.NonGeneric.wasm",
@@ -74,12 +74,12 @@
       "icudt_CJK.tjcz0u77k5.dat": "icudt_CJK.dat",
       "icudt_EFIGS.tptq2av103.dat": "icudt_EFIGS.dat",
       "icudt_no_CJK.lfu7j35m59.dat": "icudt_no_CJK.dat",
-      "BlazorPocket.Shared.resources.u4ikjv9y1w.wasm": "BlazorPocket.Shared.resources.wasm",
-      "BlazorPocket.WebAssembly.resources.2g3mpo7tgg.wasm": "BlazorPocket.WebAssembly.resources.wasm",
-      "BlazorPocket.Shared.resources.wtevwuqt0c.wasm": "BlazorPocket.Shared.resources.wasm",
-      "BlazorPocket.WebAssembly.resources.2g970xrdmm.wasm": "BlazorPocket.WebAssembly.resources.wasm",
-      "BlazorPocket.Shared.resources.tkytpc3356.wasm": "BlazorPocket.Shared.resources.wasm",
-      "BlazorPocket.WebAssembly.resources.theic4tvt6.wasm": "BlazorPocket.WebAssembly.resources.wasm"
+      "BlazorPocket.Shared.resources.fmpwf7o4up.wasm": "BlazorPocket.Shared.resources.wasm",
+      "BlazorPocket.WebAssembly.resources.w4fcqsl9zz.wasm": "BlazorPocket.WebAssembly.resources.wasm",
+      "BlazorPocket.Shared.resources.dlnzl800gn.wasm": "BlazorPocket.Shared.resources.wasm",
+      "BlazorPocket.WebAssembly.resources.o2o1zjae69.wasm": "BlazorPocket.WebAssembly.resources.wasm",
+      "BlazorPocket.Shared.resources.a2t52cssb9.wasm": "BlazorPocket.Shared.resources.wasm",
+      "BlazorPocket.WebAssembly.resources.nkzo3zfjly.wasm": "BlazorPocket.WebAssembly.resources.wasm"
     },
     "jsModuleNative": {
       "dotnet.native.tu18g0hln1.js": "sha256-ZRtWJM79pph/Fb99iqGcEFLP2AZbaDrUXlhQdgux+lM="
@@ -101,8 +101,8 @@
     },
     "assembly": {
       "Blazored.LocalStorage.12n6dz54qr.wasm": "sha256-OaMAAd5n7ORfyur5e3QIyEVKJ76MKIvwbg7/icnnYcU=",
-      "BlazorPocket.Shared.o6l1zwo8xv.wasm": "sha256-gCTPkjL0ZdoW0bIN2EAn2I8byhoithWbl1kXcfmR0F0=",
-      "BlazorPocket.WebAssembly.e63gj7zvhd.wasm": "sha256-FtO6FpseHGBimiBXjyLtL7twQ40PbbwO8V8SzS8sLk8=",
+      "BlazorPocket.Shared.ekc1utne5j.wasm": "sha256-IqhWCDbaFhaAoAcp53UTPWdAaf23Kbta/ZEf9QiP+8w=",
+      "BlazorPocket.WebAssembly.83le1zdujx.wasm": "sha256-RL9e225fJAAatG/lubDgzMnGor4ahxNyCzFp0UR8clA=",
       "Microsoft.AspNetCore.Authorization.55us4zl1pt.wasm": "sha256-mQcHNB01dKc/9LTvGv+jrPDfdL4Vaz3jNXulvkTt960=",
       "Microsoft.AspNetCore.Components.Authorization.cwbi26r4i6.wasm": "sha256-vNYZDmZbqeMdCQR59VAyRtDXsKpyQOflqEgxmVnT8TM=",
       "Microsoft.AspNetCore.Components.Forms.8rc5truzkc.wasm": "sha256-1PiEvsU+3ztlkghyCiUOoRZTt8kkmZ2wFS56A82IZiI=",
@@ -128,9 +128,9 @@
       "MimeMapping.gmxjevqz69.wasm": "sha256-CMXcRIg84k7AstbhcD8rbnPKy2wa/gmsBD8gBgZP1c8=",
       "MudBlazor.zncrvl26um.wasm": "sha256-3wvX7vz+y/dp+qpS4NWvtNGHg11uPNYM4zYBTI4uMTE=",
       "netstandard.d2y0qpc9w1.wasm": "sha256-dQouaiAQqm0Hn+RE9+q4hg+f7KiqjBlyX1v0uQQBDog=",
-      "pocketbase-csharp-sdk.zatdl7rdy8.wasm": "sha256-m3Ygiww+8DFxyIUAuGQZmxaaJe8isYnE7e8QhPmmKqk=",
-      "PocketBaseClient.BlazorPocket.tty711avb8.wasm": "sha256-765acZS3XtCpyevTc1M1ETY4hagudgE37LKbTsziurE=",
-      "PocketBaseClient.42xffrkg1x.wasm": "sha256-5K8uIhabMluoSFz112KssFbg/wVMLxaixainQMAdu08=",
+      "pocketbase-csharp-sdk.i4y3rjvlmt.wasm": "sha256-giY55FV8Dm1tQowOmJNMhubvHPA8KmfDR0+l4bGFYQE=",
+      "PocketBaseClient.BlazorPocket.73hpe33yyd.wasm": "sha256-PXOfdVKDztnKYgYA1xHfLPz72yZbG3L+f/GWIqLDKPE=",
+      "PocketBaseClient.igknme2ja7.wasm": "sha256-rooDmqwEVArVY7o8hkZ4LCY7xgi+NhRwVF+JAqjw7MY=",
       "System.Collections.Concurrent.7j7cummyij.wasm": "sha256-3Xj+a9cCt4f1TVbjTHUTrOEqZdKRI/Y5+AUykdog6mU=",
       "System.Collections.Immutable.huiuxx40ls.wasm": "sha256-6d/Ds+71eyVxv12e6lRF+x7BN7xJAIJa3zCOUbWCUyo=",
       "System.Collections.NonGeneric.6d6g1fhf8o.wasm": "sha256-OpFiyYzORH8BTXDBpxhSn3SOmhKNCnQaiMKvQ+v61XU=",
@@ -165,16 +165,16 @@
     },
     "satelliteResources": {
       "de-DE": {
-        "BlazorPocket.Shared.resources.u4ikjv9y1w.wasm": "sha256-zndcZiKq1Nl4cAo1Af2dv+9ANRMgumKsaYtJxE+qtb4=",
-        "BlazorPocket.WebAssembly.resources.2g3mpo7tgg.wasm": "sha256-Dnypeji1LTLt2deDZU9d9Otle7F9/RRhivt2MwEkoBM="
+        "BlazorPocket.Shared.resources.fmpwf7o4up.wasm": "sha256-t7Q2T8QBuAlQnvE3hqloGQ3IihMT+ygGPGfb10B46B0=",
+        "BlazorPocket.WebAssembly.resources.w4fcqsl9zz.wasm": "sha256-YE4nrw+yKiOUvHUto4jejiwLWUq/DkZ060SIefdLWUY="
       },
       "en-US": {
-        "BlazorPocket.Shared.resources.wtevwuqt0c.wasm": "sha256-1JQOEtvRCH1s4iEa2Vat5vPu+Chb5mkT3u7XhdcAiQE=",
-        "BlazorPocket.WebAssembly.resources.2g970xrdmm.wasm": "sha256-bsAdbFtkTEOKudtkPyIN9mZZP1o6olp+cpRne0WwmjA="
+        "BlazorPocket.Shared.resources.dlnzl800gn.wasm": "sha256-MbfkDyqS5is3QtC//p2JZ0H5/jToEc19vWGumfuLaak=",
+        "BlazorPocket.WebAssembly.resources.o2o1zjae69.wasm": "sha256-IH+0BE3nrDZZzMJMZDTl1ZWRq84puJq5OqjN3afsjns="
       },
       "zh-CN": {
-        "BlazorPocket.Shared.resources.tkytpc3356.wasm": "sha256-s1LFNmmbjnqLWS5pv2AWAgo0V27MxaWgmIJwsqp3XQs=",
-        "BlazorPocket.WebAssembly.resources.theic4tvt6.wasm": "sha256-HzrBYDGxyJyw9GBb0b6jhFm7YhNnHsk9T9aRtSKnud4="
+        "BlazorPocket.Shared.resources.a2t52cssb9.wasm": "sha256-YtQKvNcyUk13x3d4Qnlz3QZCkyuONfb6tJny2kHdrNw=",
+        "BlazorPocket.WebAssembly.resources.nkzo3zfjly.wasm": "sha256-F8mwGgHCPTU17QW/gXbw2hE0+lnbjhu5m1FFzyY8HI0="
       }
     }
   },
