@@ -4,13 +4,13 @@
     </DialogContent>
     <DialogActions>
         <MudButton StartIcon="@Icons.Material.Filled.Cancel" OnClick="@(()=>MudDialog.Cancel())">Cancel</MudButton>
-        <MudButton StartIcon="@Icons.Material.Filled.Delete" Color="Color.Error" Variant="Variant.Filled" OnClick="@(()=>MudDialog.Close(DialogResult.Ok(true)))">Confirm</MudButton>
+        <MudButton StartIcon="@Icons.Material.Filled.Delete" Color="Color.Error"  OnClick="@(()=>MudDialog.Close(DialogResult.Ok(true)))">Confirm</MudButton>
     </DialogActions>
 </MudDialog>
 
 @code
 {
-    [CascadingParameter] private MudDialogInstance MudDialog { get; set; } = default!;
+    [CascadingParameter] private IMudDialogInstance MudDialog { get; set; } = default!;
 
     [EditorRequired][Parameter] public string? ContentText { get; set; }
      

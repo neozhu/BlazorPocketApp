@@ -152,9 +152,7 @@ public class Theme
             ZIndex = new ZIndex(),
             Typography = new()
             {
-                Input = new InputTypography {
-                    FontSize = ".75rem",
-                },
+                
                 Default = new DefaultTypography
                 {
                     FontSize = ".8125rem",
