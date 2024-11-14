@@ -1,12 +1,16 @@
 ﻿@page "/"
 
-<PageTitle>Home</PageTitle>
+<div class="d-flex flex-column gap-3">
+    <MudText Typo="Typo.h3" Align="Align.Center" Class="mt-16 mb-8">“Never had such a good time making a site“</MudText>
+    <div  >
+        <Carousel />
+    </div>
+    <div>
+        <CarouselReverse />
+    </div>
+</div>
 
-<h1>@L["Hello, world!"]</h1>
-
-@L["Welcome to your new app."]
-
-<MudPaper Class="pa-4 mb-3">
+<MudPaper Class="pa-4 mt-3">
     <style>
 
         .circle {
