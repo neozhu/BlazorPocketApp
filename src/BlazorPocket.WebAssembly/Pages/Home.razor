@@ -1,16 +1,6 @@
 ﻿@page "/"
 
-<div class="d-flex flex-column gap-3">
-    <MudText Typo="Typo.h3" Align="Align.Center" Class="mt-16 mb-8">“Never had such a good time making a site“</MudText>
-    <div  >
-        <Carousel />
-    </div>
-    <div>
-        <CarouselReverse />
-    </div>
-</div>
-
-<MudPaper Class="pa-4 mt-3">
+<MudPaper Class="pa-4 mb-3">
     <style>
 
         .circle {
@@ -19,12 +9,14 @@
             display: inline-block;
         }
 
-        .rounded-circle{
+        .rounded-circle {
             border-radius: 50%;
         }
+
         .bg-success {
             background-color: #28a745 !important;
         }
+
         .bg-warning {
             background-color: #ffc107 !important;
         }
@@ -74,13 +66,11 @@
             height: 100%;
             transition: width 0.6s ease;
         }
+
         @@media (max-width: 850px) {
-            .flex-row
-
-        {
-            flex-wrap: wrap;
-        }
-
+            .flex-row {
+                flex-wrap: wrap;
+            }
         }
 
         .fw-bold {
@@ -156,3 +146,14 @@
 
 
 </MudPaper>
+
+<div class="d-flex flex-column gap-3">
+    <MudText Typo="Typo.h3" Align="Align.Center" Class="mt-16 mb-8">“Never had such a good time making a site“</MudText>
+    <div  >
+        <Carousel />
+    </div>
+    <div>
+        <CarouselReverse />
+    </div>
+</div>
+
