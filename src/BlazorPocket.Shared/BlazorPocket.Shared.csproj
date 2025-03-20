@@ -9,11 +9,11 @@
 
   <ItemGroup>
 	  <PackageReference Include="Blazored.LocalStorage" Version="4.5.0" />
-	  <PackageReference Include="Riok.Mapperly" Version="4.1.1-next.0" ExcludeAssets="runtime" PrivateAssets="all">
+	  <PackageReference Include="Riok.Mapperly" Version="4.1.1" ExcludeAssets="runtime" PrivateAssets="all">
 	    <IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	  </PackageReference>
-	  <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="9.0.0" />
-	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.0" />
+	  <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="9.0.3" />
+	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.3" />
     <ProjectReference Include="..\PocketBaseClient.BlazorPocket\PocketBaseClient.BlazorPocket.csproj" />
   </ItemGroup>
 
